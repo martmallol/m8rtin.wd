@@ -1,0 +1,35 @@
+.banner h1 {
+    background-image: url("https://s3.amazonaws.com/codecademy-content/courses/freelance-1/unit-2/pattern.jpeg");
+    font-family: Helvetica;
+    font-size: 100px;
+    font-weight: bold;
+    color: khaki;
+    text-align: center;
+    text-align-last: center;
+}
+
+.front {
+    font-family:Helvetica;
+}
+.etiquette h2 {
+    font-size: 32px;
+    font-weight: bold;
+    color: white;
+}
+
+.first h2 {
+    background-color: mediumspringgreen; 
+}
+
+.second h2 {
+    background-color: lightcoral; 
+}
+
+.third h2 {
+    background-color: skyblue; 
+}
+
+#blue {
+    font-weight: bold;
+    color: blue;
+}

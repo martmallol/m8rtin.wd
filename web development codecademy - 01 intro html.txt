@@ -1,0 +1,1001 @@
+WEB DEVELOPMENT CODECADEMY:
+
+-----LECCION 1-----
+HTML: So what exactly is HTML? HTML provides structure to the content appearing on a website, such as 
+images, text, or videos. 
+
+HTML stands for HyperText Markup Language:
+* A markup language is a computer language that defines the structure and presentation of raw text.
+* In HTML, the computer can interpret raw text that is wrapped in HTML elements.
+* HyperText is text displayed on a computer or device that provides access to other text through links, 
+also known as hyperlinks.
+
+BODY: Only content inside the opening and closing body tags can be displayed to the screen.
+EJ:
+
+<body>
+  <p>What's up, doc?</p>
+</body>
+
+PARENTAL STRUCTURE: HTML is organized as a collection of family tree relationships. When an element is
+contained inside another element, it is considered the child of that element. The child element is said 
+to be nested inside of the parent element. 
+EJ:
+
+<body>
+  <p>This paragraph is a child of the body</p>
+</body>
+
+Since there can be multiple levels of nesting, this analogy can be extended to grandchildren, 
+great-grandchildren, and beyond. The relationship between elements and their ancestor and descendent elements 
+is known as HIERARCHY.
+EJ:
+
+<body>
+  <div>
+    <h1>Sibling to p, but also grandchild of body</h1>
+    <p>Sibling to h1, but also grandchild of body</p>
+  </div>
+</body>
+
+HEADINGS (TITULOS): Headings in HTML are similar to headings in other types of media. For example, in newspapers, 
+large headings are typically used to capture a reader’s attention. Other times, headings are used to describe 
+content, like the title of a movie or an educational article.
+HTML follows a similar pattern. In HTML, there are six different headings. Headings can be used for a variety of
+purposes, like titling sections, articles, or other forms of content.
+
+The following is the list of heading elements available in HTML. They are ordered from largest to smallest 
+in size:
+
+1- <h1> — used for main headings. All other smaller headings are used for subheadings.
+2- <h2>
+3- <h3>
+4- <h4>
+5- <h5>
+6- <h6>
+
+The following example code uses a headline intended to capture a reader’s attention. It uses the largest heading:
+
+<h1>BREAKING NEWS</h1>
+
+DIVS: One of the most popular elements in HTML is the <div> element. <div> is short for “division” or a container
+that divides the page into sections. These sections are very useful for grouping elements in your HTML together.
+EJ:
+
+<body>
+  <div>
+    <h1>Why use divs?</h1>
+    <p>Great for grouping elements!</p>
+  </div>
+</body>
+
+ATTRIBUTES: If we want to expand an element’s tag, we can do so using an attribute. Attributes are content added 
+to the opening tag of an element and can be used in several different ways, from providing information to 
+changing styling. Attributes are made up of the following two parts:
+
+* The name of the attribute
+* The value of the attribute
+
+One commonly used attribute is the id. We can use the id attribute to specify different content (such as <div>s)
+and is really helpful when you use an element more than once. ids have several different purposes in HTML, 
+but for now, we’ll focus on how they can help us identify content on our page.
+EJ:
+
+<div id="intro">
+  <h1>Introduction</h1>
+</div>
+
+DISPLAYING TEXT: If you want to display text in HTML, you can use a paragraph or span:
+
+* Paragraphs (<p>) contain a block of plain text.
+* <span> contains short pieces of text or other HTML. They are used to separate small pieces of content that 
+are on the same line as other content.
+
+EJ:
+
+<div>
+  <h1>Technology</h1>
+</div>
+<div>
+  <p><span>Self-driving cars</span> are expected to replace up to 2 million jobs over the next two decades.</p>
+</div>
+
+It’s best to use a <span> element when you want to target a specific piece of content that is inline, 
+or on the same line as other text. If you want to divide your content into blocks, it’s better to use a <div>.
+
+STYLING TEXT: You can also style text using HTML tags. The <em> tag emphasizes text, while the <strong> tag
+highlights important text.
+* The <em> tag will generally render as italic emphasis.
+* The <strong> will generally render as bold emphasis.
+
+EJ:
+
+<p><strong>The Nile River</strong> is the <em>longest</em> river in the world, measuring over 6,850 kilometers
+long (approximately 4,260 miles).</p>
+
+LINE BREAKS: The spacing between code in an HTML file DOESN'T affect the positioning of elements in the browser.
+If you are interested in modifying the spacing in the browser, you can use HTML’s line break element: <br>.
+The line break element is unique because it is only composed of a starting tag. You can use it anywhere 
+within your HTML code and a line break will be shown in the browser.
+EJ:
+
+<p>The Nile River is the longest river <br> in the world, measuring over 6,850 <br> kilometers long 
+(approximately 4,260 <br> miles).</p>
+
+The code in the example above will result in an output that looks like the following:
+
+The Nile River is the longest river
+in the world, measuring over 6,850
+kilometers long (approximately 4,260
+miles).
+
+UNORDERED LISTS: You can also display content in an easy-to-read list. you can use an unordered list tag
+(<ul>) to create a list of items in no particular order. An unordered list outlines individual list items 
+with a bullet point.
+Individual list items must be added to the unordered list using the <li> tag. The <li> or list item tag is 
+used to describe an item in a list.
+EJ:
+
+<ul>
+  <li>Limes</li>
+  <li>Tortillas</li>
+  <li>Chicken</li>
+</ul>
+
+In the example above, the list was created using the <ul> tag and all individual list items were added 
+using <li> tags.
+
+The output will look like this:
+
+* Limes
+* Tortillas
+* Chicken
+
+ORDERED LISTS: Ordered lists (<ol>) are like unordered lists, except that each list item is numbered.
+EJ:
+
+<ol>
+  <li>Preheat the oven to 350 degrees.</li>
+  <li>Mix whole wheat flour, baking soda, and salt.</li>
+  <li>Cream the butter, sugar in separate bowl.</li>
+  <li>Add eggs and vanilla extract to bowl.</li>
+</ol>
+
+The output will look like this:
+
+1. Preheat the oven to 350 degrees.
+2. Mix whole wheat flour, baking soda, and salt.
+3. Cream the butter, sugar in separate bowl.
+4. Add eggs and vanilla extract to bowl.
+
+IMAGES: The <img> tag allows you to add an image to a web page. Most elements require both opening and 
+closing tags, but the <img> tag is a self-closing tag. Note that the end of the <img> tag has 
+a forward slash /. Self-closing tags may include or omit the final slash — both will render properly.
+EJ:
+
+<img src="image-location.jpg" />
+
+The <img> tag has a required attribute called src. The src attribute must be set to the 
+image’s SOURCE, or the location of the image. 
+
+IMAGE ALTS: The alt attribute, which means alternative text, brings meaning to the images on our sites. 
+The alt attribute can be added to the image tag just like the src attribute. The value of alt should be 
+a description of the image.
+EJ:
+
+<img src="#" alt="A field of yellow sunflowers" />
+
+The alt attribute also serves the following purposes:
+* If an image fails to load on a web page, a user can mouse over the area originally intended for the image 
+and read a brief description of the image. This is made possible by the description you provide in the alt 
+attribute.
+* Visually impaired users often browse the web with the aid of screen reading software. When you include the 
+alt attribute, the screen reading software can read the image’s description out loud to the visually 
+impaired user.
+* The alt attribute also plays a role in Search Engine Optimization (SEO), because search engines cannot 
+“see” the images on websites as they crawl the internet. Having descriptive alt attributes can improve 
+the ranking of your site.
+
+If the image on the web page is not one that conveys any meaningful information to a user 
+(visually impaired or otherwise), the alt attribute should be left empty.
+
+VIDEOS: HTML also supports displaying videos. Like the <img> tag, the <video> tag requires a src attribute 
+with a link to the video source. Unlike the <img> tag however, the <video> element requires an opening 
+and a closing tag.
+EJ:
+
+<video src="myVideo.mp4" width="320" height="240" controls>
+  Video not supported
+</video>
+
+The text, “Video not supported”, between the opening and closing video tags will only be displayed 
+if the browser is unable to load the video.
+
+-----LECCION 2-----
+HTML DOCUMENT STANDARDS: It’s time to learn how to set up an HTML file. HTML files require certain elements
+to set up the document properly. You can let web browsers know that you are using HTML by starting your 
+document with a document type declaration.
+
+The declaration looks like this:
+
+<!DOCTYPE html>
+
+This declaration is an instruction, and it must be the first line of code in your HTML document. It tells
+the browser what type of document to expect, along with what version of HTML is being used in the document. 
+For now, the browser will correctly assume that the html in <!DOCTYPE html> is referring to HTML5, as it is 
+the current standard.
+
+THE <html> TAG: To create HTML structure and content, we must add opening and closing <html> tags after 
+declaring <!DOCTYPE html>:
+
+<!DOCTYPE html>
+<html>
+
+</html>
+
+Anything between the opening <html> and closing </html> tags will be interpreted as HTML code. 
+
+THE HEAD: Let’s also give the browser some information about the page itself. We can do this by adding a <head>
+element.
+Remember the <body> tag? The <head> element is part of this HTML metaphor. It goes above our <body> element.
+The <head> element contains the metadata for a web page. Metadata is information about the page that isn’t 
+displayed directly on the web page. Unlike the information inside of the <body> tag, the metadata in the head
+is information about the page itself. You’ll see an example of this in the next exercise.
+
+<head>
+</head>
+
+PAGE TITLES: What kind of metadata about the web page can the <head> element contain? A browser’s tab displays
+the title specified in the <title> tag. The <title> tag is always inside of the <head>.
+
+!DOCTYPE html>
+<html>
+  <head>
+    <title>My Coding Journal</title>
+  </head>
+</html>
+
+El titulo aparece en la parte del marcador de la pagina, de la pestaña.
+
+LINKING TO OTHER WEB PAGES: One of the powerful aspects of HTML (and the Internet), is the ability to link 
+to other web pages.
+
+You can add links to a web page by adding an anchor element <a> and including the text of the link in 
+between the opening and closing tags. You also have to add the href attribute. This attribute stands for 
+hyperlink reference and is used to link to a path, or the address to where a file is located 
+(whether it is on your computer or another location). The paths provided to the href attribute are often URLs.
+EJ:
+
+<a href="https://www.wikipedia.org/">This Is A Link To Wikipedia</a>
+
+OPENING LINKS IN A NEW WINDOW: The TARGET attribute specifies how a link should open. For a link to open in a 
+new window, the target attribute requires a value of _blank. The target attribute can be added directly to 
+the opening tag of the anchor element, just like the href attribute.
+EJ:
+
+<a href="https://en.wikipedia.org/wiki/Brown_bear" target="_blank">The Brown Bear</a>
+
+In the example above, setting the target attribute to "_blank" instructs the browser to open the relevant 
+Wikipedia page in a new window.
+
+LINKING TO RELATIVE PAGE: When making multi-page static websites, web developers often store HTML files in the 
+root directory, or a main folder where all the files for the project are stored. As the size of the projects 
+you create grows, you may use additional folders within the main project folder to organize your code.
+
+project-folder/
+|—— about.html
+|—— contact.html
+|—— index.html
+
+HTML files are often stored in the same folder, as shown in the example above. If the browser is currently 
+displaying index.html, it also knows that about.html and contact.html are in the same folder. Because the 
+files are stored in the same folder, we can link web pages together using a relative path.
+
+<a href="./contact.html">Contact</a>
+
+The <a> tag is used with a relative path to link from the current HTML file to the contact.html file in the 
+same folder. On the web page, Contact will appear as a link.
+
+A relative path is a filename that shows the path to a local file (a file on the same website, such as
+./index.html) versus an absolute path (a full URL, like https://www.codecademy.com/learn/learn-html which 
+is stored in a different folder). The ./ in ./index.html tells the browser to look for the file in the 
+current folder.
+
+LINKING AT WILL: You’ve probably visited websites where not all links were made up of text. Maybe the links
+you clicked on were images or some other form of content.
+
+Thankfully, HTML allows you to turn nearly any element into a link by wrapping that element with an anchor 
+element. With this technique, it’s possible to turn images into links by simply wrapping the <img> element 
+with an <a> element.
+EJ:
+
+<a href="https://en.wikipedia.org/wiki/Opuntia" target="_blank"><img src="https://www.Prickly_Pear_Closeup.jpg" alt="A red prickly pear fruit"/></a>
+
+In the example above, an image of a prickly pear has been turned into a link by wrapping the outside of 
+the <img> element with an <a> element.
+
+LINKING TO SAME PAGE:  How do we make it easier for a user to jump to different portions of our page?
+
+When users visit our site, we want them to be able to click a link and have the page automatically scroll to
+a specific section.
+In order to link to a target on the same page, we must give the target an id, like this:
+
+<p id="top">This is the top of the page!</p>
+<h1 id="bottom">This is the bottom! </h1>
+
+An id can be added to most elements on a webpage. An id should be descriptive to make it easier to remember 
+the purpose of a link. The target link is a string containing the # character and the target element’s id.
+
+<ol>
+  <li><a href="#top">Top</a></li>
+  <li><a href="#bottom">Bottom</a></li>
+</ol>
+
+WHITESPACE: As the code in an HTML file grows, it becomes increasingly difficult to keep track of how elements 
+are related. Programmers use two tools to visualize the relationship between elements: whitespace and indentation.
+
+Both tools take advantage of the fact that the position of elements in a browser is independent of the amount of 
+whitespace or indentation in the index.html file.
+
+For example, if you wanted to increase the space between two paragraphs on your web page, you would not be able
+to accomplish this by adding space between the paragraph elements in the index.html file. The browser ignores 
+whitespace in HTML files when it renders a web page, so it can be used as a tool to make code easier to read 
+and follow.
+
+What makes the example below difficult to read?
+
+<body><p>Paragraph 1</p><p>Paragraph 2</p></body>
+
+You have to read the entire line to know what elements are present. Compare the example above to this:
+
+<body>
+    <p>Paragraph 1</p>
+    <p>Paragraph 2</p>
+</body>
+
+This example is easier to read, because each element is on its own line.
+
+A browser renders both examples the same way:
+
+Paragraph 1
+Paragraph 2
+
+INDENTATION: The second tool web developers use to make the structure of code easier.
+EJ:
+
+<body>
+  <p>Paragraph 1</p>
+  <div>
+    <p>Paragraph 2</p>
+  </div>
+</body>
+
+COMMENTS: HTML files also allow you to add comments to your code.
+Comments begin with <!-- and end with -->. Any characters in between will be ignored by your browser.
+EJ:
+
+<!-- This is a comment that the browser will not display. -->
+
+-----LECCION 3-----
+TABLES: 
+	ROWS: The first step in entering data into the table is to add rows using the table row element: <tr>.
+EJ:
+
+<table>
+  <tr>
+  </tr>
+  <tr>
+  </tr>
+</table>
+
+	DATA: Rows aren’t sufficient to add data to a table. Each cell element must also be defined. In HTML, 
+you can add data using the table data element: <td>.
+EJ:
+
+<table>
+  <tr>
+    <td>73</td>
+    <td>81</td>
+  </tr>
+</table>
+
+	HEADINGS: To add titles to rows and columns, you can use the table heading element: <th>.
+EJ:
+
+<table>
+  <tr>
+    <th></th>
+    <th scope="col">Saturday</th>
+    <th scope="col">Sunday</th>
+  </tr>
+  <tr>
+    <th scope="row">Temperature</th>
+    <td>73</td>
+    <td>81</td>
+  </tr>
+</table>
+
+Note the use of the scope attribute, which can take one of two values:
+
+1- row - this value makes it clear that the heading is for a row.
+2- col - this value makes it clear that the heading is for a column.
+
+	BORDERS: We make them using CSS
+EJ:
+
+table, td {
+  border: 1px solid black;
+}
+
+	SPANNING COLUMNS: Data can span columns using the colspan attribute. The attributes accepts an
+integer (greater than or equal to 1) to denote the number of columns it spans across.
+EJ:
+
+<table>
+  <tr>
+    <th>Monday</th>
+    <th>Tuesday</th>
+    <th>Wednesday</th>
+  </tr>
+  <tr>
+    <td colspan="2">Out of Town</td>
+    <td>Back in Town</td>
+  </tr>
+</table>
+
+In the example above, the data Out of Town spans the Monday and Tuesday table headings using the value 2 
+(two columns). The data Back in Town appear only under the Wednesday heading.
+	
+	SPANNING ROWS: Data can also span multiple rows using the rowspan attribute.
+EJ:
+
+<table>
+  <tr> <!-- Row 1 -->
+    <th></th>
+    <th>Saturday</th>
+    <th>Sunday</th>
+  </tr>
+  <tr> <!-- Row 2 -->
+    <th>Morning</th>
+    <td rowspan="2">Work</td>
+    <td rowspan="3">Relax</td>
+  </tr>
+  <tr> <!-- Row 3 -->
+    <th>Afternoon</th>
+  </tr>
+  <tr> <!-- Row 4 -->
+    <th>Evening</th>
+    <td>Dinner</td>
+  </tr>
+</table>
+	TABLE BODY: Over time, a table can grow to contain a lot of data and become very long. When this happens,
+the table can be sectioned off so that it is easier to manage.
+Long tables can be sectioned off using the table body element: <tbody>.
+The <tbody> element should contain all of the table’s data, excluding the table headings.
+EJ:
+
+<table>
+  <tbody>
+    <tr>
+      <th></th>
+      <th>Saturday</th>
+      <th>Sunday</th>
+    </tr>
+    <tr>
+      <th>Morning</th>
+      <td rowspan="2">Work</td>
+      <td rowspan="3">Relax</td>
+    </tr>
+    <tr>
+     <th>Afternoon</th>
+    </tr>
+    <tr>
+      <th>Evening</th>
+      <td>Dinner</td>
+    </tr>
+  </tbody>
+</table>
+
+	TABLE HEAD:When a table’s body is sectioned off, however, it also makes sense to section off the table’s
+column headings using the <thead> element.
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th scope="col">Saturday</th>
+      <th scope="col">Sunday</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Morning</th>
+      <td rowspan="2">Work</td>
+      <td rowspan="3">Relax</td>
+    </tr>
+    <tr>
+     <th scope="row">Afternoon</th>
+    </tr>
+    <tr>
+      <th scope="row">Evening</th>
+      <td>Dinner</td>
+    </tr>
+  </tbody>
+</table>
+	TABLE FOOTER: The bottom part of a long table can also be sectioned off using the <tfoot> element.
+EJ:
+
+<table>
+  <thead>
+    <tr>
+      <th>Quarter</th>
+      <th>Revenue</th>
+      <th>Costs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Q1</th>
+      <td>$10M</td>
+      <td>$7.5M</td>
+    </tr>
+    <tr>
+      <th>Q2</th>
+      <td>$12M</td>
+      <td>$5M</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th>Total</th>
+      <td>$22M</td>
+      <td>$12.5M</td>
+    </tr>
+  </tfoot>
+</table>
+
+	STYLING WITH CSS:
+EJ:
+
+table, th, td {
+  border: 1px solid black;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+-----LECCION 4-----
+HTML FORMS: Just like a physical form, an HTML <form> element is responsible for collecting information to 
+send somewhere else.
+
+The <form> element is a great tool for collecting information, but then we need to send that information 
+somewhere else for processing. We need to supply the <form> element with both the location of where the 
+<form>‘s information goes and what HTTP request to make.
+EJ:
+
+<form action="/example.html" method="POST">
+</form>
+
+In the above example, we’ve created the skeleton for a <form> that will send information to example.html as 
+a POST request — the action attribute determines where the information is sent and the method attribute 
+is assigned a HTTP verb that is included in the HTTP request.
+
+The <form> element can also contain child elements. For instance, it would be helpful to provide a header 
+so that users know what this <form> is about. We could also add a paragraph to provide even more detail. 
+EJ:
+
+<form action="/example.html" method="POST">
+  <h1>Creating a form</h1>
+  <p>Looks like you want to learn how to create an HTML form. Well, the best way to learn is to play 
+around with it.</p>
+</form>
+
+TEXT INPUT (COMO EL DE GOOGLE PARA BUSCAR): If we want to create an input field in our <form>, we’ll need
+the help of the <input> element.
+
+The <input> element has a type attribute which determines how it renders on the web page and what kind of 
+data it can accept.
+
+The first value for the type attribute we’re going to explore is "text". When we create an <input> element 
+with type="text", it renders a text field that users can type into. It’s also important that we include a 
+name attribute for the <input> — without the name attribute, information in the <input> won’t be sent when 
+the <form> is submitted. 
+EJ:
+
+<form action="/example.html" method="POST">
+  <input type="text" name="first-text-field">
+</form>
+
+After users type into the <input> element, the value of the value attribute becomes what is typed into the 
+text field. The value of the value attribute is paired with the value of the name attribute and sent as text 
+when the form is submitted. For instance, if a user typed in “important details” in the text field created 
+by our <input> element.
+When the form is submitted, the text: "first-text-field=important details" is sent to /example.html because 
+the value of the name attribute is "first-text-field" and the value of value is "important details".
+
+We could also assign a default value for the value attribute so that users have a pre-filled text field 
+when they first see the rendered form like so:
+EJ:
+
+<form action="/example.html" method="POST">
+  <input type="text" name="first-text-field" value="already pre-filled">
+</form>
+
+ADDING A LABEL: For a user to properly identify an <input> we use the appropriately named <label> element.
+The <label> element has an opening and closing tag and displays text that is written between the opening 
+and closing tags. To associate a <label> and an <input>, the <input> needs an id attribute. We then assign 
+the for attribute of the <label> element with the value of the id attribute of <input>, like so:
+
+<form action="/example.html" method="POST">
+  <label for="meal">What do you want to eat?</label>
+  <br>
+  <input type="text" name="food" id="meal">
+</form>
+
+PASSWORD INPUT: Luckily, we have the type="password" attribute for <input>
+An <input type ="password"> element will replace input text with another character like an asterisk (*) or 
+a dot (•). 
+EJ:
+
+<form>
+  <label for="user-password">Password: </label>
+  <input type="password" id="user-password" name="user-password">
+</form>
+
+NUMBER INPUT: we might want our users to type in a number — then we can set the type attribute to "number".
+By setting type="number" for an <input> we can restrict what users type into the input field to just numbers 
+(and a few special characters like -, +, and .). We can also provide a step attribute which creates arrows 
+inside the input field to increase or decrease by the value of the step attribute. 
+EJ:
+
+<form>
+  <label for="years"> Years of experience: </label>
+  <input id="years" name="years" type="number" step="1">
+</form>
+
+RANGE INPUT: Another option we could use is setting type to "range" which creates a slider. (Como el 
+volumen del celu).
+To set the minimum and maximum values of the slider we assign values to the min and max attribute of the 
+<input>. We could also control how smooth and fluid the slider works by assigning the step attribute a value. 
+Smaller step values will make the slider more fluidly, whereas larger step values will make the slider 
+move more noticeably. Take a look at the code to create a slider:
+
+<form>
+  <label for="volume"> Volume Control</label>
+  <input id="volume" name="volume" type="range" min="0" max="100" step="1">
+</form>
+
+CHECKBOX INPUT: What if we presented multiple options to users and allow them to select any number of 
+options? Sounds like we could use checkboxes! In a <form> we would use the <input> element and set 
+type="checkbox".
+EJ:
+
+<form>
+  <p>Choose your pizza toppings:</p>
+  <label for="cheese">Extra cheese</label>
+  <input id="cheese" name="topping" type="checkbox" value="cheese">
+  <br>
+  <label for="pepperoni">Pepperoni</label>
+  <input id="pepperoni" name="topping" type="checkbox" value="pepperoni">
+  <br>
+  <label for="anchovy">Anchovy</label>
+  <input id="anchovy" name="topping" type="checkbox" value="anchovy">
+</form>
+
+RADIO BUTTON INPUT: There are cases where we want to present multiple options and only allow for one 
+selection — like asking users if they agree or disagree with the terms and conditions. O como una pregunta
+multiple-choice.
+EJ:
+
+<form>
+  <p>What is sum of 1 + 1?</p>
+  <input type="radio" id="two" name="answer" value="2">
+  <label for="two">2</label>
+  <br>
+  <input type="radio" id="eleven" name="answer" value="11">
+  <label for="eleven">11</label>
+</form>
+
+Radio buttons (like checkboxes) do not display their value. We have an associated <label> to represent the
+value of the radio button. To group radio buttons together, we assign them the same name and only one 
+radio button from that group can be selected.
+
+DROPDOWN LIST: Radio buttons are great if we want our users to pick one option out of a few visible options, 
+but imagine if we have a whole list of options! This situation could quickly lead to a lot of radio buttons 
+to keep track of.
+An alternative solution is to use a dropdown list to allow our users to choose one option from an 
+organized list. Here’s the code to create a dropdown menu:
+
+<form>
+  <label for="lunch">What's for lunch?</label>
+  <select id="lunch" name="lunch">
+    <option value="pizza">Pizza</option>
+    <option value="curry">Curry</option>
+    <option value="salad">Salad</option>
+    <option value="ramen">Ramen</option>
+    <option value="tacos">Tacos</option>
+  </select>
+</form>
+
+The text rendered is the text included between the opening and closing <option> tags. However, it is the 
+value of the value attribute that is used in <form> submission (notice the difference in the text and value 
+capitalization). When the <form> is submitted, the information from this input field will be sent using the 
+name of the <select> and the value of the chosen <option>. For instance, if a user selected Pizza from the 
+dropdown list, the information would be sent as "lunch=pizza".
+
+DATALIST INPUT: Even if we have an organized dropdown list, if the list has a lot of options, it could be 
+tedious for users to scroll through the entire list to locate one option. That’s where using 
+the <datalist> element comes in handy.
+The <datalist> is used with an <input type="text"> element. The <input> creates a text field that users can
+type into and filter options from the <datalist>. 
+EJ:
+
+<form>
+  <label for="city">Ideal city to visit?</label>
+  <input type="text" list="cities" id="city" name="city">
+
+  <datalist id="cities">
+    <option value="New York City"></option>
+    <option value="Tokyo"></option>
+    <option value="Barcelona"></option>
+    <option value="Mexico City"></option>
+    <option value="Melbourne"></option>
+    <option value="Other"></option>  
+  </datalist>
+</form>
+
+Notice, in the code above, we have an <input> that has a list attribute. The <input> is associated to the 
+<datalist> via the <input>‘s list attribute and the id of the <datalist>.
+While <select> and <datalist> share some similarities, there are some major differences. In the associated 
+<input> element, users can type in the input field to search for a particular option. If none of the 
+<option>s match, the user can still use what they typed in. When the form is submitted, the value of the 
+<input>‘s name and the value of the option selected, or what the user typed in, is sent as a pair.
+
+TEXTAREA ELEMENT: An <input> element with type="text" creates a single row input field for users to type in 
+information. However, there are cases where users need to write in more information, like a blog post. In 
+such cases, instead of using an <input>, we could use <textarea>.
+The <textarea> element is used to create a bigger text field for users to write more text. We can add the 
+attributes rows and cols to determine the amount of rows and columns for the <textarea>.
+EJ:
+
+<form>
+  <label for="blog">New Blog Post: </label>
+  <br>
+  <textarea id="blog" name="blog" rows="5" cols="30">
+  </textarea>
+</form>
+
+If we want to add a default value to text to <textarea> we would include it within the opening and 
+closing tags like so:
+
+<textarea>Adding default text</textarea>
+
+SUBMIT FORM: To make a submit button in a <form>, we’re going to use the reliable <input> element and
+set the type to "submit". For instance:
+
+<form>
+  <input type="submit" value="Send">
+</form>
+
+Notice in the code snippet that the value assigned to the <input> shows up as text on the submit button. 
+If there isn’t a value attribute, the default text, Submit shows up on the button.
+
+-----LECCION 5-----
+FORM VALIDATION
+REQUIRING INPUT:Sometimes we have fields in our <form>s which are not optional, i.e. there must be information 
+provided before we can submit it. To enforce this rule, we can add the required attribute to an <input> element.
+EJ:
+
+<form action="/example.html" method="POST">
+  <label for="allergies">Do you have any dietary restrictions?</label>
+  <br>
+  <input id="allergies" name="allergies" type="text" required>
+  <br>
+  <input type="submit" value="Submit">
+</form>
+
+SET A MIN AND A MAX: Another built-in validation we can use is to assign a minimum or maximum value for a 
+number field, e.g. <input type="number"> and <input type="range">. To set a minimum acceptable value, we use 
+the min attribute and assign a value. To set a maximum acceptable value, we assign the max attribute a value.
+EJ:
+
+<form action="/example.html" method="POST">
+  <label for="guests">Enter # of guests:</label>
+  <input id="guests" name="guests" type="number" min="1" max="4">
+  <input type="submit" value="Submit">
+</form> 
+
+CHECKING TEXT LENGTH: To set a minimum number of characters for a text field, we add the minlength attribute 
+and a value to set a minimum value. Similarly, to set the maximum number of characters for a text field, we 
+use the maxlength attribute and set a maximum value. 
+EJ:
+
+<form action="/example.html" method="POST">
+  <label for="summary">Summarize your fillings in less than 250 characters</label>
+  <input id="summary" name="summary" type="text" minlength="5" maxlength="250" required>
+  <input type="submit" value="Submit">
+</form>
+
+If a user tries to type in more than the maximum allowed number of characters, they don’t get a warning 
+message, but they can’t type it in.
+
+MATCHING A PATTERN: For cases when we want user input to follow specific guidelines, we use the pattern 
+attribute and assign it a regular expression, or regex. Regular expressions are a sequence of characters that 
+make up a search pattern. If the input matches the regex, the form can be submitted.
+
+Let’s say we wanted to check for a valid credit card number (a 14 to 16 digit number). We could use 
+the regex: [0-9]{14,16} which checks that the user provided only numbers and that they entered at least 
+14 digits and at most 16 digits.
+EJ: 
+
+<form action="/example.html" method="POST">
+  <label for="payment">Credit Card Number (no spaces):</label>
+  <br>
+  <input id="payment" name="payment" type="text" required pattern="[0-9]{14,16}">
+  <input type="submit" value="Submit">
+</form>
+
+-----LECCION 6-----
+SEMANTIC HTML: Forma de escribir codigo para que se lea mejor, syntactic sugar
+
+-BODY/STRUCTURE-
+
+HEADER AND NAV: . A <header> is a container usually for either navigational links or introductory content 
+containing <h1> to <h6> headings.
+A <nav> is used to define a block of navigation links such as menus and tables of contents. It 
+is important to note that <nav> can be used inside of the <header> element but can also be used on its own.
+EJ:
+
+<header> 
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>      
+    </ul>
+  </nav>
+</header>
+
+By using <nav> as a way to label our navigation links, it will be easier for not only us, but also for 
+web browsers and screen readers to read the code.
+
+MAIN AND FOOTER: The element <main> is used to encapsulate the dominant content within a webpage. This 
+tag is separate from the <footer> and the <nav> of a web page since these elements don’t contain the 
+principal content. By using <main> as opposed to a <div> element, screen readers and web browsers are better 
+able to identify that whatever is inside of the tag is the bulk of the content.
+EJ (MAIN):
+
+<main>
+  <header>
+    <h1>Types of Sports<h1>
+  </header>
+  <article>
+    <h3>Baseball</h3>
+    <p>
+      The first game of baseball was played in Cooperstown, New York in the summer of 1839.
+    </p>
+  </article>
+</main>
+
+The content at the bottom of the subject information is known as the footer, indicated by the <footer> element. 
+The footer contains information such as:
+
+* Contact information
+* Copyright information
+* Terms of use
+* Site Map
+* Reference to top of page links
+
+EJ (FOOTER):
+
+<footer>
+  <p>Email me at Codey@Codecademy.com</p>
+</footer>
+
+-WHAT GOES INSIDE THE BODY-
+
+SECTION: <section> defines elements in a document, such as chapters, headings, or any other area 
+of the document with the same theme. For example, content with the same theme such as articles about cricket 
+can go under a single <section>. A website’s home page could be split into sections for the introduction, news 
+items, and contact information.
+EJ:
+
+<section>
+  <h2>Fun Facts About Cricket</h2> 
+</section>
+
+ARTICLE:The <article> element holds content that makes sense on its own. <article> can hold content such as 
+articles, blogs, comments, magazines, etc. An <article> tag would help someone using a screen reader understand 
+where the article content (that might contain a combination of text, images, audio, etc.) begins and ends.
+EJ:
+
+<section>
+  <h2>Fun Facts About Cricket</h2>
+  <article>
+    <p>A single match of cricket can last up to 15 days.</p>
+  </article>
+</section>
+
+It is important to note that a <section> element could also be placed in an <article> element depending 
+on the context.
+
+ASIDE ELEMENT: The <aside> element is used to mark additional information that can enhance another element but 
+isn’t required in order to understand the main content. This element can be used alongside other elements such 
+as <article> or <section>. Some common uses of the <aside> element are for:
+
+* Bibliographies
+* Endnotes
+* Comments
+* Pull quotes
+* Editorial sidebars
+* Additional information
+
+EJ:
+
+<article>
+  <p>The first World Series was played between Pittsburgh and Boston in 1903 and was a nine-game series.</p>
+</article>
+<aside>
+  <p>
+   Babe Ruth once stated, “Heroes get remembered, but legends never die.” 
+  </p>
+</aside>
+
+FIGURE AND FIGCAPTION: <figure> is an element used to encapsulate media such as an image, illustration, diagram, 
+code snippet, etc, which is referenced in the main flow of the document.
+EJ:
+
+<figure>
+  <img src="overwatch.jpg"/>
+</figure>
+
+It’s possible to add a caption to the image by using <figcaption>.
+
+<figcaption> is an element used to describe the media in the <figure> tag. Usually, <figcaption> will go inside 
+<figure>. This is different than using a <p> element to describe the content; if we decide to change the 
+location of <figure>, the paragraph tag may get displaced from the figure while a <figcaption> will move with 
+the figure. This is useful for grouping an image with a caption.
+EJ:
+
+<figure>
+  <img src="overwatch.jpg">
+  <figcaption>This picture shows characters from Overwatch.</figcaption>
+</figure>
+
+AUDIO AND ATTRIBUTES: The <audio> element is used to embed audio content into a document. Like <video>, 
+<audio> uses src to link the audio source.
+EJ:
+
+<audio controls>
+  <source src="iAmAnAudioFile.mp3" type="audio/mp3">
+</audio>
+
+Attributes allow us to do many different things to our audio file. There are many attributes for <audio> but 
+today we’re going to be focusing on controls and src.
+
+* controls: automatically displays the audio controls into the browser such as play and mute.
+* src: specifies the URL of the audio file.
+
+For example, here’s how we could add both autoplay functionality and audio controls:
+<audio autoplay controls>
+
+VIDEOS AND ITS ATTRIBUTES: Some attributes that can alter a video playback include:
+
+* controls: When added in, a play/pause button will be added onto the video along with volume control and a 
+fullscreen option.
+* autoplay: The attribute which results in a video automatically playing as soon as the page is loaded.
+* loop: This attribute results in the video continuously playing on repeat.
+
+Below is an example of <video> being used with the controls attribute:
+
+<video src="coding.mp4" controls>Video not supported</video>
+
+In the code above, a video file named coding.mp4 is being played. The “Video not supported” will only show up 
+if the browser is unable to display the video.
+
+EMBED: Another tag that can be used to incorporate media content into a page is the <embed> tag, which can 
+embed any media content including videos, audio files, and gifs from an external source. This means that 
+websites that have an embed button have some form of media content that can be added to other websites. The 
+<embed> tag is a self-closing tag, unlike the <video> element. Embed can be used to add local files as well 
+as media content straight from some other websites.
+EJ:
+
+<embed src="download.gif"/>

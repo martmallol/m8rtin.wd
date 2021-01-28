@@ -1,0 +1,318 @@
+WEB DEVELOPMENT CODECADEMY:
+
+
+-----LECCION 1----- (Mientras mas especifico sea el tag, mas prioridad tiene EJ: !important)
+INTRO TO CSS: CSS is a language that web developers use to style the HTML content on a web page. If 
+you’re interested in modifying colors, font types, font sizes, shadows, images, element positioning, 
+and more, CSS is the tool for the job!
+
+INLINE STYLES:
+It’s possible to write CSS code directly within HTML code using inline styles.
+To style an HTML element, you can add the style attribute directly to the opening tag. After you add 
+the attribute, you can set it equal to the CSS style(s) you’d like applied to that element.
+EJEMPLO:
+	<p style="color: red;">I'm learning to code!</p>
+This will set the color of the paragraph text to red within the browser.
+
+If you’d like to add more than one style with inline styles, simply keep adding to the style 
+attribute. Make sure to end the styles with a semicolon (;).
+EJEMPLO:
+	<p style="color: red; font-size: 20px;">I'm learning to code!</p>
+
+THE <style> TAG:
+HTML allows you to write CSS code in its own dedicated section with the <style> element. CSS can be 
+written between opening and closing <style> tags. To use the <style> element, it must be placed inside
+of the <head> element.
+After adding a <style> tag in the head section, you can begin writing CSS code.
+Ejemplo:
+	<head>
+  	  <style>
+	    p {
+      	      color: red;
+              font-size: 20px;
+   	    }
+	  </style>
+	</head>
+
+THE .css FILE:
+Developers avoid mixing code by storing HTML and CSS code in separate files (HTML files contain only 
+HTML code, and CSS files contain only CSS code).
+
+LINKING THE CSS FILE:
+When HTML and CSS code are in separate files, the files must be linked. Otherwise, the HTML file won’t 
+be able to locate the CSS code, and the styling will not be applied.
+You can use the <link> element to link HTML and CSS files together. The <link> element must be placed 
+within the head of the HTML file. It is a self-closing tag and requires the following three attributes:
+
+1) href — like the anchor element, the value of this attribute must be the address, or path, to the
+CSS file.
+2) type — this attribute describes the type of document that you are linking to (in this case, a CSS 
+file). The value of this attribute should be set to text/css.
+3) rel — this attribute describes the relationship between the HTML file and the CSS file. Because you
+are linking to a stylesheet, the value should be set to stylesheet.
+EJEMPLO:
+	<link href="https://www.codecademy.com/stylesheets/style.css" type="text/css" rel="stylesheet">
+Note that in the example above the path to the stylesheet is a URL.
+If the CSS file is stored in the same directory as your HTML file, then you can specify a relative path
+instead of a URL, like so:
+	<link href="./style.css" type="text/css" rel="stylesheet">
+
+TAG NAME:
+CSS can select HTML elements by using an element’s tag name.
+For example, in HTML, the tag for a paragraph element is <p>. The CSS syntax for selecting <p> 
+elements is:
+	p {
+
+	}
+
+CLASS NAME:
+HTML elements can have more than just a tag name; they can also have attributes. One common attribute 
+is the class attribute. It’s also possible to select an element by its class attribute.
+EJEMPLO:
+(EN HTML)
+	<p class="brand">Sole Shoe Company</p>
+(EN CSS)
+	.brand {
+
+	}
+
+MULTIPLE CLASSES:
+It’s possible to add more than one class name to an HTML element’s class attribute.
+We can add multiple classes to an HTML element’s class attribute by separating them with a space. This 
+enables us to mix and match CSS classes to create many unique styles without writing a custom class for
+every style combination needed.
+EJEMPLO:
+(EN CSS)
+	.green {
+	  color: green;
+	}
+
+	.bold {
+	  font-weight: bold;
+	}
+Then, you could include both of these classes on one HTML element like this:
+(EN HTML)
+	<h1 class="green bold"> ... </h1>
+
+ID NAME:
+If an HTML element needs to be styled uniquely (no matter what classes are applied to the element), 
+we can add an ID to the element. To add an ID to an element, the element needs an id attribute: 
+	<h1 id="large-title"> ... </h1>
+Then, CSS can select HTML elements by their id attribute. To select an id element, CSS prepends the id
+name with a hashtag (#). For instance, if we wanted to select the HTML element in the example above, 
+it would look like this:
+	#large-title {
+
+	}
+
+CLASSES AND IDS:
+CSS classes and IDs have different purposes, which can affect which one you use to style HTML elements.
+CSS classes are meant to be reused over many elements. By writing CSS classes, you can style elements 
+in a variety of ways by mixing classes on HTML elements.
+While classes are meant to be used many times, an ID is meant to style only one element. IDs override 
+the styles of tags and classes. Since IDs override class and tag styles, they should be used sparingly 
+and only on elements that need to always appear the same.
+
+SPECIFICITY:
+Specificity is the order by which the browser decides which CSS styles will be displayed. 
+IDs are the most specific selector in CSS, followed by classes, and finally, tags.
+To make styles easy to edit, it’s best to style with a tag selector, if possible. If not, add a class 
+selector. If that is not specific enough, then consider using an ID selector. 
+EJEMPLO:
+(EN HTML)
+	<h1 class="headline">Breaking News</h1>
+(EN CSS)
+	h1 {
+	  color: red;
+	}
+
+	.headline {
+	  color: firebrick;
+	}
+In the example code above, the color of the heading would be set to firebrick, as the class selector is
+more specific than the tag selector. If an ID attribute (and selector) were added to the code above, 
+the styles within the ID selector’s body would override all other styles for the heading.
+
+CHAINING SELECTORS:
+	h1.special {
+
+	}
+The code above would select only the h1 elements that have a class of special 
+
+NESTED ELEMENTS:
+In addition to chaining selectors to select elements, CSS also supports selecting elements that are 
+nested within other HTML elements.
+EJEMPLO:
+(EN HTML):
+	<ul class='main-list'>
+	  <li> ... </li>
+	  <li> ... </li>
+	  <li> ... </li>
+	</ul>
+(EN CSS):
+	.main-list li {
+
+	}
+
+CHAINING AND SPECIFICITY
+Adding more than one tag, class, or ID to a CSS selector increases the specificity of the CSS selector.
+EJEMPLO:
+	p {
+	  color: blue;
+	}
+
+
+	.main p {
+	  color: red;
+	}
+Both of these CSS rules define what a p element should look like. Since .main p has a class and a p tag
+as its selector, only the p elements inside the .main element will appear red. This occurs despite there
+being another more general rule that states p elements should be blue.
+
+MULTIPLE SELECTORS:
+In order to make CSS more concise, it’s possible to add CSS styles to multiple CSS selectors all at once.
+This prevents writing repetitive code.
+For instance, the following code has repetitive style attributes:
+	h1 {
+	  font-family: Georgia;
+	}
+
+	.menu {
+	  font-family: Georgia;
+	}
+Instead of writing font-family: Georgia twice for two selectors, we can separate the selectors by a 
+comma to apply the same style to both, like this:
+	h1, 
+	.menu {
+	  font-family: Georgia;
+	}
+By separating the CSS selectors with a comma, both the h1 and the .menu elements will receive the 
+"font-family: Georgia" styling.
+
+CLEANSHEET: 
+https://www.codecademy.com/learn/paths/web-development/tracks/styling-a-website/modules/learn-css-selectors-visual-rules/cheatsheet
+
+-----LECCION 2----- (https://getmdl.io/)
+CSS STRUCTURE:
+To style an HTML element using CSS, you need to write a CSS declaration inside the body of a 
+CSS selector.
+EJEMPLO:
+	h1 {
+	  color: blue;
+	}
+
+FONT FAMILY:
+To change the typeface of text on your web page, you can use the font-family property.
+EJEMPLO:
+	h1 {
+	  font-family: Garamond;
+	}
+When setting typefaces on a web page, keep the following points in mind:
+1) The font specified in a stylesheet must be installed on a user’s computer in order for that font 
+to display when a user visits the web page.
+2) The default typeface for all HTML elements is Times New Roman. If no font-family attribute is 
+defined, the page will appear in Times New Roman.
+3) It’s a good practice to limit the number of typefaces used on a web page to 2 or 3. 
+This helps the page load faster in some cases and is usually a good design decision.
+4) When the name of a typeface consists of more than one word, it’s a best practice to enclose 
+the typeface’s name in quotes, like so:
+	h1 {
+	  font-family: "Courier New";
+	}
+
+FONT SIZE:
+To change the size of text on your web page, you can use the font-size property.
+EJEMPLO:
+	p {
+	  font-size: 18px;
+	}
+
+FONT WEIGHT:
+In CSS, the font-weight property controls how bold or thin text appears.
+	p {
+	  font-weight: bold;
+	}
+
+TEXT ALIGN:
+To align text we can use the text-align property. This property can be set to one of the following
+three values:
+1) left — aligns text to the left hand side of its parent element, which in this case is the browser.
+2) center — centers text inside of its parent element.
+3) right — aligns text to the right hand side of its parent element.
+EJEMPLO:
+	h1 {
+	  text-align: right;
+	}
+
+COLOR:
+Color can affect the following design aspects:
+* Foreground color
+* Background color
+In CSS, these two design aspects can be styled with the following two properties:
+* color: this property styles an element’s foreground color
+* background-color: this property styles an element’s background color
+EJEMPLO:
+	h1 {
+	  color: red;
+	  background-color: blue;
+	}
+In the example above, the text of the heading will appear in red, and the background of the heading 
+will appear blue.
+
+OPACITY:
+It’s measured from 0 to 1, with 1 representing 100%, or fully visible and opaque, and 0 representing 0%,
+or fully invisible.
+EJEMPLO:
+	.overlay {
+	  opacity: 0.5;
+	}
+In the example above, the .overlay element would be 50% visible, letting whatever is positioned behind 
+it show through.
+
+BACKGROUND IMAGE:
+It's possible to make the background of an element an image. This is done through the CSS property
+background-image.
+EJEMPLO:
+	.main-banner {
+	  background-image: url("https://www.example.com/image.jpg");
+	}
+1)The background-image property will set the element’s background to display an image.
+2)The value provided to background-image is a url. The url should be a url to an image. The url can be 
+a file within your project, or it can be a link to an external site. 
+To link to an image inside an existing project, you must provide a relative file path. If there was an 
+image folder in the project, with an image named mountains.jpg, the relative file path would look like:
+	.main-banner {
+	  background-image: url("images/mountains.jpg");
+	}
+
+IMPORTANT:
+!important can be applied to specific attributes instead of full rules. It will override ANY STYLE 
+no matter how specific it is. As a result, it should almost never be used.
+EJEMPLO:
+	p {
+	  color: blue !important;
+	}
+
+	.main p {
+	  color: red;
+	}
+Since !important is used on the p selector’s color attribute, all p elements will appear blue, even 
+though there is a more specific .main p selector that sets the color attribute to red.
+
+One justification for using !important is when working with multiple stylesheets. For example, if we
+are using the Material Design Lite style library and want to override the styles for one specific HTML 
+element, we can use the !important property.
+
+VIDEO CHEATSHEET: https://www.youtube.com/watch?v=InA5Ff7mxrc
+
+-----LECCION 3-----
+DEBUGGING IN VISUAL CODE STUDIO:
+https://code.visualstudio.com/docs/editor/debugging
+
+-----LECCION 4-----
+PRIMER PAGINA WEB USANDO VS CODE:
+https://www.codecademy.com/paths/web-development/tracks/styling-a-website/modules/local-website-development/articles/f1-u2-create-first-prj
+
+-----LECCION 5-----
+USANDO CHROME DEVTOOLS PARA EDITAR DE MANERA VISUAL:
+https://www.youtube.com/watch?time_continue=485&v=VuQ4pF_hfag&feature=emb_title

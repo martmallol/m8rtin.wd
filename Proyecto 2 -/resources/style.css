@@ -1,121 +1,95 @@
-@import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
-body {
-  /*fuente de la navbar*/
+/*Que los enlaces no esten subrayados*/
+a:link, a:visited, a:active {
+  text-decoration:none;
+}
+
+/*La navbar*/
+* {
   margin: 0;
-  background: #222;
-  font-family: 'Work Sans', sans-serif;
-  font-weight: 800;
-}
-
-.container {
-  width: 80%;
-  margin: 0 auto;
-}
-
-header {
-  background: #55d6aa; /*color del fondo de la navbar*/
-}
-
-header::after {  /*tengo que ver el video sobre esto. lo que hace es que cuando mandas el logo a la izq y las listas
-                   a la derecha, el fondo desaparece. este codigo hace que eso no pase.*/
-  content: '';
-  display: table;
-  clear: both;
-}
-
-.logo {
-  float: left; /*mando al logo para la izq*/
-  padding: 10px 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 nav {
-  float: right; /*mando a las listas para la derecha*/
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 8vh;
+  background-color: #ffffff;
+  font-family: "Poppins", sans-serif;
 }
 
-nav ul {
-  margin: 0;
-  padding: 0;
-  list-style: none; /*les saco los puntos que tienen las listas ul*/
+/*.logo {
+  color: rgb(226, 226, 226);
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-size: 20px;
+}*/
+
+.nav-links {
+  display: flex;
+  justify-content: space-around;
+  width: 30%;
 }
 
-nav li {
-  display: inline-block; /*en vez de que las listas esten en forma vertical, las pone en lado horizontal*/
-  margin-left: 70px;
-  padding-top: 23px;
-
-  position: relative; /*con esto los bloques tienen la longitud de las listas*/
+.nav-links li {
+  list-style: none;
 }
 
-nav a {
-  color: #444;
-  text-decoration: none; /*le saco la linea que subraya a la lista*/
-  text-transform: uppercase; /*pongo todo en mayus*/
+.nav-links a {
+  color: rgb(31, 28, 28);
+  text-decoration: none;
+  letter-spacing: 1px;
   font-size: 14px;
 }
 
-nav a:hover { /*se vuelve mas bold la fuente cuando pones el mouse encima de ella*/
-  color: #000; 
+.nav-imgs {
+  display: flex;
+  text-decoration: none;
 }
 
-nav a::before {
-  content: '';
-  display: block; /*bloque arriba de cada lista*/
-  height: 5px;
-  background-color: #444;
-
-  position: absolute; /*que los bloques recorran la longitud de la lista*/
-  top: 0;
-  width: 0%;/*hago que sea invisible el bloque*/
-
-  transition: all ease-in-out 250ms;
+body {
+  background-color: #FCE7CC;
 }
 
-nav a:hover::before {
-  width: 100%; /*con esto el bloque pasa a verse por completo al poner el mouse*/
+/*El recuadro de Get more from Codecademy*/
+.Pro {
+  margin-top: 100px;
+  padding-left: 200px;
+  padding-top: 20px;
+
 }
 
-
-
-
-
-
-
-
-
-
-
-h1, 
-h2, 
-h3, 
-p {
-  font-family: "Helvetica", sans-serif;
+.marco {
+border:1px solid black;
+background: #ffffff;
+padding:10px;
 }
 
-h1 {
-  background-image: url("https://s3.amazonaws.com/codecademy-content/courses/freelance-1/unit-2/pattern.jpeg");
-  text-align: center;
-  font-size: 100px;
-  color: khaki;
-}
+.cajapro {
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: 520;
+  color: #ffffff;
+  background: #000000;
+  margin: 0 0 25px;
+  overflow: hidden;
+  padding: 3px;
+  }
 
-.item h2 {
-  font-size: 32px;
-  color: white;
-}
-
-.price {
+.titulopro {
+  font-family: sans-serif;
+  font-size: 20px;
   font-weight: bold;
-  color: blue;
+  padding: 5px;
+  color: #000000;
+
 }
 
-#brush {
-  background-color: mediumspringgreen;
-}
-
-#frame {
-  background-color: lightcoral;
-}
-
-#paint {
-  background-color: skyblue;
+.parrafopro {
+  line-height: 25px; 
+  color: #000000;
 }

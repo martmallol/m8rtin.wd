@@ -3,13 +3,13 @@ a:link, a:visited, a:active {
   text-decoration:none;
 }
 
-/*La navbar*/
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/*La navbar*/
 nav {
   position: fixed;
   top: 0;
@@ -20,6 +20,7 @@ nav {
   min-height: 8vh;
   background-color: #ffffff;
   font-family: "Poppins", sans-serif;
+  border-bottom: 1px solid black;
 }
 
 /*.logo {
@@ -27,6 +28,14 @@ nav {
   text-transform: uppercase;
   letter-spacing: 5px;
   font-size: 20px;
+}*/
+/*.navizq {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 30%;
+  height: 100%;
+  z-index: 1;
 }*/
 
 .nav-links {
@@ -49,17 +58,63 @@ nav {
 .nav-imgs {
   display: flex;
   text-decoration: none;
+  /*background-color: red;*/
+}
+
+.nav-imgs button {
+  margin-top: 5px;
+  padding: 12px;
+  margin-left: 8px;
+  background-color: rgb(73, 15, 209);
+  color: #ffffff;
+}
+
+.nav-imgs .logo {
+  margin-top: 10px;
 }
 
 body {
   background-color: #FCE7CC;
+  font-family: sans-serif;
+}
+
+/*Maqueta gral*/
+.general {
+  margin: auto;
+  margin-top: 50px;
+  width: 1260px;
+  height: 800px;
+  background-color: red;
+}
+
+/*El recuadro de My Goal*/
+.banner {
+  padding-top: 60px;
+  float: right;
+  width: 350px;
+  height: 500px;
+  background-color: green;
+}
+
+.titulo {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.edit {
+  color: rgba(211, 53, 158, 0.664);
+  padding: 5px;
 }
 
 /*El recuadro de Get more from Codecademy*/
 .Pro {
-  margin-top: 100px;
+  padding-top: 60px;
+  width: 840px;
+  height: 189px;
+  background-color: blue;
+  /*margin-top: 100px;
   padding-left: 200px;
-  padding-top: 20px;
+  padding-top: 20px;*/
 
 }
 
@@ -67,10 +122,10 @@ body {
 border:1px solid black;
 background: #ffffff;
 padding:10px;
+padding-left: 30px;
 }
 
 .cajapro {
-  font-family: sans-serif;
   font-size: 14px;
   font-weight: 520;
   color: #ffffff;
@@ -78,6 +133,7 @@ padding:10px;
   margin: 0 0 25px;
   overflow: hidden;
   padding: 3px;
+  
   }
 
 .titulopro {
@@ -90,6 +146,7 @@ padding:10px;
 }
 
 .parrafopro {
-  line-height: 25px; 
+  line-height: 40px; 
   color: #000000;
+  font-size: 14px;
 }

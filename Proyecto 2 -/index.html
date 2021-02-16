@@ -8,54 +8,41 @@
     <link href="https://fonts.googleapis.com/css?family=Psoppins%26display=swap" rel="stylesheet">
 </head>
 
-<body>
     <!--Aca va la navbar-->
-    <header>
-        <div class="container">
-          <nav>
-            <div class="logo">
-              <a href="#"> <img src="./resources/images/codecademy.png" alt="logo" class="logo"height="37" width="149"/> </a> <!--Loguito Codecademy-->
-            </div>
-            <ul class="nav-links">
-              <li><a href="#">My Home</a></li>
-              <li><a href="#">Catalog</a></li>
-              <li><a href="#">Resources</a></li>
-              <li><a href="#">Community</a></li>
-              <li><a href="#">Pro Pricing</a></li>
-              <li><a href="#">For Business</a></li>
-            </ul>
-            <div class="nav-imgs">
-               
-              <a href="#"><img src="./resources/images/lupa.png" alt="logo" height="30" width="30"/></a> <!--Lupita-->
-              <a href="#"><img src="./resources/images/bell.png" alt="logo" height="30" width="30"/></a> <!--Campanita-->
-              <a href="#"><img src="./resources/images/user.png" alt="user" height="52" width="52"/></a> <!--Usuario-->
-              <a href="#">
-                <button>
-                  <span>Upgrade to Pro</span>
-                </button>
-              </a>  
-              </a>
-          </nav>
-
+<header>
+  <div class="container">
+    <nav>
+        <div class="logo">
+          <a href="#"> <img src="./resources/images/codecademy.png" alt="logo" class="logo"height="37" width="149"/> </a> <!--Loguito Codecademy-->
         </div>
-    </header>
-    
-    <!--Recuadro de Codecademy PRO-->
-    <div class="Pro"> 
-      <div class="marco">
-        <a href="">
-          <span class="cajapro">PRO</span> 
-          <span class="titulopro">Get more from Codecademy</span>
-          <p class="parrafopro">Go deeper and learn job-ready skills with our Pro-exclusive Paths. 
-          Earn a certificate of completion for every Path finished.</p>
-        </a>
-      </div>  
-    </div>
-    
-    <!--Aca va la columna de la derecha con la data del usuario y cuantos dias laburo-->
-    <div class="banner">
-        <h1>My Goal</h1>
-        <a href="??????"><span>Edit</span></a>
+        <ul class="nav-links">
+          <li><a href="#">My Home</a></li>
+          <li><a href="#">Catalog</a></li>
+          <li><a href="#">Resources</a></li>
+          <li><a href="#">Community</a></li>
+          <li><a href="#">Pro Pricing</a></li>
+          <li><a href="#">For Business</a></li>
+        </ul>
+      <div class="nav-imgs">
+        <a href="#"><img src="./resources/images/lupa.png" class="logo" alt="logo" height="30" width="30"/></a> <!--Lupita-->
+        <a href="#"><img src="./resources/images/bell.png" class="logo" alt="logo" height="30" width="30"/></a> <!--Campanita-->
+        <a href="#"><img src="./resources/images/user.png" alt="user" height="52" width="52"/></a> <!--Usuario-->
+        <a href="#">
+          <button>
+            <span>Upgrade to Pro</span>
+          </button>
+      </div>
+    </nav>
+
+  </div>
+</header>
+
+<body>
+    <div class="general">
+            <!--Aca va la columna de la derecha con la data del usuario y cuantos dias laburo-->
+      <div class="banner">
+        <span class="titulo">My Goal</span>
+        <a href="#"><span class="edit">Edit</span></a>
         <div id="targetbox">
           <div id="dias completados"> <!--Aca el boton con los dias completados-->
               <div id="week title">
@@ -101,10 +88,21 @@
               <span>weeks in a row</span>
           </div>
         </div>
-    </div>
-
-    <!--Aca van los recuadros-->
-    <div class="front">
+      </div>
+      
+      <!--Recuadro de Codecademy PRO-->
+      <div class="Pro"> 
+        <div class="marco">
+          <a href="">
+            <span class="cajapro">PRO</span> 
+            <span class="titulopro">Get more from Codecademy</span>
+            <p class="parrafopro">Go deeper and learn job-ready skills with our Pro-exclusive Paths. 
+            Earn a certificate of completion for every Path finished.</p>
+          </a>
+        </div>  
+      </div>
+      <!--Aca van los recuadros-->
+      <div class="front">
         <div class="my courses"> 
           <h1>My Courses</h1>
           <div id="careerpath"> <!--Recuadro de Web Development-->
@@ -244,8 +242,8 @@
                 </a>
             </div>
         </div>
+      </div>
     </div>
-
     <!--Aca va el footer de la pag, lo que esta abajo de todo.-->
     <footer> 
       <div class="info">

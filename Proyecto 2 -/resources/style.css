@@ -83,8 +83,9 @@ body {
   margin: auto;
   margin-top: 50px;
   width: 1260px;
-  height: 800px;
+  height: 1400px;
   background-color: red;
+
 }
 
 /*El recuadro de My Goal*/
@@ -99,12 +100,70 @@ body {
 .titulo {
   font-size: 26px;
   font-weight: bold;
+  color: #000000;
 }
 
 .edit {
-  color: rgba(211, 53, 158, 0.664);
   padding: 5px;
+  font-weight: bold;
 }
+
+.week-title {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 10px;
+}
+.week-title p {
+  padding-left: 15px;
+  letter-spacing: 0.1em;
+}
+
+.targetbox {
+  background-color: #ffffff;
+  font-size: 15px;
+  }
+
+.dias-completados {
+  padding:10px;
+  padding-left: 25px;
+  padding-top: 30px;
+  border-bottom: 1px solid black;
+}
+
+.zero {
+  font-weight: bold;
+  font-size: 45px;
+}
+
+.semana {
+  display: flex;
+  justify-content: space-around;
+  align-items: left;
+  text-align: center;
+  padding-bottom: 25px;
+  
+}
+
+.monday, .tuesday, .thursday, .friday, .saturday, .sunday {
+  background-image: url(./images/rombo.png);
+  background-size: cover;
+  padding: 12px;
+  padding-bottom: 2px;
+}
+
+.wednesday {
+  background-image: url(./images/rombo\ punteado.png);
+  background-size: cover;
+  padding: 11px;
+}
+
+.semanas-completadas {
+  padding:10px;
+  padding-left: 25px;
+  padding-top: 30px;
+  padding-bottom: 25px;
+}
+
 
 /*El recuadro de Get more from Codecademy*/
 .Pro {
@@ -149,4 +208,24 @@ padding-left: 30px;
   line-height: 40px; 
   color: #000000;
   font-size: 14px;
+}
+
+/*El recuadro de My Courses*/
+.front {
+  width: 840px;
+  height: 1200px;
+  background-color: yellow;
+  /*margin-top: 100px;
+  padding-left: 200px;
+  padding-top: 20px;*/
+
+}
+
+/*El footer con los links y redes sociales*/
+footer {
+  margin: auto;
+  margin-top: 50px;
+  width: 1520px;
+  height: 800px;
+  background-color: lightblue;
 }

@@ -5,6 +5,7 @@ EMPIEZA LO IMPORTANTE
 - git add <archivo> -> agrego un archivo a lo que voy a subir (si pongo "git add ." agrega toda la carpeta)
 - git commit -m 'Mensaje' -> establezco que voy a commitear y adjunto al lado un mensaje para saber que es lo que cambie
 - git push origin master -> mando el commit a github/gitlab mediante la rama "master"
+- git remote add origin URL -> adjunto a que repo de github lo voy a mandar
 TERMINA LO IMPORTANTE
 - git status -> checkeo el estado actual de lo que estoy por commitear
 - git checkout -b <branch-name> -> creo una nueva branch, O si branch-name ya existe, me cambia a esa branch

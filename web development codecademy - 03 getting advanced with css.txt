@@ -115,3 +115,134 @@ visible — displays an element.
 collapse — collapses an element.
 
 
+
+-----LECCION 2----- 
+INTRO A DEV TOOLS: How to manipulate the box model proportions.
+1. Article:
+https://www.codecademy.com/paths/web-development/tracks/getting-more-advanced-with-design/modules/learn-css-box-model/articles/f1-devtools-box-model
+2. Video: 
+https://www.youtube.com/watch?v=VuQ4pF_hfag
+
+
+
+-----LECCION 3----- 
+DISPLAY AND POSITIONING:
+FLOW OF HTML: A browser will render the elements of an HTML document that has no CSS from left to right, top 
+to bottom, in the same order as they exist in the document. This is called the flow of elements in HTML.
+In this lesson, we will learn five properties for adjusting the position of HTML elements in the browser.
+
+POSITION: Block-level elements create a block the full width of their parent elements, and they prevent other 
+elements from appearing in the same horizontal space. Osea, que a priori no puedo poner varios elementos de manera
+horizontal entre ellos. Cuando creo una division, automaticamente agarra el ancho de su padre, o de toda la pag.
+
+The default position of an element can be changed by setting its position property. 
+The position property can take one of five values:
+- static - the default value (it does not need to be specified)
+- relative
+- absolute
+- fixed
+- sticky 
+
+POSITION: RELATIVE
+This value allows you to position an element relative to its default static position on the web page.
+We can specify where the element should be positioned on the page. This is done by accompanying the position 
+declaration with one or more of the following offset properties that will move the element away from its default 
+static position:
+- top - moves the element down from the top.
+- bottom - moves the element up from the bottom.
+- left - moves the element away from the left side (to the right).
+- right - moves the element away from the right side (to the left).
+
+.green-box {
+  background-color: green;
+  position: relative;
+  top: 50px;
+  left: 120px;
+}
+
+POSITION: ABSOLUTE
+When an element’s position is set to absolute, all other elements on the page will ignore the element and act like 
+it is not present on the page. The element will be positioned relative to its closest positioned parent element, 
+while offset properties can be used to determine the final position from there.
+Seria como tener una imagen en word que no dependa del texto, que el texto pise a la imagen.
+
+POSITION: FIXED
+When an element’s position is set to absolute, as in the last exercise, the element will scroll with the rest of 
+the document when a user scrolls. We can fix an element to a specific position on the page (regardless of user 
+scrolling) by setting its position to fixed, and accompanying it with the familiar offset properties top, bottom, 
+left, and right. Esto me sirve para una navbar por ejemplo. Ya que siempre que scrolleo, esta me va a aparecer en 
+la pagina.
+
+.title {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+}
+
+The .title element will remain fixed to its position no matter where the user scrolls on the page
+
+POSITION: STICKY
+Since static and relative positioned elements stay in the normal flow of the document, when a user scrolls the page 
+(or parent element) these elements will scroll too. And since fixed and absolute positioned elements are removed 
+from the document flow, when a user scrolls, these elements will stay at their specified offset position.
+The sticky value is another position value that keeps an element in the document flow as the user scrolls, 
+but *sticks* to a specified position as the page is scrolled further. 
+
+.box-bottom {
+  background-color: darkgreen;
+  position: sticky;
+  top: 240px;
+}
+
+In the example above, the .box-bottom <div> will remain in its relative position, and scroll as usual. When it 
+reaches 240 pixels from the top, it will stick to that position until it reaches the bottom of its parent 
+container where it will “unstick” and rejoin the flow of the document.
+
+Z-INDEX: When boxes on a web page have a combination of different positions, the boxes (and therefore, their 
+content) can overlap with each other, making the content difficult to read or consume.
+The z-index property controls how far back or how far forward an element should appear on the web page when 
+elements overlap. This can be thought of as the depth of elements, with deeper elements appearing behind 
+shallower elements.
+Es como un efecto de parallax. Le da a cada elemento que lo tenga, una prioridad sobre si debe aparecer adelante
+o atras.
+
+INLINE DISPLAY:
+In the example below, the <em> element is inline, because it displays its content on the same line as the 
+content surrounding it, including the anchor tag.
+EJ: To learn more about <em>inline</em> elements, read <a href="#">MDN documentation</a>.   
+
+
+DISPLAY: BLOCK
+Some elements are not displayed in the same line as the content around them. These are called block-level 
+elements. These elements fill the entire width of the page by default, but their width property can also be set.
+Elements that are block-level by default include all levels of heading elements (<h1> through <h6>), <p>, <div> 
+and <footer>.
+
+DISPLAY: INLINE-BLOCK
+Inline-block display combines features of both inline and block elements. Inline-block elements can appear next 
+to each other and we can specify their dimensions using the width and height properties. Images are the best 
+example of default inline-block elements.
+Por ejemplo, me sirve para poner una al lado de la otra a cada seccion de una navbar.
+
+FLOAT: 
+So far, we’ve learned how to specify the exact position of an element using offset properties. If we’re simply 
+interested in moving an element as far left or as far right as possible in the container, we can use the float 
+property.
+The float property is often set using one of the values below:
+- left - moves, or floats, elements as far left as possible.
+- right - moves elements as far right as possible.
+
+Floated elements must have a width specified, as in the example above. Otherwise, the element will assume the 
+full width of its containing element, and changing the float value will not yield any visible results.
+
+CLEAR:
+The float property can also be used to float multiple elements at once. However, when multiple floated elements 
+have different heights, it can affect their layout on the page. Specifically, elements can “bump” into each other 
+and not allow other elements to properly move to the left or right.
+
+The clear property specifies how elements should behave when they bump into each other on the page. 
+It can take on one of the following values:
+- left: the left side of the element will not touch any other element within the same containing element.
+- right: the right side of the element will not touch any other element within the same containing element.
+- both: neither side of the element will touch any other element within the same containing element.
+- none: the element can touch either side.

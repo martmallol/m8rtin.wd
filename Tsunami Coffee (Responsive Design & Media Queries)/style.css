@@ -1,0 +1,138 @@
+html,
+body {
+  font-family: Helvetica, sans-serif;
+  font-size: 16px;
+  margin: 0;
+  background-color: white;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.main {
+  height: 30rem;
+  padding-top: 1rem;
+  background-image: url(https://content.codecademy.com/courses/freelance-1/unit-5/tsunami-coffee/images/bg-photo.png); /*Agrego una imagen como banner para el titulo de la pagina*/
+  background-position: center; /*Asi la imagen se ve siempre centrada no importa que tan grande sea la pag.*/
+  background-size: cover; /*Asi tiene el tamano de una portada.*/
+}
+
+.main img {
+  width: 15rem;
+  display: block;
+  margin: auto;
+  margin-top: 5rem;
+}
+
+nav {
+  background-color: OrangeRed;
+  color: White;
+
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+}
+
+li {
+  display: inline-block;
+  padding: 0.75rem 1.25rem; /*Hago que los elementos de la navbar tengan mas espacio entre ellos. El primer nro corresponde a top y bottom. Mientras que el segundo corresponde a right y left.*/
+}
+
+.supporting,
+.rating,
+.gallery,
+.location {
+  margin: 4em auto;
+}
+
+.supporting {
+  display: flex;
+  align-items: flex-start;
+  padding: 0 1rem;
+}
+
+.supporting img {
+  height: 10%;
+  width: 10%;
+  /*Achico la imagen al ponerle un 10% de tamano tanto para el largo como el alto.*/
+  margin-right: 5%; /*Hago que haya mas espacio entre la imagen y el texto de la derecha.*/
+}
+
+.rating {
+  background-color: OrangeRed;
+  height: 20rem;
+  padding: 0 1rem;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rating h1 {
+  font-size: 2.5rem; /*Tiene que ser equivalente a 40px (miro el tamano de la fuente de la seccion 'html'). Osea, 40/16*/
+}
+
+.gallery img {
+  display: block;
+  width: 30%;
+  margin: 1.5%;
+  float: left;
+}
+
+.clearfix {
+  clear: both;
+}
+
+.location {
+  text-align: center;
+  margin-bottom: 7rem;
+}
+
+.location img {
+  width: 100% /*Asi puedo ver que toda la imagen ocupe el ancho completo de su contenedor. Si no ponia esto, la imagen rebalsaba, y no la veia entera.*/
+}
+
+footer {
+  background-color: OrangeRed;
+  padding: 0 1rem;
+}
+
+footer .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5em 0;
+  color: white;
+}
+
+/*A partir de aca, me ocupo de como se vera la pagina para otros dispositivos, como un celu o una tablet.*/
+@media only screen and (max-width: 960px) { /*Lo que venga abajo sera la visual de la pagina cuando esta tenga un ancho menor a 960 pixeles.*/
+  .main {
+    padding-top: 0; /*Con esto la navbar aparece arriba de todo. No hay nada arriba de ella.*/
+  }
+}
+
+@media only screen and (max-width: 700px) { /*Cuando la pag tenga un ancho menor a 700 pixeles.*/
+  .supporting img {
+    display: none; /*La imagen me corria mucho para la derecha al parrafo. Haciendolo muy largo y angosto. Entonces la saco asi el parrafo es mas legible.*/
+  }
+}
+
+@media only screen and (max-width: 470px) { /*Cuando la pag tenga un ancho menor a 700 pixeles.*/
+  h1 {
+    font-size: 2rem; /*Equivale a 32px*/
+  }
+
+  .gallery img { /*Se ven muy chiquitas si la pantalla es la de un celular. Vamos a cambiar su tamano.*/
+    width: 100%; /*Ahora cada imagen toma el ancho de la pantalla. Se ven mucho mas grandes y se ven 'una por una'.*/
+    margin: 0;
+  }
+
+  footer nav {
+    display: none; /*Habia overflow con la nav del footer. Asi que la invisibilizamos.*/
+  }
+}

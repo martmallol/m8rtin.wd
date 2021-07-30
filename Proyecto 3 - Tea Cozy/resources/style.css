@@ -1,0 +1,80 @@
+* {
+    margin: 0; /*que nada tenga margen en el archivo si no se especifica*/
+    padding: 0; /*que nada tenga padding en el archivo si no se especifica*/
+    
+}
+
+a:link, a:visited, a:active {
+    color: seashell;
+    opacity: 0.9;
+    text-decoration: none; /*que ningun link tenga decoracion (subrayado x ej)*/
+}
+
+/*Specs del archivo de ruta*/
+html {
+    font-family: Helvetica;
+    font-size: 22px;
+    color: seashell;
+    background-color: black;
+    opacity: 0.9;
+}
+  
+/*La navbar*/
+nav {
+    position: fixed; /*Siempre queda fixeada arriba*/
+    display: flex; /*Pasa a ser un flexbox*/
+    background-color: black;
+    width: 100%; /*Ocupa todo el ancho de la pag*/
+    height: 69px;
+    align-items: center; /*Los elementos quedan centrados verticalmente*/
+    justify-content: space-around;
+    border-bottom: 1px solid seashell;
+    z-index: 1;
+  }
+
+.logo {
+    margin-left: 10px;
+    height: 50px;
+    width: auto;
+    display: flex;
+    justify-content: start;
+}
+
+.nav-links li {
+    display: inline-flex;
+    justify-content: space-around;
+    margin-right: 1.5rem;
+}
+.nav-links a {
+    text-decoration: underline;
+}
+
+/*Banner*/
+
+#banner {
+    height: 700px;
+    padding-top: 69px; /*Para que no se choque con la navbar*/
+    margin: 0 35px;
+    position: relative;
+    display: flex;
+    background-repeat: no-repeat;
+    align-items: center;
+
+    /*Parte de la posicion de la imagen*/
+    background-image: url(./images/mission.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+#banner .heading {
+    width: 1200px;
+    background-color: black;
+    flex-wrap: wrap;
+    
+}
+
+footer {
+    text-align: left;
+    margin: 40px 20px;
+}

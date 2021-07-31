@@ -1,15 +1,3 @@
-* {
-    margin: 0; /*que nada tenga margen en el archivo si no se especifica*/
-    padding: 0; /*que nada tenga padding en el archivo si no se especifica*/
-    
-}
-
-a:link, a:visited, a:active {
-    color: seashell;
-    opacity: 0.9;
-    text-decoration: none; /*que ningun link tenga decoracion (subrayado x ej)*/
-}
-
 /*Specs del archivo de ruta*/
 html {
     font-family: Helvetica;
@@ -59,7 +47,7 @@ nav {
     display: flex;
     background-repeat: no-repeat;
     align-items: center;
-
+    justify-content: center;
     /*Parte de la posicion de la imagen*/
     background-image: url(./images/mission.jpg);
     background-repeat: no-repeat;
@@ -68,11 +56,83 @@ nav {
 }
 
 #banner .heading {
-    width: 1200px;
+    width: 1180px;
+    padding: 10px;
     background-color: black;
+    display: flex;
     flex-wrap: wrap;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+/*Tea of the Month*/
+
+#tea-month {
+    margin: 100px;
+    justify-content: center;
+    text-align: center;
+}
+
+#tea-month h2 {
+    margin-bottom: 20px;
+}
+
+#tea-month h4 {
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+
+.images {
     
 }
+
+.images img {
+    height: 200px;
+    width: 300px;
+    margin: 10px;
+}
+
+/*Locations*/
+
+#locations {
+    height: 420px;
+    padding-top: 80px; /*Para que con el height total de 500px*/
+    text-align: center;
+    margin: 0 35px;
+    /*Parte de la posicion de la imagen*/
+    background-image: url(./images/locations.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+
+
+.loc-blocks {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+/*Contact*/
+
+#contact {
+    text-align: center;
+    height: 200px;
+    margin-top: 0.5em;
+}
+
+#contact h2 {
+    margin-bottom: 40px;
+}
+
+#contact h5 {
+    margin-bottom: 30px;
+}
+
+/*Footer*/
 
 footer {
     text-align: left;

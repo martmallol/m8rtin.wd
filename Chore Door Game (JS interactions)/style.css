@@ -1,0 +1,73 @@
+body {
+  background-color: #010165;
+  margin: 0px;
+}
+/* --Logo-- */
+.header {
+  background-color:#00ffff;
+  text-align: center; /*Ahora el logo estara en el medio de la pag y no a la izq*/
+}
+
+/* --Instrucciones-- */
+/* Bloque de texto */
+.title-row {
+  margin-top: 42px;
+  margin-bottom: 21px;
+  text-align: center;
+}
+
+/* Titulo */
+.instructions-title {
+  display: inline; /*Hace que esta clase pertenezca al renglon del padre.*/
+  font-size: 18px;
+  color: #00ffff;
+  font-family: 'Work Sans';
+}
+
+/*Bloque de las filas con las instrucciones*/
+.instructions-row {
+  margin: 0 auto;
+  width: 400px;
+}
+
+/*Numero de cada instruccion*/
+.instructions-number {
+  padding-right: 25px;
+  font-family: 'Work Sans';
+  font-size: 36px;
+  color: #00ffff;
+}
+
+/*Fila de cada instruccion*/
+.instructions-text {
+  padding: 10px;
+  font-family: 'Work Sans';
+  font-size: 14px;
+  color: #ffffff;
+}
+
+/* --Puertas-- */
+/*Bloque*/
+.door-row {
+  text-align: center;
+}
+
+/*Cada puerta*/
+.door-frame {
+  cursor: pointer; /*Con esta propiedad muestro que el elemento puede ser clickeado cuando reposo el cursor sobre el.*/
+  padding: 10px;
+}
+
+/* --Boton-- */
+.start-row {
+  margin: auto; /*Lo manda al medio del archivo con un margen automatico*/
+  width: 120px;
+  height: 43px;
+  font-family: 'Work Sans';
+  padding-top: 18px;
+  text-align: center;
+  background-color: #eb6536;
+  color: #010165;
+  margin-bottom: 21px;
+  cursor: pointer;
+}

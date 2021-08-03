@@ -1,0 +1,186 @@
+WEB DEVELOPMENT CODECADEMY:
+
+-----LECCION 1----- 
+THE <SCRIPT> TAG: The <script> element allows you to add JavaScript code inside an HTML file. 
+Below, the <script> element embeds valid JavaScript code:
+
+<h1>This is an embedded JS example</h1>
+<script>
+  function Hello() {
+    alert ('Hello World');
+  }
+</script>
+
+THE SRC ATTRIBUTE: Let’s talk about linking code.  Instead of having messy code that is all in the same file, 
+developers separate their code into different files, making each “concern” easier to understand and more 
+convenient when changes must be made.
+
+Instead of writing JavaScript in our HTML file, we write it in its own file, and then reference this code with a 
+file path name. We do this using the **src attribute**!
+
+This seems familiar, that’s because you may have been linking to external files with the <img> and <link> elements. 
+The attribute is exactly the same, but now its value specifies the location of your script file.
+
+Below is an example of a providing a relative path for a JavaScript file.
+<script src="./exampleScript.js"></script>
+
+HOW ARE SCRIPTS LOADED?: Elements, including the <script> element, are by default, parsed in the order they appear 
+in the HTML file. When the HTML parser encounters a <script> element, it loads the script then executes its 
+contents before parsing the rest of the HTML. The two main points to note here are that:
+- The HTML parser does NOT process the next element in the HTML file until it loads and executes the <script> 
+  element, thus leading to a delay in load time and resulting in a poor user experience.
+- Additionally, scripts are loaded sequentially, so if one script depends on another script, they should be placed 
+  in that very order inside the HTML file.
+
+Aca se habla basicamente sobre que al cargar una pagina, hay elementos que se cargan antes que otros. Los scripts 
+se leen de arriba a abajo.
+
+DEFER ATTRIBUTE: The defer attribute specifies scripts should be executed after the HTML file is completely parsed. 
+When the HTML parser encounters a <script> element with the defer attribute, it loads the script but defers the 
+actual execution of the JavaScript until after it finishes parsing the rest of the elements in the HTML file.
+
+Here is an example of the defer tag:
+<script src="example.js" defer></script> 
+
+Q: When is defer useful?
+A: When a script contains functionality that requires interaction with the DOM, the defer attribute is the way 
+to go. This way, it ensures that the entire HTML file has been parsed before the script is executed.
+
+ASYNC ATTRIBUTE: The async attribute loads and executes the script asynchronously with the rest of the webpage. 
+This means that, similar to the defer attribute, the HTML parser will continue parsing the rest of the HTML as 
+the script is downloaded in the background. However, with the async attribute, the script will not wait until 
+the entire page is parsed: it will execute immediately after it has been downloaded. 
+
+Here is an example of the async tag:
+<script src="example.js" async></script>
+
+Q: When is it useful?
+A: async is useful for scripts that are independent of other scripts in order to function accordingly. Thus, if it 
+does not matter exactly at which point the script file is executed, asynchronous loading is the most suitable 
+option as it optimizes web page load time.
+
+The old convention was to put scripts right before the </body> tag to prevent the script from blocking the rest 
+of the HTML content. Now, the convention is to put the script tag in the <head> element and to use the 
+defer and async attributes.
+
+
+-----LECCION 2----- 
+WHAT IS THE DOM?: The Document Object Model, abbreviated DOM, is a powerful tree-like structure that allows 
+programmers to conceptualize hierarchy and access the elements on a web page.
+The DOM is a language-agnostic structure implemented by browsers to allow for web scripting languages, 
+like JavaScript, to access, modify, and update the structure of an HTML web page in an organized way.
+For this reason, we like to think of the DOM as the link between an HTML web page and scripting languages.
+
+Explicacion en español: El DOM es la estructura de objetos que genera el navegador cuando se carga un documento y 
+se puede alterar mediante Javascript para cambiar dinámicamente los contenidos y aspecto de la página.
+
+THE DOM AS A TREE STRUCTURE: Tree-like modeling is used in many fields, including evolutionary science and data 
+analytics. The DOM tree follows similar logic to that of a family tree.
+In the DOM tree, the top-most node is called the root node, and it represents the HTML document. The descendants 
+of the root node are the HTML tags in the document, starting with the <html> tag followed by the <head> and <body> 
+tags and so on.
+
+NODES AND ELEMENTS IN THE DOM: There are nine different types of node objects in the DOM tree. In our diagram, the 
+node objects with the sharp-edge rectangles are of the type Element, while the rounded edge rectangles are of type 
+Text, because they represent the text inside the HTML paragraph elements.
+
+When trying to modify a web page, the script will mostly interact with the DOM nodes of type element. Elements are 
+the building units of HTML web pages, they contain everything between an opening tag and a closing tag. If the tag 
+is a self-closing tag, then that is the element itself.
+
+ATTRIBUTES OF AN ELEMENT NODE: The DOM also allows access to the regular attributes of an HTML element such as 
+its style, id, etc.
+
+
+-----LECCION 3----- 
+THE DOCUMENT KEYWORD: The document object in JavaScript is the door to the DOM structure. The document allows you 
+to access the root node of the DOM tree. Before you can access a specific element in the page, first you must 
+access the document structure itself. The document allows scripts to access children of the DOM as properties.
+
+For example, if you wanted to access the <body> element in your script, you could access it as a property of the 
+document by typing document.body. This property will return the body element of that DOM.
+
+A comprehensive list of all document properties: https://developer.mozilla.org/en-US/docs/Web/API/Document
+
+TWEAK AN ELEMENT: When using the DOM in your script to access an HTML element, you also have access to all of that 
+element’s properties. This includes the ability to modify the contents of the element as well as its attributes and 
+properties— that can range from modifying the text inside a p element to assigning a new background color to a div.
+
+You can access and set the contents of an element with the .innerHTML property.
+For example, the following code reassigns the inner HTML of the body element to the text ‘The cat loves the dog’:
+document.body.innerHTML = 'The cat loves the dog.';
+
+The .innerHTML property can also add any valid HTML, including properly formatted elements. The following example 
+assigns an h2 element as a child inside the <body> element:
+document.body.innerHTML = '<h2>This is a heading</h2>'; 
+
+SELECT AND MODIFY ELEMENTS: What if we wanted to select a specific element? The DOM interface allows us to access a
+specific element with CSS selectors. CSS selectors define the elements to which a set of CSS rules apply, but we 
+can also use these same selectors to access DOM elements with our script! Selectors can include the name of the 
+tag, a class, or an ID.
+
+The .querySelector() method allows us to specify a CSS selector and then returns the first element that matches 
+that selector. The following code would return the first paragraph in the document.
+document.querySelector('p');
+
+You can also use other CSS selectors such as an element’s . class or its # ID.
+
+Another option, if you want to access elements directly by their id, you can use the aptly named 
+.getElementByID() function:
+document.getElementById('bio').innerHTML = 'The description';
+
+The example chains so that it selects the element with an ID of ‘bio’ and set its .innerHTML to the text 
+‘The description’.
+
+STYLE AND ELEMENT: Another way to modify an element is by changing its CSS style. The .style property of a DOM 
+element provides access to the inline style of that HTML tag.
+The syntax follows an element.style.property format, with the property representing a CSS property.
+
+For example, the following code selects the first element with a class of blue and assigns blue as the 
+background-color:
+	let blueElement = document.querySelector('.blue');
+	blueElement.style.backgroundColor = 'blue';
+
+The following chaining syntax would also work:
+	document.querySelector('.blue').style.fontFamily = 'Roboto';
+
+CREATE AND INSERT ELEMENTS: Just as the DOM allows scripts to modify existing elements, it also allows for the 
+creation of new ones. The .createElement(tagName) method creates a new element based on the specified tag name 
+passed into it as an argument. However, it does not append it to the document. It creates an empty element with 
+no inner HTML.
+
+In order to create an element and add it to the web page, you must assign it to be the child of an element that 
+already exists on the DOM. We call this process appending. The .appendChild() method will add a child element as 
+the last child node.
+
+The following code creates a new paragraph element, gives it an id, adds text to the new element’s .innerHTML, 
+and appends it to the body of the document:
+	let paragraph = document.createElement('p');
+	paragraph.id = 'info'; 
+	paragraph.innerHTML = 'The text inside the paragraph';
+	document.body.appendChild(paragraph);
+
+REMOVE AN ELEMENT: The DOM also allows for the removal of an element. The .removeChild() method removes a specified 
+child from a parent.
+
+Because the .querySelector() method returns the first paragraph, the following code would remove the first 
+paragraph in the document:
+	let paragraph = document.querySelector('p');
+	document.body.removeChild(paragraph);
+
+If you want to hide an element because it does not need to be loaded initially, the .hidden property allows you to 
+hide it by assigning it as true or false:
+	document.getElementById('sign').hidden = true;
+
+INTERACTIVITY WITH ONCLICK: You can add interactivity to DOM elements by assigning a function to run based on an 
+event. Events can include anything from a click to a user mousing over an element.
+
+The .onclick property allows you to assign a function to run on a click event on an element:
+	let element = document.getElementById('interact');
+	element.onclick = function() { element.style.backgroundColor = 'blue' };
+
+TRAVERSING THE DOM: Each DOM element node has a .parentNode and .children property. The property will return a 
+list of the element’s children and return null if the element has no children. The .firstChild property will grant 
+access to the first child of that parent element.
+
+

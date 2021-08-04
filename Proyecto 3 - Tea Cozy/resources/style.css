@@ -1,7 +1,6 @@
 * {
     margin: 0; /*que nada tenga margen en el archivo si no se especifica*/
     padding: 0; /*que nada tenga padding en el archivo si no se especifica*/
-    
 }
 
 a:link, a:visited, a:active {
@@ -101,7 +100,10 @@ nav {
 }
 
 .images {
-    
+    display: inline-flex;
+    flex-wrap: wrap;
+    min-width: 1000px;
+    justify-content: center;
 }
 
 .images img {

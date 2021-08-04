@@ -1,3 +1,15 @@
+* {
+    margin: 0; /*que nada tenga margen en el archivo si no se especifica*/
+    padding: 0; /*que nada tenga padding en el archivo si no se especifica*/
+    
+}
+
+a:link, a:visited, a:active {
+    color: seashell;
+    opacity: 0.9;
+    text-decoration: none; /*que ningun link tenga decoracion (subrayado x ej)*/
+}
+
 /*Specs del archivo de ruta*/
 html {
     font-family: Helvetica;
@@ -59,11 +71,16 @@ nav {
     width: 1180px;
     padding: 10px;
     background-color: black;
+    opacity: 0.9;
     display: flex;
     flex-wrap: wrap;
     text-align: center;
     align-items: center;
     justify-content: center;
+}
+
+#banner h2 {
+    margin-bottom: 20px;
 }
 
 /*Tea of the Month*/
@@ -107,14 +124,26 @@ nav {
     background-size: cover;
 }
 
-
-
 .loc-blocks {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 25px;
+    margin-top: 15px;
 }
+
+#downtown, #bayside, #oakdale {
+    width: 300px;
+    height: auto;
+    background-color: black;
+    margin: 0 20px;
+    padding: 25px 0;
+}
+
+.loc-blocks h4 {
+    font-weight: normal;
+    margin-top: 35px;
+}
+
 
 /*Contact*/
 

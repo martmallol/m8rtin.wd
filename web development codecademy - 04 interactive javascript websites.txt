@@ -295,3 +295,147 @@ interaction with keyboard keys in the browser.
 Keyboard events have unique properties assigned to their event objects like the .key property that stores the 
 values of the key pressed by the user. You can program the event handler function to react to a specific key, or 
 react to any interaction with the keyboard.
+
+
+-----LECCION 3----- 
+HANDLEBARS: In this lesson, we will learn about an external library, Handlebars.js! A library is a collection of 
+code that is already written that makes development easier. In the case of Handlebars, you are provided a 
+templating engine which allows you to generate reusable HTML with JavaScript. Another benefit is that Handlebars 
+keeps a clear separation of when you’re writing HTML or JavaScript.
+
+IMPLEMENTING HANDLEBARS: The major steps of using Handlebars in a project:
+- Add the Handlebars library to your project. — one option is to use a Content Delivery Network (CDN): 
+  MDN CDN documentation. (https://developer.mozilla.org/en-US/docs/Glossary/CDN)
+- Create a Handlebars script in your HTML file.
+- In your JavaScript file, grab the HTML stored in the Handlebars script.
+- Use Handlebars.compile() to return a templating function.
+- Pass in a context object to the templating function to get a compiled template.
+- Render the compiled template onto the web page.
+
+USING HANDLEBARS EXPRESSIONS: The power of Handlebars lies in its reusability and extensibility. Inside a script, 
+Handlebar expressions are wrapped with double braces, {{ }}. The content inside the curly braces serves as a 
+placeholder. For instance, if we use the following script:
+
+<script id="foo" type="text/x-handlebars-template">
+  <p>{{bar}}</p>
+</script>
+
+And our JavaScript file looks like:
+
+const source = document.getElementById('foo').innerHTML;
+const template = Handlebars.compile(source);
+const context = {
+  bar: 'Text of the paragraph element'
+};
+const compiledHtml = template(context);
+
+After running our code, the expression, {{bar}} is replaced with the value of context.bar in our JavaScript file. 
+In other words, compiledHtml will contain a string of '<p> Text of the paragraph element </p>'.
+
+"IF" BLOCK HELPER: If you want to check for a specific object property before you insert a value, Handlebars provides 
+you with the {{if}} helper block. The {{if}} helper is similar to the if conditional in JavaScript, but there is a 
+difference in syntax:
+
+{{#if argument}}
+  // Code to include if the provided argument is truthy 
+{{/if}}
+
+In JS:
+
+const context = {
+  opinion: true
+};
+
+Notice that the example above has both an opening {{#if}} expression and a closing {{/if}} expression. The code 
+block between those expressions will be added to the final HTML template if the argument provided is truthy.
+
+"ELSE" SECTION: If the {{if}} argument turns out to be falsy then you’ll just have a blank section in your HTML.
+Instead, you can add a default line of code by creating an else section, using Handlebar’s {{else}} expression.
+For example, 
+
+{{#if argument}}
+  // Code to include if the provided argument is truthy 
+{{else}}
+  // Code to include if the provided argument is falsy 
+{{/if}}
+
+In JS we change the option to false:
+
+const context = {
+  opinion: false
+};
+
+"EACH" AND "THIS" PART I: The {{each}} block allows you to iterate through an array. Inside the {{each}} block, 
+{{this}} acts as a placeholder for the element in the iteration.
+Below is an example of the Handlebars {{each}} block:
+	{{#each someArray}}
+  	  <p>{{this}} is the current element!</p>
+	{{/each}}
+
+This {{each}} block would be paired with an array like:
+	const context = {
+  	  someArray: ['First', 'Second', 'Third'] 
+	}
+
+After compiling, the HTML will look like:
+	<p>First is the current element!</p>
+	<p>Second is the current element!</p>
+	<p>Third is the current element!</p>
+
+"EACH" AND "THIS" PART II: Using {{this}} also gives you access to the properties of the element being iterated over.
+
+For instance, if you’re using the following array inside the context object:
+
+const context = {
+  someArray: [
+    {shape: 'Triangle'},
+    {shape: 'Circle'},
+    {shape: 'Square'}
+  ] 
+}
+
+And your template looks like:
+
+{{#each someArray}}
+  <p>The current shape is: {{this.shape}}!</p>
+{{/each}}
+
+After going through the steps of compiling, the finished HTML will look like:
+
+<p>The current shape is: Triangle!</p>
+<p>The current shape is: Circle!</p>
+<p>The current shape is: Square!</p>
+
+COMBINING "IF" AND "EACH": 
+In HTML:
+{{#each languages}}
+  <div class="card">
+    {{#if this.modern}}
+      <p>I should learn {{this.name}}.</p>
+    {{else}}
+      <p>When I have time, I'll learn {{this.name}}.</p>
+    {{/if}}
+  </div>
+{{/each}}
+
+In JS:
+const context = {
+  languages: [
+    {
+      name: 'HTML',
+      modern: true
+    },
+    {
+      name:'CSS',
+      modern: true
+    }, 
+    {
+      name: 'JavaScript',
+      modern: true
+    },
+    {
+      name: 'COBOL',
+      modern: false
+    }
+  ]
+};

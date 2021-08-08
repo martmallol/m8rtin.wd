@@ -320,3 +320,121 @@ This default exports object can now be used within secret-messages.js like so:
 
 Notice how toggleHiddenElement() and changeToFunkyColor() are now methods of the imported object called 
 'domFunctions' and are extracted using ES6 destructuring syntax!
+
+
+-----LECCION 3----- 
+ERRORS
+ERROR STACK TRACES: A piece of software, called a compiler, is trying to translate your code so that your computer 
+can understand and run it. However, the compiler is coming across a piece of code that it can’t interpret. As a 
+result, it throws an error back to you to let you know that it has to stop and why.
+This information is logged as an error stack trace — a printed message containing information about where the error 
+occurred, what type of error was thrown, and a description of the error.
+
+JAVASCRIPT ERROR TYPES: Here are three common error types:
+- SyntaxError: This error will be thrown when a typo creates invalid code — code that cannot be interpreted by the 
+      compiler. When this error is thrown, scan your code to make sure you properly opened and closed all brackets, 
+      braces, and parentheses and that you didn’t include any invalid semicolons.
+- ReferenceError: This error will be thrown if you try to use a variable that does not exist. When this error is 
+      thrown, make sure all variables are properly declared.
+- TypeError: This error will be thrown if you attempt to perform an operation on a value of the wrong type. For 
+      example, if we tried to use a string method on a number, it would throw a TypeError.
+
+There are seven types of built-in JavaScript errors in total. You can find more information about all of them at the 
+MDN JavaScript Error documentation: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
+
+LOCATING SILENT BUGS: Even if your code runs error-free, it is not necessarily bug-free. You may find that your 
+code is consistently returning incorrect values without throwing any errors. 
+
+An incredibly powerful tool for locating bugs is a method you likely learned very early on in your JavaScript 
+journey: **console.log()**! By adding print statements to our code, we can identify where things have gone wrong.
+
+DEBUGGING WIH CONSOLE.LOG(): 
+1. Go to the beginning of the malfunctioning code. Print out all starting variables, existing values, and arguments 
+   using console.log(). If the values are what you expect, move on to the next piece of logic in the code. If not, 
+   you have identified a bug and should skip to step 3.
+2. After the next piece of logic in your code, add console.log() statements to ensure updated variables have the 
+   values that you now expect and that the block of code is being executed. If that logic is executing properly, 
+   continue repeating this step until you find a line not working as expected, then move to step 3.
+3. Fix the identified bug and run your code again. If it now works as expected, you’ve finished debugging! If not, 
+   continue stepping through your code using step 2 until it does.
+
+
+-----LECCION 4----- 
+ERROR HANDLING
+CONSTRUCTING AN ERROR: What if we need an error message that isn’t covered by the built-in errors? Let’s say we 
+need to inform a user that a string passed in as an argument is too short with a custom message. Such a message 
+isn’t covered by a built-in error, but we could use the Error function to make our own error object with a message 
+that is unique to our program!
+
+console.log(Error('Your password is too weak.'));
+// Prints: Error: Your password is too weak.
+
+You might also see errors created with the new keyword. Both methods will lead to the same functionality:
+console.log(new Error('Your password is too weak.'));
+// Prints: Error: Your password is too weak.
+
+THE THROW ERROR: Creating an error doesn’t cause our program to stop — remember, an error must be thrown for it to 
+halt the program. To throw an error in JavaScript, we use the throw keyword like so:
+	throw Error('Something wrong happened');
+	// Error: Something wrong happened
+
+When we use the throw keyword, the error is thrown and code after throw statement will not execute. For example:
+	throw Error('Something wrong happened');
+	// Error: Something wrong happened
+ 
+	console.log('This will never run');
+
+THE TRY...CATCH STATEMENT: We have the ability to anticipate and handle these errors by writing code to address 
+the error and allow our program to continue running. In JavaScript, we use try...catch statement to anticipate and 
+handle errors. Take a look at example below:
+
+try {
+  throw Error('This error will get caught');
+} catch (e) {
+  console.log(e);
+}
+// Prints: This error will get caught
+ 
+console.log('The thrown error that was caught in the try...catch statement!');
+// Prints: 'The thrown error that was caught in the try...catch statement!'
+
+
+Now, let’s break down what happened in the try...catch statement above:
+1. We have code that follows try inside curly braces {} known as the try block.
+2. Inside the try block we insert code that we anticipate might throw an error.
+3. Since we want to see what happens if an error is thrown in the try block, we throw an error with the message 
+   'This error will get caught'.
+4. Following the try block is the catch statement which accepts the thrown error from the try block . The 'e' 
+   represents the thrown error.
+5. The curly braces that follow catch(e) is known as the catch block and contains code that executes to handle 
+   the error.
+6. Since the error is caught, our console.log() after the try...catch statement prints 'The thrown error that was 
+   caught in the try...catch statement!'.
+
+Generally speaking, in a try...catch statement, we evaluate code in the try block and if the code throws an error, 
+the code inside the catch block will handle the error for us.
+
+HANDLING WITH TRY...CATCH: In the previous exercise we caught an error that we threw, but we can also use a 
+try...catch statement to handle built-in errors that are thrown by the JavaScript engine that is reading and 
+evaluating our code.
+
+const someVar = 'Cannot be reassigned';
+try {
+  someVar = 'Still going to try';
+} catch(e) {
+  console.log(e);
+}
+// Prints: TypeError: Assignment to constant variable.
+
+In the example above, we didn’t use the throw keyword to throw a custom error, rather we tried to re-assign a const 
+variable and a TypeError was thrown. Then, in our catch block, we logged the error to the console.
+
+Using a try...catch statement for built-in JavaScript errors is really beneficial when we need to use data from an 
+external source that’s not written directly in our program.
+
+Let’s say we expect to grab an array from a database but the information we get back is a string. In our program, 
+we could have a function that only works on arrays. If that function was called with a string instead of an array 
+we would get an error and our program would stop running!
+
+However, we can use a try...catch statement to handle the thrown error for us which allows our program to continue 
+running and we receive a message knowing what went wrong! Let’s see how we can implement this in our code.

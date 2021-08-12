@@ -1,0 +1,102 @@
+WEB DEVELOPMENT CODECADEMY:
+
+(directory = carpeta)
+-----LECCION 1----- 
+NAVIGATING THE FILE SYSTEM
+INTRO TO COMMAND LINE: The command line is a text interface for the computer’s operating system. You can use it to 
+traverse and edit your computer’s filesystem. Through the command line, you can create new files, edit the 
+contents of those files, delete files, and more! The advantage of using the command line is its power. You can run 
+programs, write scripts to automate common tasks, and combine simple commands to handle difficult tasks.
+On Mac and Linux systems, we access the command line through something called Bash. Although Windows comes with a 
+different built-in command line, Windows users can also download Bash. 
+
+FILESYSTEM: A filesystem organizes a computer’s files and directories into a tree structure:
+1. The first directory in the filesystem is the **root directory.** It is the parent of all other directories and 
+   files in the filesystem.
+2. Each parent directory can contain more child directories and files.
+3. Each directory can contain more files and child directories. The parent-child relationship continues as long as 
+   directories and files are nested.
+Filesystem example: https://content.codecademy.com/courses/learn-command-line/img/LCL-fileTrees-01.png
+
+THE COMMAND 'ls': A command is a directive to the computer to perform a specific task. When you type ls, the 
+command line looks at the directory you are in, and then “lists” all the files and directories inside of it.
+In the terminal, the first thing you see is $. This is called a shell prompt. It appears when the terminal is 
+ready to accept a command.
+If we typed:
+  $ ls
+
+the terminal would display our current directory’s files and directories:
+  2014  2015  hardware.txt
+
+The directories 2014, 2015, and the file hardware.txt are the contents of the current directory.
+
+
+THE COMMAND 'pwd': **pwd** stands for “print working directory.” It outputs the name of the directory you are 
+currently in, called the working directory. Here is an example:
+  $ pwd
+  /home/ccuser/workspace/blog   (<-- this is what the console prints)
+
+
+THE COMMAND 'cd': It stands for “change directory.” Just as you would click on a folder in Windows Explorer, cd 
+switches you into the directory you specify. In other words, cd changes the working directory.
+Let’s say the directory we change into is 2015:
+  $ cd 2015
+
+When a file, directory, or program is passed into a command, it is called an argument. Here the 2015 directory is an 
+argument for the cd command. The cd command takes a directory name as an argument and switches into that directory.
+
+Instead of using cd twice in order to move from 2015 to memory (/home/ccuser/workspace/blog/2015/jan/memory), we 
+can use it once and give it a longer argument:
+  $ cd jan/memory
+
+To move up one directory, we use cd ..: (esto me sirve para volver atras)
+  $ cd ..
+Here, cd .. navigates up from jan/memory/ to jan/.
+
+
+THE COMMAND 'mkdir': Now that we can traverse the existing filesystem, let’s try editing it by making directories 
+(folders) through the command line. The command for that is mkdir:
+  $ mkdir media
+
+The mkdir command stands for “make directory”. It takes in a directory name as an argument and then creates a new 
+directory in the current working directory. Here we used mkdir to create a new directory named media/ inside our 
+working directory.
+
+We’ve made our new media directory, but what if we wanted to create another directory inside that one? We could 
+make the new directory from our current position by using a / to combine arguments as we did in the last lesson.
+Using:
+  $ mkdir media/tv (crea las dos carpetas a la vez, o crea a la carpeta 'tv' si estoy en el directorio que 
+		    contiene a 'media')
+
+
+THE COMMAND 'touch': Now we know how to create directories through the command line, but how do we create new files?
+We can do this using the command touch:
+  $ touch keyboard.txt
+
+The touch command creates a new file inside the working directory. It takes in a filename as an argument and then 
+creates an empty file with that name in the current working directory.
+
+HELPER COMMANDS: Let’s look at some helpful commands that will make using it easier!
+THE COMMAND 'clear': clear is used to clear your terminal, which is useful when it’s full of previous commands and 
+                     outputs. It doesn’t change or undo your previous commands, it just clears them from the view. 
+                     You can scroll upwards to see them at any time.
+
+THE 'tab' KEY: tab can be used to autocomplete your command. When you are typing the name of an existing file or 
+               directory, you can use tab to finish the rest of the name.
+
+THE 'up' AND 'down' ARROW KEYS: They can be used to cycle through your previous commands. ↑ will take you up 
+                                through your most recent commands, and ↓ will take you back through to the most 
+                                recent one.
+
+RESUME: 
+From the command line, you can navigate through files and folders on your computer:
+  - pwd outputs the name of the current working directory.
+  - ls lists all files and directories in the working directory.
+  - cd switches you into the directory you specify.
+  - mkdir creates a new directory in the working directory.
+  - touch creates a new file inside the working directory.
+
+You can use helper commands to make navigation easier:
+  - clear clears the terminal
+  - tab autocompletes the name of a file or directory
+  - ↑ and ↓ allow you to cycle through previous commands

@@ -158,3 +158,43 @@ current working directory into another directory.
 In the next example, w*.txt selects all files in the working directory starting with “w” (prefix) and ending with 
 “.txt” (suffix), and copies them to my_directory/.
   cp w*.txt my_directory/
+
+'mv' COMMAND: This command moves files. mv moves a file without making a copy. To move a file into a directory, use 
+mv with the source file as the first argument and the destination directory as the second argument. 
+Here we move my_file.txt into my_directory/.
+  mv my_file.txt my_directory/
+
+To move multiple files into a directory, use mv with a list of source files as the first arguments, and the 
+destination directory as the last argument. 
+Here, we move my_file_1.txt and my_file_2.txt into my_directory/.
+  mv my_file_1.txt my_file_2.txt my_directory/
+
+To rename a file, use mv with the old file as the first argument and the new file as the second argument. By moving 
+file_original.txt into file_renamed.txt, we rename the file as file_renamed.txt.
+  mv file_origin.txt file_renamed.txt
+
+'rm' AND 'rm -r' COMMANDS: The rm command deletes files and directories. 
+Here we remove the file unwanted_file.txt from the filesystem.
+  rm unwanted_file.txt
+
+The -r is an option that modifies the behavior of the rm command. The -r stands for “recursive,” and it’s used to 
+delete a directory and all of its child directories. For example:
+  rm -r unwanted_directory
+
+Be careful when you use rm! It deletes files and directories permanently. There isn’t an undelete command, so once 
+you delete a file or directory with rm, it’s gone.
+
+REVIEW: 
+1. Options modify the behavior of commands:
+  - ls -a lists all contents of a directory, including hidden files and directories
+  - ls -l lists all contents in long format
+  - ls -t orders files and directories by the time they were last modified
+  - Multiple options can be used together, like ls -alt
+
+2. From the command line, you can also copy, move, and remove files and directories:
+  - cp copies files
+  - mv moves and renames files
+  - rm removes files
+  - rm -r removes directories
+
+3. Wildcards are useful for selecting groups of files and directories

@@ -100,3 +100,61 @@ You can use helper commands to make navigation easier:
   - clear clears the terminal
   - tab autocompletes the name of a file or directory
   - ↑ and ↓ allow you to cycle through previous commands
+  
+
+-----LECCION 2----- 
+WHAT IS BASH?: Bash, or the Bourne-Again SHell, is a CLI that was created as a free software replacement for the 
+Bourne Shell. A shell is a specific kind of CLI. Bash is “open source,” which means that anyone can read the code 
+and suggest changes. 
+
+BASH SETUP FOR WINDOWS: Windows has a CLI called Command Prompt. While this has many of the same features as Bash, 
+Bash is much more popular. Because of the strength of the open source community and the tools they provide, 
+mastering Bash is a better investment than mastering Command Prompt.
+
+To use Bash on a Windows computer, we will download and install a program called Git Bash. Git Bash allows us to 
+easily access Bash as well as another tool we’ll be using later called Git, inside the Windows environment.
+You can watch the following video: https://www.youtube.com/watch?v=sQY0g7s2hac&feature=emb_title
+
+
+-----LECCION 3----- 
+MANIPULATION
+ls, REVISITED: The 'ls' command lists all files and directories in the working directory. We can use ls as is, or 
+attach an option. Options modify the behavior of commands. For example:
+  ls -a
+
+This command displays all the files and directories, including those starting with a dot (.). Files starting with 
+a dot are normally hidden, and don’t appear when using ls alone.
+
+In addition to -a, the ls command has several more options. Here are three common ones:
+-a - lists all contents, including hidden files and directories
+-l - lists all contents of a directory in long format, as well as the file permissions
+-t - orders files and directories by the time they were last modified.
+-alt - lists all contents, including hidden files and directories, in long format, ordered by the date and time 
+       they were last modified.
+
+'cat' COMMAND: The cat command outputs the contents of a specified file. For example:
+  cat action/superwoman.txt
+will output all the text from superwoman.txt.
+
+This is a useful command for peeking at files without opening them, and confirming the result of other commands 
+that change the contents of files.
+
+'cp' COMMAND: Let’s move on to copying, moving, and removing files and directories from the command line. The cp 
+command copies files or directories. Below, we copy the contents of a source file into a destination file:
+  cp source.txt destination.txt 
+
+We could also copy a file to a destination directory:
+  cp source.txt destination/
+
+To copy multiple files into a directory, use cp with a list of source files as the first arguments, and the 
+destination directory as the last argument. Here, we copy the files file1.txt and file2.txt into the same directory.
+  cp file1.txt file2.txt my_directory/ 
+
+WILDCARDS: In addition to using exact filenames as arguments, we can use special characters like * to select groups 
+of files. These special characters are called wildcards. For example, here we use cp to copy all files in the 
+current working directory into another directory.
+  cp * my_directory/
+
+In the next example, w*.txt selects all files in the working directory starting with “w” (prefix) and ending with 
+“.txt” (suffix), and copies them to my_directory/.
+  cp w*.txt my_directory/

@@ -198,3 +198,162 @@ REVIEW:
   - rm -r removes directories
 
 3. Wildcards are useful for selecting groups of files and directories
+
+
+
+-----LECCION 4----- 
+REDIRECTING INPUT & OUTPUT
+INTRO: Up until now, we have run commands in the command line and received a stream of output in the terminal. In 
+this lesson, we’ll focus on input and output (I/O) redirection.
+
+What happens when you type this command?
+  $ echo "Hello"
+  Hello
+
+The echo command accepts the string “Hello” as standard input, and echoes the string “Hello” back to the terminal 
+as standard output.
+
+Let’s learn more about standard input, standard output, and standard error:
+1. standard input, abbreviated as stdin, is information inputted into the terminal through the keyboard or input 
+   device.
+2. standard output, abbreviated as stdout, is the information outputted after a process is run.
+3. standard error, abbreviated as stderr, is an error message outputted by a failed process.
+
+YOUR FIRST REDIRECT: How does redirection work?
+  $ echo "Hello" > hello.txt
+
+The > command redirects the standard output to a file. Here, "Hello" is entered as the standard input, and is then 
+redirected to the file hello.txt by > .
+
+As a reminder, the cat command outputs the contents of a file to the terminal. When you type:
+  $ cat hello.txt
+the contents of hello.txt are displayed. You should see "Hello" printed to the console.
+
+'>' COMMAND: 
+  $ cat deserts.txt > forests.txt
+> takes the standard output of the command on the left, and redirects it to the file on the right. Here the 
+standard output of cat deserts.txt is redirected to forests.txt.
+
+Note that > overwrites all original content in forests.txt. When you view the output data by using cat on 
+forests.txt, you will see only the contents of deserts.txt.
+
+'>>' COMMAND: Now we know how to overwrite a file’s contents, but what if we want to be able to add to a file 
+without losing the original text? We can use the >> command! >> takes the standard output of the command on the 
+left and appends (adds) it to the file on the right.
+  $ cat deserts.txt >> forests.txt
+
+Here, the output data of forests.txt will contain the original contents of forests.txt with the content of 
+deserts.txt appended to it.
+
+'<' COMMAND: < takes the standard input from the file on the right and inputs it into the program on the left.
+  $ cat < deserts.txt
+Here, deserts.txt is the standard input for the cat command. The standard output appears in the terminal.
+
+
+'|' COMMAND: | is a “pipe.” The | takes the standard output of the command on the left, and pipes it as standard 
+input to the command on the right. You can think of this as “command to command” redirection.
+  $ cat volcanoes.txt | wc  
+
+Above, the output of cat volcanoes.txt becomes the standard input of wc. in turn, the wc command outputs the number 
+of lines, words, and characters in volcanoes.txt, respectively.
+  $ cat volcanoes.txt | wc | cat > islands.txt 
+
+Multiple |s can be chained together. Here the standard output of cat volcanoes.txt is “piped” to the wc command. 
+The standard output of wc is then “piped” to cat. Finally, the standard output of cat is redirected to islands.txt.
+
+You can view the output data of this chain by typing cat islands.txt.
+
+
+'sort' COMMAND: ort takes the standard input and orders it alphabetically for the standard output (it doesn’t 
+change the file itself). 
+  $ sort continents.txt 
+
+Here, the continents in continents.txt will be listed in alphabetical order:
+  Africa
+  Antarctica
+  Asia
+  Australia
+  Europe
+  North America
+  South America
+
+
+'uniq' COMMAND: uniq stands for “unique.” It filters out adjacent, duplicate lines in a file.
+  $ uniq deserts.txt 
+Here uniq deserts.txt filters out duplicates of "Sahara Desert", because its duplicate directly follows the previous 
+instance. The “Kalahari Desert” duplicates are not adjacent, and thus remain.
+
+A more effective way to use uniq is to call sort to alphabetize a file, and “pipe” the standard output to uniq. By 
+piping sort deserts.txt to uniq, all duplicate lines are alphabetized (and thereby made adjacent) and filtered out.
+  sort deserts.txt | uniq > uniq-deserts.txt 
+This uses piping to create a new file named uniq-deserts.txt that contains a sorted version of deserts.txt
+
+
+'grep' AND 'grep -i' COMMANDS: grep stands for “global regular expression print.” It searches files for lines that 
+match a pattern and then returns the results. It is also case sensitive.
+  $ grep America continents.txt 
+Above, grep searched for anything that matched “America” in continents.txt.
+
+grep -i enables the command to be case insensitive.
+  $ grep -i America continents.txt
+Here, grep searched for capital or lowercase strings that match “America” in continents.txt. Note that we don’t use 
+quotes in our command.
+
+'grep -R' COMMAND: grep -R searches all files in a directory and outputs filenames and lines containing matched 
+results. -R stands for “recursive”.
+  $ grep -R Arctic /home/ccuser/workspace/geography
+
+  /home/ccuser/workspace/geography/deserts.txt:Arctic Desert
+  /home/ccuser/workspace/geography/oceans.txt:Arctic Ocean
+
+Above, grep -R searched the /home/ccuser/workspace/geography directory for the string “Arctic” and outputted 
+filenames and lines with matching results.
+
+'grep -Rl' COMMAND: 
+grep -Rl searches all files in a directory and outputs only filenames with matched results (so no lines). 
+'l' (a lowercase L, not a capital i) stands for “files with matches.”
+  $ grep -Rl Arctic /home/ccuser/workspace/geography
+
+  /home/ccuser/workspace/geography/deserts.txt
+  /home/ccuser/workspace/geography/oceans.txt
+
+Here grep -Rl searched the /home/ccuser/workspace/geography directory for the string “Arctic” and outputs filenames 
+with matched results.
+
+'sed' COMMAND: sed stands for “stream editor.” It accepts standard input and modifies it based on an expression, 
+before displaying it as output data. It is similar to “find and replace.”
+  sed 's/snow/rain/' forests.txt 
+
+Let’s look at the expression 's/snow/rain/':
+  - s: stands for “substitution.” It is always used when using sed for substitution.
+  - snow: the search string, or the text to find.
+  - rain: the replacement string, or the text to add in place.
+
+In this case, sed searches forests.txt for the word “snow” and replaces it with “rain.” Importantly, the above 
+command will only replace the first instance of “snow” on a line.
+
+  sed 's/snow/rain/g' forests.txt 
+The above command uses the g expression, meaning “global.” Here sed searches forests.txt for the word “snow” and 
+replaces it with “rain” globally. This means all instances of “snow” on a line will be turned to “rain.”
+
+sed as we’ve used it will only rewrite the command line output and the actual file won’t be changed. In order to 
+rewrite the actual file, we need to use -i at the beginning of the command:
+  sed -i 's/snow/rain/g' forests.txt
+
+The above command will rewrite forests.txt and replace all instances (since we’re also using g) of “snow” with 
+“rain”.
+
+REVIEW:
+1. Redirection reroutes standard input, standard output, and standard error.
+
+2. The common redirection commands are:
+  - > redirects standard output of a command to a file, overwriting previous content.
+  - >> redirects standard output of a command to a file, appending new content to old content.
+  - < redirects standard input to a command.
+  - | redirects standard output of a command to another command.
+
+3. A number of other commands are powerful when combined with redirection commands:
+  - sort: sorts lines of text alphabetically.
+  - uniq: filters duplicate, adjacent lines of text.
+  - grep: searches for a text pattern and outputs it.
+  - sed : searches for a text pattern, modifies it, and outputs it.

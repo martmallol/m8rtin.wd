@@ -110,6 +110,83 @@ HEAD is now set to that previous commit.
 
 REVIEW: 
 Let’s take a moment to review the new commands:
-  - git checkout HEAD filename: Discards changes in the working directory.
-  - git reset HEAD filename:    Unstages file changes in the staging area.
-  - git reset commit_SHA:       Resets to a previous commit in your commit history.
+  - git checkout HEAD filename: Discards changes in the working directory. 
+                                (el archivo vuelve a como estaba antes de los cambios)
+  - git reset HEAD filename: Unstages file changes in the staging area.
+                             (el archivo sale de la pila de archivos a commitear)
+  - git reset commit_SHA: Resets to a previous commit in your commit history.
+
+
+-----LECCION 3----- 
+BRANCHING
+GIT BRANCH: Git allows us to create branches to experiment with versions of a project. Imagine you want to create 
+version of a story with a happy ending. You can create a new branch and make the happy ending changes to that 
+branch only. It will have no effect on the master branch until you’re ready to merge the happy ending to the 
+master branch.
+
+You can use the command below to answer the question: “which branch am I on?”:
+  git branch
+
+To create a new branch, use:
+  git branch new_branch
+
+Be sure to name your branch something that describes the purpose of the branch. Also, branch names can’t contain 
+whitespaces: *new-branch* and *new_branch* are valid branch names, but *new branch* is not.
+
+GIT CHECKOUT: You can switch to the new branch with
+  git checkout branch_name
+
+Once you switch branches, you will now be able to make commits on the branch that have no impact on master. You can 
+continue your workflow, while master stays intact!
+
+GIT MERGE: What if you wanted include all the changes made to the 'fencing' branch on the 'master' branch? We can 
+easily accomplish this by merging the branch into 'master' with:
+  git merge fencing
+
+Keep in mind:
+  - Your goal is to update master with changes you made to fencing.
+  - fencing is the giver branch, since it provides the changes.
+  - master is the receiver branch, since it accepts those changes.
+
+MERGE CONFLICTS: The merge was successful because 'master' had not changed since we made a commit on 'fencing'. Git 
+knew to simply update 'master' with changes on 'fencing'.
+
+What would happen if you made a commit on 'master' before you merged the two branches? Furthermore, what if the 
+commit you made on 'master' altered the same exact text you worked on in 'fencing'? When you switch back to 
+'master' and ask Git to merge the two branches, Git doesn’t know which changes you want to keep. 
+This is called a 'merge conflict'.
+
+Let’s say you decide you’d like to merge the changes from 'fencing' into 'master'. Here’s where the trouble begins!
+You’ve made commits on separate branches that alter the same line in conflicting ways. Now, when you try to merge 
+'fencing' into 'master', Git will not know which version of the file to keep.
+
+FIXING THE MERGE CONFLICT: We must fix the merge conflict. In the code editor, look at 'resume.txt'. Git uses 
+markings to indicate the HEAD (master) version of the file and the fencing version of the file, like this:
+  <<<<<<< HEAD
+  master version of line
+  =======
+  fencing version of line
+  >>>>>>> fencing
+
+Git asks us which version of the file to keep: the version on 'master' or the version on 'fencing'. You decide you
+want the 'fencing' version.
+
+From the code editor:
+  - Delete the content of the line as it appears in the master branch
+  - Delete all of Git’s special markings including the words HEAD and fencing. If any of Git’s markings remain, 
+    for example, >>>>>>> and =======, the conflict remains.
+Then you add 'resume.txt' to the staging area and you commit it with a message like "Resolve merge conflict"
+
+DELETE BRANCH: In Git, branches are usually a means to an end. You create them to work on a new project feature, 
+but the end goal is to merge that feature into the master branch. After the branch has been integrated into 
+'master', it has served its purpose and can be deleted.
+The command below will delete the specified branch from your Git project:
+  git branch -d branch_name
+
+REVIEW:
+The following commands are useful in the Git branch workflow.
+  - git branch: Lists all a Git project’s branches.
+  - git branch branch_name: Creates a new branch.
+  - git checkout branch_name: Used to switch from one branch to another.
+  - git merge branch_name: Used to join file changes from one branch to another.
+  - git branch -d branch_name: Deletes the branch specified.

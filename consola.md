@@ -13,5 +13,5 @@
 - ssh <equipo>: me cambia a otro equipo (en este caso a <equipo>)
 - whoami: me dice en que equipo estoy
 - exit: salgo del equipo al que me cambie. si estoy en la consola de mi pc, la cierra
-
+- ./blablabla: corro el programa blablabla 
 

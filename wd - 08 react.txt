@@ -323,6 +323,83 @@ class Random extends React.Component {
 
 
 
+-----LECCION 5-----
+REACT SETUP AND RAVENOUS
+
+https://www.codecademy.com/paths/web-development/tracks/front-end-applications-with-react/modules/react-development-setup-and-ravenous-part-1/articles/how-to-create-a-react-app
+
+CREATING A REACT APP: We will be using the Node package manager (npm), so you will need to have Node installed on 
+your computer. When you install Node, you automatically get npm installed on your computer as well. 
+To upgrade to the latest version of npm on Linux, you can run this command in your terminal:
+	sudo npm install -g npm@latest
+
+SETTING UP THE BOILERPLATE APPLICATION: It is possible to manually create a React app, but Facebook has created a 
+Node package create-react-app to generate a boilerplate version of a React application. This has the added benefit 
+of providing a consistent structure for React apps that you will recognize as you move between React projects. It 
+also provides an out-of-the-box build script and development server.
+
+We will use npx, a package runner tool that comes with npm 5.2+ and higher, to install and run create-react-app.
+You can simply run this command:
+	npx create-react-app myfirstreactapp
+
+REACT APP STRUCTURE: Most of what you see will not be visible to the visitor of your web app. React uses a tool 
+called webpack which transforms the directories and files here into static assets. Visitors to your site are served 
+those static assets.
+
+.gitignore FILE: This is the standard file used by the source control tool git to determine which files and 
+directories to ignore when committing code. While this file exists, create-react-app did not create a git repo 
+within this folder.
+
+package.json FILE: This file outlines all the settings for the React app.
+
+- name: is the name of your app
+- version: is the current version
+- "private": true: is a failsafe setting to avoid accidentally publishing your app as a public package within the 
+                   npm ecosystem.
+- dependencies: contains all the required Node modules and versions required for the application.
+- scripts: specifies aliases that you can use to access some of the react-scripts commands in a more efficient 
+	   manner. 
+- browserslist: provides information about browser compatibility of the app 
+- eslintConfig: takes care of the code linting. (Linting is the process of running a program that will analyse code 
+		 for potential errors.)
+
+node-modules DIRECTORY: This directory contains dependencies and sub-dependencies of packages used by the current 
+React app, as specified by package.json. This folder is automatically added to the .gitignore for good reason! 
+
+package-lock.json FILE: This provides a way for teams working on private apps to ensure that they have the same 
+version of dependencies and sub-dependencies. It also contains a history of changes to package.json, so you can 
+quickly look back at dependency changes.
+
+public DIRECTORY: It contains assets that will be served directly without additional processing by webpack.
+
+src DIRECTORY: This contains the JavaScript that will be processed by webpack and is the heart of the React app. 
+Browsing this folder, you see the main App JavaScript component (App.js), its associated styles (App.css), and test 
+suite (App.test.js). index.js and its styles (index.css) provide an entry into the App and also kick off the 
+registerServiceWorker.js. This service worker takes care of caching and updating files for the end-user. It allows 
+for offline capability and faster page loads after the initial visit.
+
+components/ & views/ DIRECTORIES: As your React app grows, it is common to add a components/ directory to organize 
+components and component-related files and a views/ directory to organize React views and view-related files.
+
+STARTING THE REACT APP DEVELOPMENT SERVER: You just need to run npm start in your app directory to begin serving 
+the development server. It should auto-open a tab in your browser that points to http://localhost:3000/ (if not, 
+manually visit that address).
+
+
+
+-----LECCION 6-----
+REACT DEVELOPER TOOLS: Use React Developer Tools to debug your React applications
+
+INSTALL IT: Facebook created a Chrome extension to help with debugging React Apps. It allows developers to inspect 
+React components, view their properties, and interact with them while looking at the application in Google Chrome.
+Link: https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi
+
+To open the React Developer Tools, first open Chrome DevTools (View > Developer > Developer Tools). On the same 
+banner as Elements, Sources, Console, etc., there will be two new React tabs: Components and Profiler. These two 
+tabs will only appear on sites using React.
+
+
+
 
 
 

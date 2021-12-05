@@ -398,7 +398,7 @@ To open the React Developer Tools, first open Chrome DevTools (View > Developer 
 banner as Elements, Sources, Console, etc., there will be two new React tabs: Components and Profiler. These two 
 tabs will only appear on sites using React.
 
-
+For more tips about React Dev Tools: https://www.codecademy.com/paths/web-development/tracks/front-end-applications-with-react/modules/react-development-setup-and-ravenous-part-1/informationals/ready-react-developer-tools
 
 
 

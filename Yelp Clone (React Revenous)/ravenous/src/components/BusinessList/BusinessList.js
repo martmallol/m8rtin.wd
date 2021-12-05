@@ -1,0 +1,26 @@
+// Aca va el segundo componente
+
+import React from 'react';
+import Business from '../Business/Business'; // Importo el primer componente
+import './BusinessList.css';
+
+// Creo el componente
+class BusinessList extends React.Component {
+    //Metodo de render
+    render() {
+        return (
+            // Lista de negocios de la pagina
+            <div class="BusinessList">
+              <Business /> 
+              <Business />
+              <Business />
+              <Business />
+              <Business />
+              <Business />
+            </div>
+        );
+    };
+};
+
+// Exporto el componente
+export default BusinessList;

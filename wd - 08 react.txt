@@ -402,4 +402,207 @@ For more tips about React Dev Tools: https://www.codecademy.com/paths/web-develo
 
 
 
+-----LECCION 7-----
+COMPONENTS INTERACT
+COMPONENTS RENDER OTHER COMPONENTS: In the below example, Crazy‘s render method returns an instance of the OMG 
+component class. You could say that 
+Crazy renders an <OMG />.
+
+class OMG extends React.Component {
+  render() {
+    return <h1>Whooaa!</h1>;
+  }
+}
+ 
+class Crazy extends React.Component {
+  render() {
+    return <OMG />; <-- ACA!!!
+  }
+}
+
+When a component renders another component, what happens is very similar to what happens when ReactDOM.render() 
+renders a component.
+
+It may not seem like a big deal yet, but you’ve just discovered the key to React’s power.
+By nesting components inside of other components, you can build infinitely complex architectures, even if each 
+component is relatively simple. The relationship that you just built is the fundamental relationship of React.js.
+
+
+
+-----LECCION 8-----
+this.props
+
+ACCESS A COMPONENT'S PROPS: A component’s props is an object. It holds information about that component. To see a 
+component’s props object, you use the expression "this.props".
+
+PASS 'props' TO A COMPONENT: You can pass information to a React component. How? By giving that component an 
+attribute. Let’s say that you want to pass a component the message, "This is some top secret info.". Here’s how you 
+could do it:
+	<Example message="This is some top secret info." />
+
+As you can see, to pass information to a component, you need a name for the information that you want to pass.
+
+In the above example, we used the name message. You can use any name you want. If you want to pass information that 
+isn’t a string, then wrap that information in curly braces. Here’s how you would pass an array:
+	<Greeting myInfo={["top", "secret", "lol"]} />
+
+Or a multiple set of values:
+	<Greeting name="Frarthur" town="Flundon" age={2} haunted={false} />
+
+RENDER A COMPONENT'S PROPS: Here’s how to make a component display passed-in information:
+1 - Find the component class that is going to receive that information.
+2 - Include this.props.name-of-information in that component class’s render method’s return statement.
+
+EJ:
+class Greeting extends React.Component {
+  render() {
+    return <h1>Hi there, {this.props.firstName}!</h1>; <-- ACA!!!
+  }
+}
+
+ReactDOM.render(
+  <Greeting firstName='Pedurum' />, <-- ACA!!!
+  document.getElementById('app')
+);
+
+
+RENDER DIFFERENT UI BASED ON PROPS: 
+export class Welcome extends React.Component {
+  render() {
+    if (this.props.name === 'Wolfgang Amadeus Mozart') { <-- ACA!!!
+      return (
+      	<h2>
+      	  hello sir it is truly great to meet you here on the web
+      	</h2>
+      );
+    } else {
+      return (
+      	<h2>
+      	  WELCOME "2" MY WEB SITE BABYYY!!!!!
+      	</h2>
+      );
+    }
+  }
+}
+
+You can tell from this.props.name on line 3 that Welcome expects to receive a piece of information called name. 
+However, Welcome never renders this piece of information! Instead, it uses the information to make a decision.
+
+
+
+handleEvent, onEvent, AND this.props.onEvent: Let’s talk about naming things.
+If you are listening for a “click” event, then you name your event handler handleClick. If you are listening for a 
+“keyPress” event, then you name your event handler handleKeyPress:
+Your prop name should be the word on, plus your event type. If you are listening for a “click” event, then you name 
+your prop onClick. If you are listening for a “keyPress” event, then you name your prop onKeyPress:
+
+class MyClass extends React.Component {
+  handleHover() {
+    alert('I am an event handler.');
+    alert('I will listen for a "hover" event.');
+  }
+ 
+  render() {
+    return <Child onHover={this.handleHover} />;
+  }
+}
+
+this.props.children: Every component’s props object has a property named children.
+this.props.children will return everything in between a component’s opening and closing JSX tags.
+
+So far, all of the components that you’ve seen have been self-closing tags, such as <MyComponentClass />. They 
+don’t have to be! You could write <MyComponentClass></MyComponentClass>, and it would still work.
+this.props.children would return everything in between <MyComponentClass> and </MyComponentClass>.
+
+If a component has more than one child between its JSX tags, then this.props.children will return those children 
+in an array.
+
+defaultProps PROPERTY: The defaultProps property should be equal to an object. Inside of this object, write 
+properties for any default props that you’d like to set:
+
+class Example extends React.Component {
+  render() {
+    return <h1>{this.props.text}</h1>;
+  }
+}
+ 
+Example.defaultProps = { text: 'yo' }; 
+
+If an <Example /> doesn’t get passed any text, then it will display “yo.”
+If an <Example /> does get passed some text, then it will display that passed-in text.
+
+
+
+-----LECCION 9-----
+STATE: Dynamic information is information that can change. React components will often need dynamic information in 
+order to render. For example, imagine a component that displays the score of a basketball game. The score of the 
+game might change over time, meaning that the score is dynamic.
+
+There are two ways for a component to get dynamic information: props and state. Besides props and state, every 
+value used in a component should always stay exactly the same.
+
+props and state are all that you need to set up an ecosystem of interacting React components.
+
+SETTING INITIAL STATE: To make a component have state, give the component a state property. This property should be 
+declared inside of a constructor method, like this:
+class Example extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { mood: 'decent' };
+  }
+ 
+  render() {
+    return <div></div>;
+  }
+}
+ 
+<Example />
+
+this.state should be equal to an object. This object represents the initial “state” of any component instance. 
+It is important to note that React components always have to call super in their constructors to be set up properly.
+
+ACCESS A COMPONENT'S STATE: To read a component’s state, use the expression this.state.name-of-property:
+
+UPDATE STATE WITH this.setState: A component can also change its own state. this.setState() takes two arguments: an 
+object that will update the component’s state, and a callback. You basically never need the callback.
+
+this.setState() takes an object, and merges that object with the component’s current state. If there are properties 
+in the current state that aren’t part of that object, then those properties remain how they were.
+
+EJ:
+<Example /> has a state of:
+	{
+  	  mood:   'great',
+  	  hungry: false
+	}
+	
+Now, let’s say that <Example /> were to call:
+	this.setState({ hungry: true });
+
+After that call, here is what <Example />‘s state would be:
+	{
+  	  mood:   'great',
+    	  hungry: true
+	}
+The mood part of the state remains unaffected!
+
+EVENT HANDLER WITH 'this': In React, whenever you define an event handler that uses this, you need to add 
+this.methodName = this.methodName.bind(this) to your constructor function.
+EJ:
+class Example extends React.Component {
+  constructor(props) {
+    super(props);
+    ...
+    this.makeSomeFog = this.makeSomeFog.bind(this); <-- ACA!!!
+  }
+ 
+  makeSomeFog() {
+    ...
+  }
+}
+
+Articulo que lo explica bien: https://reactjs.org/docs/handling-events.html
+
+BONUS: You can’t call this.setState() from inside of the .render() method. this.setState() automatically 
+calls .render(). If .render() calls this.setState(), then an infinite loop is created.
 

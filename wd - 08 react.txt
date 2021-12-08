@@ -606,3 +606,59 @@ Articulo que lo explica bien: https://reactjs.org/docs/handling-events.html
 BONUS: You can’t call this.setState() from inside of the .render() method. this.setState() automatically 
 calls .render(). If .render() calls this.setState(), then an infinite loop is created.
 
+
+
+-----LECCION 10-----
+STATELESS COMPONENTS FROM STATEFUL COMPONENTS
+Our programming pattern uses two React components: a stateful component, and a stateless component. “Stateful” 
+describes any component that has a state property; “stateless” describes any component that does not.
+
+STATEFUL COMPONENT CLASS EXAMPLE: 
+class Parent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { name: 'Frarthur' };
+  }
+  render() {
+    return <div></div>;
+  }
+};
+
+STATELESS COMPONENT CLASS EXAMPLE:
+export class Child extends React.Component {
+  render() {
+    return <h1>Hey, my name is {this.props.name}!</h1>;
+  }
+};
+
+A <Parent /> is going to pass a prop to a <Child />. That means that a <Parent /> is going to render a <Child />. 
+Rendering is the only way for a component to pass props to another component. Child is ready to inherit a prop and 
+display it.
+
+PASS A COMPONENT'S STATE: A <Parent /> is supposed to pass its state to a <Child />. Before a <Parent /> can pass 
+anything to a <Child />, you need to import Child into Parent.js.
+
+class Parent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { name: 'Frarthur' };
+  }
+  render() {
+    return <Child name={this.state.name} />;	<-- ACA!!!
+  }
+};
+
+PRINT: "Hey, my name is Frarthur!"	<-- ACA!!!
+
+DON'T UPDATE PROPS: A component should never update this.props. A React component should use props to store 
+information that can be changed, but can only be changed by a different component.
+A React component should use state to store information that the component itself can change.
+
+
+
+-----LECCION 11-----
+
+
+
+
+

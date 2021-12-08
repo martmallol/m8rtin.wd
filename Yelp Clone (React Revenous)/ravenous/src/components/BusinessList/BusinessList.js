@@ -11,12 +11,11 @@ class BusinessList extends React.Component {
         return (
             // Lista de negocios de la pagina
             <div class="BusinessList">
-              <Business /> 
-              <Business />
-              <Business />
-              <Business />
-              <Business />
-              <Business />
+              {
+                this.props.businesses.map((business) => { /*Aca iban los business repetidos */
+                  return <Business businesses={business} />;
+                })
+              }
             </div>
         );
     };

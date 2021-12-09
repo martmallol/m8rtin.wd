@@ -5,35 +5,28 @@ import './App.css';
 import BusinessList from '../BusinessList/BusinessList.js';
 import SearchBar from '../SearchBar/SearchBar.js';
 
-// Creo el objeto 'business'
-// El componente '<Business /> de react va a consumir su info
-const business = {
-  imageSrc: 'https://content.codecademy.com/programs/react/ravenous/pizza.jpg',
-  name: 'MarginOtto Pizzeria',
-  address: '1010 Paddington Way',
-  city: 'Flavortown',
-  state: 'NY',
-  zipCode: '10101',
-  category: 'Italian',
-  rating: 4.5,
-  reviewCount: 90
-};
-
-// Array con los negocios
-const businesses = [
-  business, 
-  business, 
-  business, 
-  business,
-  business,
-  business];
+//Importo Yelp.js para poder utilizar las funcionalidades de la API
+import Yelp from '../../util/Yelp';
 
 // Lo transformo en componente
 class App extends React.Component {
+  // Constructor de la clase
+  constructor(props) {
+    super(props);
+    this.state = {
+      businesses: []
+    };
+    this.searchYelp = this.searchYelp.bind(this);
+  }
+
   // Metodo que agrega funcionalidad. Envia informacion a la API de Yelp
   searchYelp(term, location, sortBy) {
-    console.log(`Searching Yelp with ${term}, ${location}, ${sortBy}`);
+    // Metodo del objeto Yelp
+    Yelp.search(term, location, sortBy).then(businesses => 
+      { this.setState({ businesses: businesses }) }
+      );  
   }
+  
   // Ahora App.js utiliza los componentes creados (los que importe arriba)
   render(){
     return (
@@ -47,3 +40,14 @@ class App extends React.Component {
 }
 
 export default App;
+
+/* 
+Below is a list of some potential features to add to Ravenous:
+- Make addresses clickable and have them open the address in Google Maps in a new tab
+- Make images clickable and have them open the business’ website in a new tab
+- Clicking on a different sorting option automatically requeries the Yelp API, rather than having to 
+  manually click “Let’s Go” again
+- Implement your own type of sort (for example, by entering a distance or radius from a central location)
+- Allow you to search by pressing “Enter” (or “Return”) on your keyboard, as opposed to manually clicking
+- Add autocompletion of addresses to the “Location” input
+*/

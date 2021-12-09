@@ -12,8 +12,8 @@ class BusinessList extends React.Component {
             // Lista de negocios de la pagina
             <div class="BusinessList">
               {
-                this.props.businesses.map((business) => { /*Aca iban los business repetidos */
-                  return <Business businesses={business} />;
+                this.props.businesses.map(business => { /*Aca iban los business repetidos */
+                  return <Business business={business} />;
                 })
               }
             </div>

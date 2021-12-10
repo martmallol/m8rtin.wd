@@ -1,0 +1,172 @@
+WEB DEVELOPMENT CODECADEMY
+
+-----LECCION 1----- 
+ADVANCED REACT TECHNIQUES
+How to make a propType, how to write a form, and how to use styles. Dividing components into presentational 
+components and container components.
+
+INLINE STYLES: An inline style is a style that’s written as an attribute, like this:
+	<h1 style={{ color: 'red' }}>Hello world</h1>
+
+Notice the double curly braces. What are those for?
+The outer curly braces inject JavaScript into JSX. They say, “everything between us should be read as JavaScript, 
+not JSX.” The inner curly braces create a JavaScript object literal. They make this a valid JavaScript object:
+	{ color: 'red' }
+	
+MAKE A STYLE OBJECT VARIABLE: One problem with previous approach is that it becomes obnoxious if you want to use
+more than just a few styles. An alternative that’s often nicer is to store a style object in a variable, and then
+inject that variable into JSX.
+
+const style = {
+  color: 'darkcyan',
+  background: 'mintcream'
+};
+
+Defining a variable named style in the top-level scope would be an extremely bad idea in many JavaScript 
+environments! In React, however, it’s totally fine.
+Every file is invisible to every other file, except for what you choose to expose via module.exports. You could 
+have 100 different files, all with global variables named style, and there could be no conflicts.
+
+STYLE NAME SYNTAX: In regular JavaScript, style names are written in hyphenated-lowercase:
+const styles = {
+  'margin-top': '20px',
+  'background-color': 'green'
+};
+
+In React, those same names are instead written in camelCase:
+const styles = {
+  marginTop: '20px',
+  backgroundColor: 'green'
+};
+
+SHARE STYLES ACROSS MULTIPLE COMPONENTS: One way to make styles reusable is to keep them in a separate JavaScript 
+file. This file should export the styles that you want to reuse. You can then import your styles into any 
+component that wants them.
+
+
+
+-----LECCION 2----- 
+SEPARATE CONTAINER COMPONENTS FROM PRESENTATIONAL COMPONENTS
+It's a programming pattern that will help organize your React code.
+
+CONTAINER COMPONENT: If a component has to have state, make calculations based on props, or manage any other 
+complex logic, then that component shouldn’t also have to render HTML-like JSX. The functional part of a component 
+(state, calculations, etc.) can be separated into a container component.
+
+PRESENTATIONAL COMPONENT: The presentational component’s only job is to contain HTML-like JSX. It should be an 
+exported component and will not render itself because a presentational component will always get rendered by a 
+container component.
+
+As a separate example, say we have Presentational and Container components. Presentational.js must export the 
+component class (or function, when applicable):
+	export class Presentational extends Component {
+Container.js must import that component:
+	import { Presentational } from 'Presentational.js';
+
+EN RESUMEN:
+- Container: Logic
+- Presentational: JSX elements
+
+ARTICLES: 
+- Container: https://medium.com/@learnreact/container-components-c0e67432e005
+- Presentational & Containers: https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0
+
+
+
+-----LECCION 3-----
+propTypes FEATURE
+
+propTypes are useful for two reasons. The first reason is prop validation.
+
+Validation can ensure that your props are doing what they’re supposed to be doing. If props are missing, or if they’re present but they aren’t what you’re expecting, then a warning will print in the console.
+
+This is useful, but reason #2 is arguably more useful: documentation.
+
+Documenting props makes it easier to glance at a file and quickly understand the component class inside. When you have a lot of files, and you will, this can be a huge benefit.
+
+APPLY propTypes: 
+import React from 'react';
+import PropTypes from 'prop-types'; <-- ACA!!!
+
+export class MessageDisplayer extends React.Component {
+  render() {
+    return <h1>{this.props.message}</h1>; <-- ACA!!!
+  }
+}
+
+// This propTypes object should have one property for each expected prop:
+MessageDisplayer.propTypes = {
+  message: PropTypes.string 		<-- ACA!!!
+};
+
+
+Notice the expression this.props.message. From this expression, you can deduce that MessageDisplayer expects to 
+get passed a prop named message. Somewhere, at some time, this code is expected to execute:
+	<MessageDisplayer message="something" />
+
+If a component class expects a prop, then you can use propTypes for that component class! In order to start using 
+propTypes, we need to import the 'prop-types' library. Then, you can declare propTypes as a static property for 
+your component after the component has been defined. The second step is to add properties to the propTypes 
+object. For each prop that your component class expects to receive, there can be one property on your propTypes 
+object.
+
+PropTypes PROPERTIES: What are the properties on propTypes supposed to be, exactly? The name of each property in 
+propTypes should be the name of an expected prop. In our case, MessageDisplayer expects a prop named message, so 
+our property’s name is message.
+
+The value of each property in propTypes should fit this pattern:
+	PropTypes.expected_data_type_goes_here
+
+If you add .isRequired to a propType, then you will get a console warning if that prop isn’t sent.
+	blabla.propTypes = {
+	  week: PropTypes.number.isRequired
+	}
+
+
+
+-----LECCION 4-----
+REACT FORMS
+
+INPUT onChange: A traditional form doesn’t update the server until a user hits “submit.” But you want to update 
+the server any time a user enters or deletes any character.
+	<input type="text" onChange={this.handleUserInput}/>
+
+INPUT EVENT HANDLER: Define a function that gets called whenever a user enters or deletes any character.
+export class Input extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { userInput: '' };
+    this.handleUserInput = this.handleUserInput.bind(this); <-- ACA!!!
+  }
+  
+  handleUserInput(e) {
+    this.setState({userInput: e.target.value});	<-- ACA!!!
+  }
+  ...
+}
+
+INPUT'S INITIAL STATE: The initial text should be blank! Otherwise it would look like someone had already typed 
+something.
+  constructor(props) {
+    ...
+    this.state = { userInput: '' };	 <-- ACA!!!
+  }
+  
+UPDATE AN INPUT'S VALUE: When a user types or deletes in the <input />, then that will trigger a change event, 
+which will call 'handleUserInput'. 'handleUserInput' will set 'this.state.userInput' equal to whatever text is currently in the input field. 
+
+You need to somehow make the <input />‘s text responsive to this.state.userInput. Easy enough! You can control an 
+<input />‘s text by setting its value attribute: 
+      <div>
+        <input type="text" onChange={this.handleUserInput} value={this.state.userInput} />
+        <h1>{this.state.userInput}</h1>
+      </div>
+
+
+
+-----LECCION 4-----
+UNCONTROLLED COMPONENTS
+https://www.codecademy.com/paths/web-development/tracks/front-end-applications-with-react/modules/react-102-advanced-react-u/articles/what-are-uncontrolled-components
+https://reactjs.org/docs/uncontrolled-components.html
+
+

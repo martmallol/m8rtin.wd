@@ -22,6 +22,7 @@ class App extends React.Component {
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
+    this.savePlaylist = this.savePlaylist.bind(this);
   }
 
   // Este metodo agrega un track a la key 'playlistTracks' en el estado del constructor
@@ -47,6 +48,18 @@ class App extends React.Component {
     this.setState( { playlistName: name } );
   }
 
+  // Guarda la playlisy creada en la cuenta de un usuario
+  savePlaylist() {
+    const tracks = this.playlistTracks;
+    // Array donde estaran los uris de cada tema de la playlist
+    // Que es un uri? -> https://developer.spotify.com/documentation/web-api/
+    const trackURIs = tracks.map(function(x) {
+      return `spotify:${x.name}:${x.id}`;
+    });
+    
+
+  }
+
   /* Los elementos del <Playlist /> siempre van a dar un isRemoval = true porque justamente forman parte 
   de la playlist. Mientras que los elementos de <SearchResults /> siempre dan un isRemoval = false porque
   no estan en la playlist y por lo tanto pueden ser agregados. */
@@ -62,7 +75,8 @@ class App extends React.Component {
             <Playlist playlistName={this.state.playlistName}
                       playlistTracks={this.state.playlistTracks}
                       onRemove={this.removeTrack} 
-                      onNameChange={this.updatePlaylistName}/>
+                      onNameChange={this.updatePlaylistName}
+                      onSave={this.savePlaylist}/>
           </div>
         </div>
       </div>

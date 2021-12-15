@@ -17,13 +17,39 @@ class App extends React.Component {
     }; 
     /* Al estado lo utilizo para poner sus elementos como atributos de los componentes 'hijos',
     como por ejemplo 'SearchResults' o 'Playlist'. Estos utilizaran estos atributos como 'props'.*/ 
+    
+    // Binding de metodos que cambien el estado del componente
+    this.addTrack = this.addTrack.bind(this);
+    this.removeTrack = this.removeTrack.bind(this);
+    this.updatePlaylistName = this.updatePlaylistName.bind(this);
   }
 
   // Este metodo agrega un track a la key 'playlistTracks' en el estado del constructor
   addTrack(track) {
-    //PONER CODIGO ACA (PUNTO 41/99)
+    // Si el tema no esta en la playlist, lo agrega
+    if (! this.state.playlistTracks.includes(track)) {
+      const newPlaylist = this.state.playlistTracks.push(track); // Playlist con el nuevo tema
+      this.setState( { playlistTracks: newPlaylist } ); // Actualizo la playlist del estado ??RETURN??
+    }
   }
 
+  // Este metodo elimina un track en la key 'playlistTracks' en el estado del constructor
+  removeTrack(track) {
+    // Busco en la playlist por el id del track
+    if(this.state.playlistTracks.find( myTrack => myTrack.id === track.id)) {
+        const newPlaylist = this.state.playlistTracks.remove(track); // Playlist sin el tema 
+        this.setState( { playlistTracks: newPlaylist } ); // Actualizo la playlist del estado
+    }
+  }
+
+  // Cambia el nombre de la playlist
+  updatePlaylistName(name) {
+    this.setState( { playlistName: name } );
+  }
+
+  /* Los elementos del <Playlist /> siempre van a dar un isRemoval = true porque justamente forman parte 
+  de la playlist. Mientras que los elementos de <SearchResults /> siempre dan un isRemoval = false porque
+  no estan en la playlist y por lo tanto pueden ser agregados. */
   render() {
     return (
       <div>
@@ -31,9 +57,12 @@ class App extends React.Component {
         <div className="App">
           <SearchBar />
           <div className="App-playlist">
-            <SearchResults searchResults={this.state.searchResults}/>
+            <SearchResults searchResults={this.state.searchResults}
+                           onAdd={this.addTrack}/>
             <Playlist playlistName={this.state.playlistName}
-                      playlistTracks={this.state.playlistTracks}/>
+                      playlistTracks={this.state.playlistTracks}
+                      onRemove={this.removeTrack} 
+                      onNameChange={this.updatePlaylistName}/>
           </div>
         </div>
       </div>

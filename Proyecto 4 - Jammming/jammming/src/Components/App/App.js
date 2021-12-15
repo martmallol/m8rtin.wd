@@ -23,6 +23,7 @@ class App extends React.Component {
     this.removeTrack = this.removeTrack.bind(this);
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
     this.savePlaylist = this.savePlaylist.bind(this);
+    this.search = this.search.bind(this);
   }
 
   // Este metodo agrega un track a la key 'playlistTracks' en el estado del constructor
@@ -50,7 +51,7 @@ class App extends React.Component {
 
   // Guarda la playlisy creada en la cuenta de un usuario
   savePlaylist() {
-    const tracks = this.playlistTracks;
+    const tracks = this.state.playlistTracks;
     // Array donde estaran los uris de cada tema de la playlist
     // Que es un uri? -> https://developer.spotify.com/documentation/web-api/
     const trackURIs = tracks.map(function(x) {
@@ -58,6 +59,11 @@ class App extends React.Component {
     });
     
 
+  }
+
+  // Metodo para buscar canciones
+  search(term) {
+    console.log(term);
   }
 
   /* Los elementos del <Playlist /> siempre van a dar un isRemoval = true porque justamente forman parte 
@@ -68,15 +74,15 @@ class App extends React.Component {
       <div>
         <h1>Ja<span className="highlight">mmm</span>ing</h1>
         <div className="App">
-          <SearchBar />
+          <SearchBar onSearch={this.search} />
           <div className="App-playlist">
             <SearchResults searchResults={this.state.searchResults}
-                           onAdd={this.addTrack}/>
+                           onAdd={this.addTrack} />
             <Playlist playlistName={this.state.playlistName}
                       playlistTracks={this.state.playlistTracks}
                       onRemove={this.removeTrack} 
                       onNameChange={this.updatePlaylistName}
-                      onSave={this.savePlaylist}/>
+                      onSave={this.savePlaylist} />
           </div>
         </div>
       </div>

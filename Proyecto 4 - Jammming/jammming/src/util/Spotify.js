@@ -6,7 +6,7 @@
 let accessToken;
 // Los datos de aca abajo se pueden encontrar en mi App de Spotify 'Jammming': https://developer.spotify.com/dashboard/applications
 const clientID = '7e1454b5db444a408d8a935f2680e276';
-const redirectURI = "http://localhost:3000/";
+const redirectURI = "http://peaceful-spy.surge.sh"; //Mi URI generada con 'Surge'
 
 const Spotify = {
     // Metodo que trata sobre la funcionalidad para obtener un 'access token'

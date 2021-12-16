@@ -14,7 +14,7 @@ class App extends React.Component {
     //playlistTracks tambien
     this.state = { 
       searchResults: [],
-      playlistName: '',
+      playlistName: 'New Playlist',
       playlistTracks: [] 
     }; 
     /* Al estado lo utilizo para poner sus elementos como atributos de los componentes 'hijos',
@@ -56,9 +56,19 @@ class App extends React.Component {
     const tracks = this.state.playlistTracks;
     // Array donde estaran los uris de cada tema de la playlist
     // Que es un uri? -> https://developer.spotify.com/documentation/web-api/
-    const trackURIs = tracks.map(function(x) {
+     const trackURIs = tracks.map(function(x) {
       return `spotify:${x.name}:${x.id}`;
     });
+
+    // Guardo la playlist utilizando el metodo del objeto 'Spotify'
+    Spotify.savePlaylist(this.state.playlistName, trackURIs);
+
+    // Reseteo el nombre de la playlist y los tracks, ya que ya la guarde en la cuenta del user
+    this.setState( {
+      playlistName: 'New Playlist',
+      playlistTracks: []
+    });
+
   }
 
   // Metodo para buscar canciones

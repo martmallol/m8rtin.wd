@@ -3,7 +3,7 @@
 // https://developer.spotify.com/documentation/general/guides/authorization/
 
 // El token de acceso del user
-const accessToken;
+let accessToken;
 // Los datos de aca abajo se pueden encontrar en mi App de Spotify 'Jammming': https://developer.spotify.com/dashboard/applications
 const clientID = '7e1454b5db444a408d8a935f2680e276';
 const redirectURI = "http://localhost:3000/";
@@ -73,7 +73,7 @@ const Spotify = {
         if(playlistName && trackURIs) {
             const myAccessToken = Spotify.getAccessToken();
             const headers = { Authorization: `Bearer ${myAccessToken}` };
-            const userID;
+            let userID;
             
             // GET Request
             return fetch(`https://api.spotify.com/v1/me`, { headers: headers }

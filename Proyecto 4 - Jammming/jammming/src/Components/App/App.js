@@ -4,6 +4,8 @@ import './App.css';
 import {SearchBar} from '../SearchBar/SearchBar';
 import {SearchResults} from '../SearchResults/SearchResults';
 import {Playlist} from '../Playlist/Playlist';
+// Objeto que se encarga del fetch de la API de Spotify
+import Spotify from '../../util/Spotify';
 
 class App extends React.Component {
   constructor(props) {
@@ -57,13 +59,15 @@ class App extends React.Component {
     const trackURIs = tracks.map(function(x) {
       return `spotify:${x.name}:${x.id}`;
     });
-    
-
   }
 
   // Metodo para buscar canciones
   search(term) {
-    console.log(term);
+    // Utiliza el objeto de Spotify que hace un fetch a la API
+    Spotify.search(term).then( searchResults => {
+      // Al realizar la busqueda, actualiza el estado de los resultados de busqueda en el objeto 'App' 
+      this.setState({ searchResults: searchResults })
+    }); 
   }
 
   /* Los elementos del <Playlist /> siempre van a dar un isRemoval = true porque justamente forman parte 

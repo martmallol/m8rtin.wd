@@ -4,10 +4,12 @@
 
 // El token de acceso del user
 const accessToken;
-const clientID;
+// Los datos de aca abajo se pueden encontrar en mi App de Spotify 'Jammming': https://developer.spotify.com/dashboard/applications
+const clientID = '7e1454b5db444a408d8a935f2680e276';
 const redirectURI = "http://localhost:3000/";
 
 const Spotify = {
+    // Metodo que trata sobre la funcionalidad para obtener un 'access token'
     getAccessToken() {
         // Si ya tengo mi access token
         if(accessToken) {
@@ -41,6 +43,30 @@ const Spotify = {
                 window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectURI}`
             }
         }
+    },
+    // Metodo que muestra la lista de tracks davueltos por la busqueda mediante un GET Request
+    search(term) {
+        const myAccessToken = Spotify.getAccessToken();
+        return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`, 
+                     {  headers: { Authorization: `Bearer ${myAccessToken}` }  }
+                     ).then(response => {
+                         return response.json(); // Convierte la respuesta del Request en .json
+                     }).then(jsonResponse => {
+                         // Si la respuesta no tiene tracks, devolvemos un array vacio
+                         if(!jsonResponse.tracks) {
+                             return [];
+                         } 
+                         // Si la respuesta tiene tracks, devolvemos una lista con todos los tracks obtenidos
+                         else {
+                             return jsonResponse.tracks.items.map(track => ({
+                                 id: track.id,
+                                 name: track.name,
+                                 artist: track.artists[0].name,
+                                 album: track.album.name,
+                                 uri: track.uri
+                             }));
+                         }
+                     })
     }
 }
 

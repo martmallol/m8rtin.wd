@@ -66,7 +66,44 @@ const Spotify = {
                                  uri: track.uri
                              }));
                          }
-                     })
+                     });
+    },
+    // Metodo para crear una playlist
+    savePlaylist(playlistName, trackURIs) {
+        if(playlistName && trackURIs) {
+            const myAccessToken = Spotify.getAccessToken();
+            const headers = { Authorization: `Bearer ${myAccessToken}` };
+            const userID;
+            
+            // GET Request
+            return fetch(`https://api.spotify.com/v1/me`, { headers: headers }
+                   ).then(response => { return response.json(); } // Convierto a json
+                   ).then(jsonResponse => {
+                        userID = jsonResponse.id; // Obtengo el user ID
+                        // POST Request (CREACION DE PLAYLIST)
+                        // Para la url uso de refe esta pag: https://developer.spotify.com/documentation/web-api/reference/#/operations/create-playlist
+                        return fetch(`https://api.spotify.com/v1/users/${userID}/playlists`, 
+                         {
+                            headers: headers,
+                            method: 'POST',
+                            body: JSON.stringify({ name: playlistName })
+                         }).then(response => { return response.json(); }
+                          ).then(jsonResponse => { 
+                              const playlistID = jsonResponse.id;
+                              // POST Request (ADICION DE TRACKS A LA PLAYLIST)
+                              // Para la url uso de refe esta pag: https://developer.spotify.com/documentation/web-api/reference/#/operations/add-tracks-to-playlist
+                              return fetch(`https://api.spotify.com/v1/users/${userID}/playlists/${playlistID}/tracks`, 
+                              {
+                                  headers: headers,
+                                  method: 'POST',
+                                  body: JSON.stringify({ uris: trackURIs })
+                              }) 
+                            });
+                    });
+
+        } else {
+            return;
+        }
     }
 }
 

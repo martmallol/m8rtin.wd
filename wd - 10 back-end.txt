@@ -1,0 +1,401 @@
+WEB DEVELOPMENT CODECADEMY
+
+-----LECCION 1----- 
+WHAT IS THE BACK-END?
+While the front-end is the part of the website that makes it to the browser, the back-end consists of all the 
+behind-the-scenes processes and data that make a website function and send resources to clients.
+
+THE WEB SERVER: The front-end consists of the information sent to a client so that a user can see and interact 
+with 
+a website, but where does the information come from? The answer is a web server.
+
+A web server is a process running on a computer that listens for incoming requests for information over the 
+internet and sends back responses. Each time a user navigates to a website on their browser, the browser makes a 
+request to the web server of that website. Every website has at least one web server. A large company like 
+Facebook has thousands of powerful computers running web servers in facilities located all around the world which 
+are listening for requests, but we could also run a simple web server from our own computer!
+
+The specific format of a request (and the resulting response) is called the protocol. You might be familiar with 
+the protocol used to access websites: HTTP. When a visitor navigates to a website on their browser, similarly to 
+how one places an order for takeout, they make an HTTP request for the resources that make up that site.
+
+For the simplest websites, a client makes a single request. The web server receives that request and sends the 
+client a response containing everything needed to view the website. This is called a **static website**. This 
+doesn’t mean the website is not interactive. A website is static because once those files are received, they don’t 
+change or move. A static website might be a good choice for a simple personal website with a short bio and family 
+photos. A user navigating Twitter, however, wants access to new content as it’s created, which a static website 
+couldn’t provide.
+
+DYNAMIC CONTENT: Modern web applications often cater to the specific user rather than sending the same files to 
+every visitor of a webpage. This is known as dynamic content.
+
+APPLICATION SERVER: The collection of programming logic required to deliver dynamic content to a client, manage 
+security, process payments, and myriad other tasks is sometimes known as the “application” or application server. 
+The application server can be responsible for anything from sending an email confirmation after a purchase to 
+running the complicated algorithms a search engine uses to give us meaningful results.
+
+STORING DATA: From a stored credit card number on an e-commerce site to the timestamp when you hit pause on
+Netflix, modern web applications collect a lot of data. For that data to be useful, it has to be organized and 
+stored somewhere.
+
+The back-ends of modern web applications include some sort of database, often more than one. Databases are 
+collections of information. There are many different databases, but we can divide them into two types: relational 
+databases and non-relational databases (also known as NoSQL databases). Whereas relational databases store 
+information in tables with columns and rows, non-relational databases might use other systems such as key-value 
+pairs or a document storage model. SQL, Structured Query Language, is a programming language for accessing and 
+changing data stored in relational databases. Popular relational databases include MySQL while popular NoSQL 
+databases include MongoDB.
+
+In addition to the database itself, the back-end needs a way to programmatically access, change, and analyze the 
+data stored there.
+
+WHAT IS AN API: When a user navigates to a specific item for sale on an e-commerce site, the price listed for that 
+item is stored in a database, and when they purchase it, the database will need to be updated with the correct 
+inventory for that item type. In fact, much of what the back-end entails is reading, updating, or deleting 
+information stored in a database.
+
+In order to have consistent ways of interacting with data, a back-end will often include a web API. A web API is a 
+collection of predefined ways of, or rules for, interacting with a web application’s data, often through an HTTP 
+request-response cycle. Unlike the HTTP requests a client makes when a user navigates to a website’s URL, this 
+type of request indicates how it would like to interact with a web application’s data (create new data, read 
+existing data, update existing data, or delete existing data), and it receives some data back as a response.
+
+AUTHORIZATION AND AUTHENTICATION: Authentication is the process of validating the identity of a user. One 
+technique for authentication is to use logins with usernames and passwords. These credentials need to be securely 
+stored in the back-end on a database and checked upon each visit. Web applications can also use external 
+resources for authentication. You’ve likely logged into a website or application using your Facebook, Google, or 
+Github credentials; that’s also an authentication process.
+
+Authorization controls which users have access to which resources and actions. Certain application views, like 
+the page to edit a social media personal profile, are only accessible to that user. Other activities, like 
+deleting a post, are often similarly restricted.
+
+When building a robust web application back-end, we need to incorporate both authentication (Who is this user? 
+Are they who they claim to be?) and authorization (Who is allowed to do and see what?) into our server-side logic 
+to make sure we’re creating secure, personalized, and dynamic content.
+
+DIFFERENT BACK-END STACKS: There’s a lot of flexibility in which technologies can be used in order to create the 
+back-end of a web application. Developers can construct back-ends in many different languages like PHP, Java, 
+JavaScript, Python, and more.
+
+Most developers make use of frameworks which are collections of tools that shape the organization of your back-end and provide efficient ways of accomplishing otherwise difficult tasks.
+
+There are numerous back-end frameworks from which developers can choose. Here are a few examples:
+ - Laravel (PHP)	 | - Express.js (JavaScript running in the Node environment)
+ - Ruby on Rails (Ruby) | - Spring (Java)
+ - JSF (Java)		 | - Flask (Python)
+ - Django (Python)	 | - ASP.NET (C#)
+ 
+ 
+
+-----LECCION 2----- 
+LEARN NODE.JS
+It is a JavaScript runtime, or an environment that allows us to execute JavaScript code outside of the browser. A 
+“runtime” converts code written in a high-level, human-readable, programming language and compiles it down to 
+code the computer can execute.
+
+Though Node was created with the goal of building web servers and web applications in JavaScript, it can also be 
+used for creating command-line applications or desktop applications. 
+
+THE NODE REPL: REPL is an abbreviation for read–eval–print loop. It’s a program that loops, or repeatedly cycles, 
+through three different states: a read state where the program reads input from a user, the eval state where the 
+program evaluates the user’s input, and the print state where the program prints out its evaluation to a console. 
+Then it loops through these states again.
+
+When you install Node, it comes with a built-in JavaScript REPL. You can access the REPL by typing the command 
+node into the terminal. A > character will show up in the terminal indicating the REPL is running and prompting 
+your input. The Node REPL will evaluate your input line by line.
+
+By default, you indicate the input is ready for eval when you hit enter. If you’d like to type multiple lines and 
+then have them evaluated at once you can type .editor while in the REPL. Once in “editor” mode, you can type 
+control + d when you’re ready for the input to be evaluated. Each session of the REPL has a single shared memory; 
+you can access any variables or functions you define until you exit the REPL.
+
+THE GLOBAL OBJECT: The Node environment contains a number of Node-specific global elements in addition to those 
+built into the JavaScript language. Every Node-specific global property sits inside the the Node global object. 
+This object contains a number of useful properties and methods that are available anywhere in the Node 
+environment.
+
+RUNNING A PROGRAM WITH NODE: Node provides the ability to run JavaScript programs on our own computers instead of 
+just in the browser’s console or embedded in HTML. Let’s see how we run a program.
+
+We’ll need to create a file with a .js extension. We’ll call ours myProgram.js.
+	// Inside myProgram.js
+	console.log('Hello World');
+
+Now, we want to execute it. We’ll open our terminal and navigate to the directory that contains myProgram.js. 
+Finally, we’ll type the command node myProgram.js into our terminal.
+
+The results of our program will print to the terminal.
+	Hello World
+
+ACCESSING THE PROCESS OBJECT: In computer science, a process is the instance of a computer program that is being 
+executed. Node has a global process object with useful methods and information about the current process.
+
+PROCESS.ENV METHOD: The process.env property is an object which stores and controls information about the 
+environment in which the process is currently running. For example, the process.env object contains a PWD 
+property which holds a string with the directory in which the current process is located. It can be useful to 
+have some if/else logic in a program depending on the current environment— a web application in a development 
+phase might perform different tasks than when it’s live to users. We could store this information on the 
+process.env. 
+
+One convention is to add a property to process.env with the key NODE_ENV and a value of either 
+'production' or 'development'.
+	if (process.env.NODE_ENV === 'development'){
+	  console.log('Testing! Testing! Does everything work?');
+	}
+
+PROCESS.MEMORYUSAGE METHOD: The process.memoryUsage() returns information on the CPU demands of the current 
+process. It returns a property that looks similar to this:
+	{ rss: 26247168,
+	  heapTotal: 5767168,
+	  heapUsed: 3573032,
+	  external: 8772 }
+
+process.memoryUsage().heapUsed will return a number representing how many bytes of memory the current process is 
+using.
+
+PROCESS.ARGV METHOD: The process.argv property holds an array of command line values provided when the current process was initiated. The first element in the array is the absolute path to Node, which ran the process. The second element in the array is the path to the file that’s running. The following elements will be any command line arguments provided when the process was initiated.
+EJ:	node myProgram.js testing several features		(IN THE CONSOLE)
+	console.log(process.argv[3]); // Prints 'several'	(IN THE .JS FILE)
+
+CORE MODULES AND LOCAL MODULES: Instead of having an entire program located in a single file, code is organized 
+into separate files and combined through requiring them where needed using the require() function.
+
+To save developers from having to reinvent the wheel each time, Node has several modules included within the 
+environment to efficiently perform common tasks. These are known as the core modules. The core modules are 
+defined within Node.js’s source and are located in the lib/ folder. Core modules are required by passing a string 
+with the name of the module into the require() function:
+	// Require in the 'events' core module:
+	let events = require('events');
+
+We can use the same require() function to require modules of our own creation. To handle these different tasks, 
+the require() function includes some interesting logic. The require() function will first check to see if its 
+argument is a core module, if not, it will move on to different attempts to locate it.
+	// dog.js 
+	module.exports = class Dog {
+		...
+	}
+	
+Above, in the dog.js file, we assign the Dog class as the value of module.exports. Each JavaScript file in the 
+Node environment has a special JavaScript object called module.exports. 
+
+	// app.js
+	let Dog = require('./dog.js');
+	const tadpole = new Dog('Tadpole');
+	console.log(tadpole.praise());
+
+In our app.js file we assign the variable Dog to the module.exports object of our dog.js file by invoking the 
+require() function. Unlike when we require core modules which are required in with the name of the module as a 
+string, local modules are required by passing in the path to the module.
+
+NODE PACKAGE MANAGER: We can take advantage of third-party modules. Using libraries created by other developers 
+is an essential aspect of production; we don’t have to reinvent the wheel each time we want to include new 
+functionality into our applications. NPM, which stands for Node Package Manager, is an online collection, or 
+registry, of software. Developers can share code they’ve written to the registry or download code provided by 
+other developers.
+
+When we download Node, the npm command-line tool is downloaded as well, which enables us to interact with the 
+registry via our terminal. There are hundreds of thousands of packages of re-usable code in the NPM registry 
+including powerful and popular frameworks like express and react. You can explore the collection at the npm 
+website: https://www.npmjs.com/
+
+THE NODEMON PACKAGE: One package we like is nodemon. It’s a powerful tool for development in Node that watches 
+all the files in a project you’re working on, and automatically restarts your application when any of them change.
+(https://www.npmjs.com/package/nodemon)
+
+EVENT-DRIVEN ARCHITECTURE: when we write web applications, we often need to write logic to handle situations 
+without knowing exactly when they’ll occur. For example, when programming a website, we might provide 
+functionality for a click event without knowing when a user will trigger it. When Node was created, it applied 
+this same concept of event-driven principles to the back-end environment.
+
+Node provides an EventEmitter class which we can access by requiring in the events core module:
+	// Require in the 'events' core module
+	let events = require('events');
+ 
+	// Create an instance of the EventEmitter class
+	let myEmitter = new events.EventEmitter();
+
+Each event emitter instance has an .on() method which assigns a listener callback function to a named event. 
+Each event emitter instance also has an .emit() method which announces a named event has occurred.
+
+	let newUserListener = (data) => {
+	  console.log(`We have a new user: ${data}.`);
+	};
+ 
+	// Assign the newUserListener function as the listener callback for 'new user' events
+	myEmitter.on('new user', newUserListener)
+ 
+	// Emit a 'new user' event
+	myEmitter.emit('new user', 'Lily Pad') //newUserListener will be invoked with 'Lily Pad'
+
+ASYNCHRONOUS JAVASCRIPT WITH NODE.JS: Node provides a number of APIs for performing asynchronous tasks which 
+expect callback functions to be passed in as arguments. These APIs trigger the subscription to and emitting of 
+events to signal the completion of the operation. When the operation completes, the callback function is added to 
+a queue, or line, of tasks waiting for their turn to be executed. When the current stack, or list, or synchronous 
+tasks finish executing, the operations on the queue will be performed.
+
+This means if synchronous tasks never end, operations waiting in the event-queue would never have the chance to 
+run. 
+EJ: 	let keepGoing = true;
+ 
+	let callback = () => {
+	  keepGoing = false;
+	};
+
+	setTimeout(callback, 1000); // Run callback after 1000ms
+
+	while(keepGoing === true) {
+	  console.log(`Bla bla bla..`)
+	};
+
+This while-loop will continue forever! Even though the callback changing the keepGoing variable to false is added 
+to the event queue after 1 second, it will never have a chance to run— the synchronous code from the loop will 
+always fill the stack! If we wanted to avoid the infinite loop, we could replace the while-loop with an 
+asynchronous function— for example, the Node setInterval() API.
+
+The modern way of handling asynchronous tasks is through JavaScript Promises (developers also favor the newer 
+async...await syntax).
+
+USER INPUT/OUTPUT: output is any data or feedback that a computer provides (like to a human user), while input is 
+data provided to the computer. When we use console.log() we prompt the computer to output information to the 
+console. In the Node environment, the console is the terminal, and the console.log() method is a “thin wrapper” 
+on the .stdout.write() method of the process object. stdout stands for standard output.
+
+In Node, we can also receive input from a user through the terminal using the stdin.on() method on the process 
+object:
+	process.stdin.on('data', (userInput) => {
+	  let input = userInput.toString()
+	  console.log(input)
+	});
+
+Here, we were able to use .on() because under the hood process.stdin is an instance of EventEmitter. When a user 
+enters text into the terminal and hits enter, a 'data' event will be fired and our anonymous listener callback 
+will be invoked. The userInput we receive is an instance of the Node Buffer class, so we convert it to a string 
+before printing.
+
+ERRORS: The Node environment has all the standard JavaScript errors such as EvalError, SyntaxError, RangeError, 
+ReferenceError, TypeError, and URIError as well as the JavaScript Error class for creating new error instances. 
+Within our own code, we can generate errors and throw them, and, with synchronous code in Node, we can use error 
+handling techniques such as try...catch statements.
+
+Many asynchronous Node APIs use error-first callback functions: callback functions which have an error as the 
+first expected argument and the data as the second argument. If the asynchronous task results in an error, it 
+will be passed in as the first argument to the callback function. If no error was thrown, the first argument will 
+be undefined.
+
+	const errorFirstCallback = (err, data)  => {
+	  if (err) {
+	    console.log(`There WAS an error: ${err}`);
+	  } else {
+	     // err was falsy
+	      console.log(`There was NO error. Event data: ${data}`);
+	  }
+	}
+
+FILESYSTEM:All of the data on a computer is organized and accessed through a filesystem. When running JavaScript 
+code on a browser, it’s important for a script to have only limited access to a user’s filesystem. This technique 
+of isolating some applications from others is known as sandboxing. Sandboxing protects users from malicious 
+programs and invasions of privacy.
+
+In the back-end, however, less restricted interaction with the filesystem is essential. The Node fs core module 
+is an API for interacting with the file system. It was modeled after the POSIX standard for interacting with the 
+filesystem.
+
+THE fs READFILE METHOD: One method available on the fs core module is the .readFile() method which reads data 
+from a provided file:
+
+	const fs = require('fs');
+	 
+	let readDataCallback = (err, data) => {
+	  if (err) {
+	    console.log(`Something went wrong: ${err}`);
+	  } else {
+	    console.log(`Provided file contained: ${data}`);
+	  }
+	};
+	 
+	fs.readFile('./file.txt', 'utf-8', readDataCallback);
+
+READABLE STREAMS: In real world. data isn’t processed all at once but rather sequentially, piece by piece, in 
+what is known as a stream. Streaming data is often preferable since you don’t need enough RAM to process all the 
+data at once nor do you need to have all the data on hand to begin processing it.
+
+One of the simplest uses of streams is reading and writing to files line-by-line. To read files line-by-line, we 
+can use the .createInterface() method from the readline core module. .createInterface() returns an EventEmitter 
+set up to emit 'line' events:
+
+	const readline = require('readline');
+	const fs = require('fs');
+ 
+	const myInterface = readline.createInterface({
+	  input: fs.createReadStream('text.txt')	// Archivo que quiero leer. En este caso, text.txt
+	});
+ 	
+ 	const fineLine = (data) => {
+	  console.log(`The line read: ${fileLine}`);	// Lo que va a leer por linea
+	}
+	
+	myInterface.on('line', fileLine); // Lee todas las lineas
+	
+WRITABLE STREAMS: We can also write to streams! We can create a writeable stream to a file using the 
+fs.createWriteStream() method:
+
+	const fs = require('fs')
+ 
+	const fileStream = fs.createWriteStream('output.txt');
+ 
+	fileStream.write('This is the first line!'); 
+	fileStream.write('This is the second line!');
+	fileStream.end();
+
+In the code above, we set the output file as output.txt. Then we .write() lines to the file. Unlike a readable 
+stream, which ends when it has no more data to read, a writable stream could remain open indefinitely. We can 
+indicate the end of a writable stream with the .end() method.
+
+CREATE AN HTTP SERVER: Node was designed with back end development needs such as the ability to create web 
+servers, computer processes that listen for requests from clients and return responses. A Node core module 
+designed to meet these needs is the http module. This module contains functions which simplify interacting with 
+HTTP and streamline receiving and responding to requests.
+
+The http.createServer() method returns an instance of an http.server. An http.server has a method .listen() which 
+causes the server to “listen” for incoming connections. When we run http.createServer() we pass in a custom 
+callback function (often referred to as the requestListener). This callback function will be triggered once the 
+server is listening and receives a request.
+
+Let’s break down how the requestListener callback function works:
+- Each time a request to the server is made, Node will invoke the provided requestListener callback function,   
+  passing in the request and response objects of the incoming request.
+- Request and response objects come with a number of properties and methods of their own, and within the   
+  requestListener function, we can access information about the request via the request object passed in.
+- The requestListener is responsible for setting the response header and body.
+- The requestListener must signal that the interaction is complete by calling the response.end() method.
+
+	const http = require('http');
+ 
+	let requestListener = (request, response) => {
+	  response.writeHead(200, {'Content-Type': 'text/plain' }); // The status code 200 means that no errors 
+	  response.write('Hello World!\n');			      // were encountered. 	
+	  response.end();
+	};
+ 
+	const server = http.createServer(requestListener);
+ 
+	server.listen(3000);	// Starts the server with the port 3000
+
+You could run the above code on your local machine, and access it by visiting http://localhost:3000/ from your 
+browser. “localhost” is used to refer to the same computer that’s running the current Node process.
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+	

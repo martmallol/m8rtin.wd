@@ -388,14 +388,245 @@ browser. “localhost” is used to refer to the same computer that’s running 
 
 
 
+-----LECCION 3----- 
+WHAT IS THE REST PARADIGM?
+REST, or REpresentational State Transfer, is an architectural style for providing standards between computer 
+systems on the web, making it easier for systems to communicate with each other. REST-compliant systems are 
+characterized by how they are stateless and separate the concerns of client and server.
 
+SEPARATION OF CLIENT AND SERVER: The implementation of the client and the implementation of the server can be done independently without each knowing about the other. The code on the client side can be changed at any time without affecting the operation of the server, and vice versa.
 
-
-
-
-
-
+Separating the user interface concerns from the data storage concerns, we improve scalability by simplifying the 
+server components.
 	
+STATELESSNESS: Systems that follow the REST paradigm are stateless, meaning that the server does not need to know 
+anything about what state the client is in and vice versa. This constraint of statelessness is enforced through 
+the use of resources. Resources are the nouns (sustantivos) of the Web - they describe any object, document, or 
+thing that you may need to store or send to other services.
 	
+COMMUNICATION BETWEEN CLIENT AND SERVER: In the REST architecture, clients send requests to retrieve or modify 
+resources, and servers send responses to these requests. 
+
+MAKING REQUESTS: REST requires that a client make a request to the server in order to retrieve or modify data on 
+the server. A request generally consists of:
+- an HTTP verb, which defines what kind of operation to perform
+- a header, which allows the client to pass along information about the request
+- a path to a resource
+- an optional message body containing data
+
+HTTP VERBS: There are 4 basic HTTP verbs we use in requests to interact with resources in a REST system:
+GET    — retrieve a specific resource (by id) or a collection of resources
+POST   — create a new resource
+PUT    — update a specific resource (by id)
+DELETE — remove a specific resource by id
+
+HEADER PARAMETERS: In the header of the request, the client sends the type of content that it is able to receive 
+from the server (Accept field). For example, a text file containing HTML would be specified with the type text/
+html. If this text file contained CSS instead, it would be specified as text/css.
+
+For example, a client accessing a resource with id 23 in an articles resource on a server might send a GET 
+request like this:
+	GET /articles/23
+	Accept: text/html, application/xhtml
 	
+PATH: Requests must contain a path to a resource that the operation should be performed on. Paths should contain 
+the information necessary to locate a resource with the degree of specificity needed.
+
+A path like fashionboutique.com/customers/223/orders/12 is clear in what it points to, even if you’ve never seen 
+this specific path before, because it is hierarchical and descriptive. We can see that we are accessing the order 
+with id 12 for the customer with id 223.
+
+SENDING RESPONSES: 
+CONTENT TYPES: When the server is sending a data payload to the client, the server must include a content-type in 
+the header of the response. This content-type header field alerts the client to the type of data it is sending in 
+the response body. 
+
+For example, when a client is accessing a resource with id 23 in an articles resource with this GET Request:
+	GET /articles/23 HTTP/1.1
+	Accept: text/html, application/xhtml
+
+The server might send back the content with the response header:
+	HTTP/1.1 200 (OK)
+	Content-Type: text/html
+
+This would signify that the content requested is being returning in the response body with a content-type of text/html, which the client said it would be able to accept.
+
+RESPONSE CODES: Responses from the server contain status codes to alert the client to information about the success of the operation, such as:  
+
+STATUS CODE 
+- 200 (OK)			 This is the standard response for successful HTTP requests.
+
+- 201 (CREATED)		 This is the standard response for an HTTP request that resulted in an item 
+				 being successfully created.	
+
+- 204 (NO CONTENT)		 This is the standard response for successful HTTP requests, where nothing 
+				 is being returned in the response body.
+
+- 400 (BAD REQUEST)		 The request cannot be processed because of bad request syntax, excessive 
+				 size, or another client error.	
+
+- 403 (FORBIDDEN)		 The client does not have permission to access this resource.
+
+- 404 (NOT FOUND)		 The resource could not be found at this time. It is possible it was 
+				 deleted, or does not exist yet.
+
+- 500 (INTERNAL SERVER ERROR)	 The generic answer for an unexpected failure if there is no more specific 
+				 information available.
+
+For each HTTP verb, there are expected status codes a server should return upon success:
+GET —    return 200 (OK)
+POST —   return 201 (CREATED)
+PUT —    return 200 (OK)
+DELETE — return 204 (NO CONTENT) If the operation fails, return the most specific status code possible 
+         corresponding to the problem that was encountered.
+
+EXAMPLES OF REQUESTS AND RESPONSES: 
+If we wanted to view all customers, the request would look like this:
+	GET http://fashionboutique.com/customers
+	Accept: application/json
+
+A possible response header would look like:
+	Status Code: 200 (OK)
+	Content-type: application/json
+followed by the customers data requested in application/json format.
+
+
+
+-----LECCION 4-----
+LEARN EXPRESS ROUTES
+Express is a powerful but flexible Javascript framework for creating web servers and APIs. It can be used for 
+everything from simple static file servers to JSON APIs to full production servers.
+
+STARTING A SERVER: Express is a Node module, so in order to use it, we will need to import it into our program 
+file. The purpose of a server is to listen for requests, perform whatever action is required to satisfy the 
+request, and then return a response. In order for our server to start responding, we have to tell the server 
+where to listen for new requests by providing a port number argument to a method called app.listen(). The server 
+will then listen on the specified port and respond to any requests that come into it.
+
+In this example, our app.listen() call will start a server listening on port 4001, and once the server is started 
+it will log 'Server is listening on port 4001'.
+	const express = require('express');
+	const app = express();
+
+	const PORT = 4001;
+	app.listen(PORT, () => {
+	  console.log(`Server is listening on port ${PORT}`);
+	});
+
+
+WRITING YOUR FIRST ROUTE: Once the Express server is listening, it can respond to any and all requests. But how 
+does it know what to do with these requests? To tell our server how to deal with any given request, we register a 
+series of routes. Routes define the control flow for requests based on the request’s path and HTTP verb. 
+
+If your server receives a GET request at /monsters, we will use a route to define the appropriate functionality 
+for that HTTP verb (GET) and path (/monsters). So in a request to localhost:4001/monsters, the path is /monsters 
+(in this example, the hostname is localhost, the port number is 4001).
+
+Express uses app.get() to register routes to match GET requests.
+EJ: 	app.get('/moods', (req, res, next) => {
+	  // Here we would send back the moods array in response
+	});
 	
+SENDING A RESPONSE: HTTP follows a one request-one response cycle. Each client expects exactly one response per 
+request, and each server should only send a single response back to the client per request.
+	
+Express servers send responses using the .send() method on the response object. .send() will take any input and 
+include it in the response body.
+EJ:	const monsters = [
+	  { type: 'werewolf' }, 
+	  { type: 'hydra' }, 
+	  { type: 'chupacabra' }
+	];
+	app.get('/monsters', (req, res, next) => {
+	  res.send(monsters);
+	});
+In this example, a GET /monsters request will match the route, Express will call the callback function, and the 
+res.send() method will send back an array of spooky monsters.
+
+GETTING A SINGLE EXPRESSION: Parameters are route path segments that begin with : in their Express route 
+definitions. They act as wildcards, matching any text at that path segment. For example /monsters/:id will match 
+both/monsters/1 and /monsters/45.
+
+Express parses any parameters, extracts their actual values, and attaches them as an object to the request 
+object: req.params. This object’s keys are any parameter names in the route, and each key’s value is the actual 
+value of that field per request.
+
+	const monsters = { 
+	  hydra: { height: 3, age: 4 }, 
+	  dragon: { height: 200, age: 350 } 
+	};
+	// GET /monsters/hydra
+	app.get('/monsters/:name', (req, res, next) => {
+	  console.log(req.params); // { name: 'hydra' }
+	  res.send(monsters[req.params.name]);
+	});
+
+SETTING STATUS CODES: Express allows us to set the status code on responses before they are sent. Response codes 
+provide information to clients about how their requests were handled.
+
+The res object has a .status() method to allow us to set the status code, and other methods like .send() can be 
+chained from it.
+EJ:	const monsterStoreInventory = { fenrirs: 4, banshees: 1, jerseyDevils: 4, krakens: 3 };
+	app.get('/monsters-inventory/:name', (req, res, next) => {
+	  const monsterInventory = monsterStoreInventory[req.params.name];
+	  if (monsterInventory) {
+	    res.send(monsterInventory);
+	  } else {
+	    res.status(404).send('Monster not found');	<-- ACA!!!
+	  }
+	});
+	
+In this example, when a request arrives for /monsters-inventory/mothMen, the route matches and so the callback is 
+invoked. req.params.name will be equal to 'mothMen' and so our program accesses monsterStoreInventory['mothMen']. 
+Since there are no mothMen in our inventory,res.status() sets a 404 status code on the response, and .send() 
+sends the response.
+
+OTHER HTTP METHODS: This course will cover three other important HTTP methods: PUT, POST, and DELETE. Express 
+provides methods for each one: app.put(), app.post(), and app.delete().
+
+PUT REQUESTS: PUT requests are used for updating existing resources.
+
+USING QUERIES:  Query strings appear at the end of the path in URLs, and they are indicated with a ? character. 
+For instance, in /monsters/1?name=chimera&age=1, the query string is name=chimera&age=1 and the path is 
+/monsters/1/
+
+Query strings do not count as part of the route path. Instead, the Express server parses them into a JavaScript 
+object and attaches it to the request body as the value of req.query. The key: value relationship is indicated by 
+the = character in a query string, and key-value pairs are separated by &. In the above example route, the 
+req.query object would be { name: 'chimera', age: '1' }.
+
+EJ:	const monsters = { '1': { name: 'cerberus', age: '4'  } };
+	// PUT /monsters/1?name=chimera&age=1
+	app.put('/monsters/:id', (req, res, next) => {
+	  const monsterUpdates = req.query;
+	  monsters[req.params.id] = monsterUpdates;
+	  res.send(monsters[req.params.id]);
+	});
+
+When a PUT /monsters/1?name=chimera&age=1 request arrives, our callback function is called and, we create a 
+monsterUpdates variable to store req.query. Since req.params.id is '1', we replace monsters['1']‘s value with 
+monsterUpdates . Finally, Express sends back the new monsters['1'].
+
+POST REQUESTS: POST is the HTTP method verb used for creating new resources. Because POST routes create new data, 
+their paths do not end with a route parameter, but instead end with the type of resource to be created. Express 
+uses .post() as its method for POST requests.
+
+DELETING OLD EXPRESSIONS: DELETE is the HTTP method verb used to delete resources. Because DELETE routes delete 
+currently existing data, their paths should usually end with a route parameter to indicate which resource to 
+delete. Express uses .delete() as its method for DELETE requests. Servers often send a 204 No Content status code 
+if deletion occurs without error.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -760,6 +760,133 @@ In the above code sample, we created reusable middleware for authentication and 
 authenticate() middleware to verify a user is logged in before proceeding with the request and we use the 
 validateData() middleware before performing the appropriate create or update function.
 
+LOGGING & MORGAN: We will replace the logging code in the workspace with morgan, an open-source library for 
+logging information about the HTTP request-response cycle in a server application. Morgan takes an argument to 
+describe the formatting of the logging output. For example, morgan('tiny') will return a middleware function that 
+does a “tiny” amount of logging. With morgan in place, we’ll be able to remove the existing logging code.
+	
+	const morgan = require('morgan');
+
+FROM	app.use((req, res, next) => {
+	  console.log(`${req.method} Request Received`);	// elimino esto
+	  next();						// elimino esto
+	});
+
+TO	app.use((req, res, next) => {
+	  morgan('tiny');					// agrego esto
+	});
+
+Morgan provides a number of pre-defined formats. If we want to change from using 'tiny' to one with a bit more 
+information, we can do it. We could want one with the HTTP method, URL, status code, response time, content 
+length, and one that changes colors of the status code output based on the code. 
+morgan documentation: https://github.com/expressjs/morgan#api
+
+BODY PARSING: We can use a body parser that is open-source.
+	
+EJ	const bodyParser = require('body-parser');
+	app.use(bodyParser.json());
+
+body-parser documentation: https://github.com/expressjs/body-parser#body-parser
+
+ERROR-HANDLING MIDDLEWARE: Express has its own error-handler, which catches errors that we haven’t handled. But 
+if we anticipate an operation might fail, we can invoke our error-handling middleware. We do this by passing an 
+error object as an argument to next(). Usually, next() is called without arguments and will proceed through the 
+middleware stack as expected. When called with an error as the first argument, however, it will call any 
+applicable error-handling middleware.
+
+	app.use((req, res, next) => {
+	  const newValue = possiblyProblematicOperation();
+	  if (newValue === undefined) {
+	    let undefinedError = new Error('newValue was not defined!');
+	    return next(undefinedError);
+	  }
+	  next();
+	});
+ 
+	app.use((err, req, res, next) => {
+	  const status = err.status || 500;
+	  res.status(status).send(err.message);
+	});
+
+If we want to put the error's status number:
+
+EJ	const error = new Error('Not enough beans in the jar to remove!')
+	    error.status = 400;
+	    return next(error);
+
+
+
+-----LECCION 7-----
+ROUTER PARAMETERS
+
+ROUTER.PARAM(): Express, luckily, is mindful of the pain-point of replicated parameter-matching code and has a 
+method specifically for this issue. When a specific parameter is present in a route, we can write a function that 
+will perform the necessary lookup and attach it to the req object in subsequent middleware that is run.
+
+FROM 	app.get('/sorcerers/:sorcererName', (req, res, next) => {
+	  const sorcerer = Sorcerers[req.params.sorcererName];
+	  res.send(sorcerer.info);
+	});
+ 
+	app.get('/sorcerers/:sorcererName/spellhistory', (req, res, next) => {
+	  const sorcerer = Sorcerers[req.params.sorcererName];
+	  const spellHistory = Spells[sorcerer.id].history;
+	  res.send(spellHistory);
+	});
+
+TO 	app.param('spellId', (req, res, next, id) => {
+	  let spellId = Number(id);
+	    try {
+	      const found = SpellBook.find((spell) => {
+	        return spellId === spell.id;
+	      })
+	      if (found) {
+	        req.spell = found;
+	        next();
+	      } else {
+	        next(new Error('Your magic spell was not found in any of our tomes'));
+	      };
+	    } catch (err) {
+	      next(err)
+	    }
+	});
+
+In the code above we intercept any request to a route handler with the :spellId parameter. Note that in the 
+app.param function signature, 'spellId' does not have the leading :. The actual ID will be passed in as the 
+fourth argument, id in this case, to the app.param callback function when a request arrives.
+
+ANOTHER EXAMPLE:
+
+	appleRouter.param('variety', (req, res, next, variety) => {
+	  if (!apples[variety]) {
+	    res.status(404).send();
+	  } else {
+	    req.variety = apples[variety];
+	    next();
+	  }
+	});
+	 
+	appleRouter.get('/:variety/description', (req, res, next) => {
+		  res.send(req.variety.description);
+	});
+	 
+	appleRouter.get('/:variety/price-range', (req, res, next) => {
+	  res.send(req.variety.priceRange);
+	});
+	 
+	appleRouter.get('/:variety/color', (req, res, next) => {
+	  res.send(req.variety.color);
+	});
+
+
+
+
+
+
+
+
+
+
 
 
 

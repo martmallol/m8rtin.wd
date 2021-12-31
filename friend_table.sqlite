@@ -1,0 +1,47 @@
+-- Voy a crear una tabla desde cero
+-- La llamo 'friends'
+CREATE TABLE friends (
+  id INTEGER,
+  name TEXT,
+  birthday DATE
+);
+
+-- Agrego un amigo
+INSERT INTO friends (id, name, birthday)
+VALUES (1, 'Ororo Munroe', '1940-05-30');
+
+-- Agrego dos amigos mas
+INSERT INTO friends (id, name, birthday)
+VALUES (2, 'Chimuelo Fernandez', '1927-08-29');
+
+INSERT INTO friends (id, name, birthday)
+VALUES (3, 'Jefferson Gutierritos', '1979-10-02');
+
+-- Ororo fue al registro civil y se cambio de nombre. Asi que tengo que actualizar la tabla
+UPDATE friends 
+SET name = 'Storm Munroe' 
+WHERE id = 1; 
+
+-- Agrego una nueva columna llamada 'email'
+ALTER TABLE friends
+ADD COLUMN email TEXT;
+
+-- Updateo el mail de todos mis queridisimos amigos
+UPDATE friends
+SET email = 'en_la_calle@gmail.com'
+WHERE id = 1;
+
+UPDATE friends
+SET email = 'me_conocen_como_el@gmail.com'
+WHERE id = 2;
+
+UPDATE friends
+SET email = 'hip_hop@gmail.com'
+WHERE id = 3;
+
+-- Me acabo de dar cuenta que Storm es producto de mi imaginacion, no existe. Asi que la elimino
+DELETE FROM friends
+WHERE id = 1;
+
+-- Chequeo siempre los datos con viendo la tabla completa
+SELECT * FROM friends

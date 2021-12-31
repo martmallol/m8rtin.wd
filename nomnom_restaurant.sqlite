@@ -1,0 +1,64 @@
+-- Para ver lo que hace cada comando, solo dejar uno (comentar el resto o sacarlos), si estan todos no pasa nada
+-- Esta hecho sobre una base de datos la cual tiene como columnas:
+-- name, neighborhood, cuisine, review, price, health
+
+-- Veo como es la base datos
+SELECT *
+FROM nomnom;
+
+-- Los distintos barrios
+SELECT DISTINCT neighborhood -- Si no pongo 'distinct' me salen duplicados 
+FROM nomnom;
+
+-- Los distintos tipos de cuisine de cada restaurante
+SELECT DISTINCT cuisine
+FROM nomnom;
+
+-- Restaurantes de comida china
+SELECT *
+FROM nomnom
+WHERE cuisine = 'Chinese';
+
+-- Restaurantes de 4 o mas estrellas
+SELECT *
+FROM nomnom
+WHERE review >= 4
+
+-- Restaurantes italianos caros
+SELECT *
+FROM nomnom
+WHERE cuisine = 'Italian' AND price = '$$$';
+
+-- Restaurantes que contienen 'meatball' en su nombre
+SELECT * 
+FROM nomnom
+WHERE name LIKE '%meatball%'; -- 'The Meatball Shop' era
+
+-- Restaurantes que quedan por 'Midtown', 'Downtown' o 'Chinatown'
+SELECT *
+FROM nomnom
+WHERE neighborhood = 'Midtown' 
+   OR neighborhood = 'Downtown' 
+   OR neighborhood = 'Chinatown';
+
+-- Restaurantes donde no fueron a inspeccionar la higiene
+SELECT *
+FROM nomnom
+WHERE health IS NULL;
+
+-- TOP 10 ranking de los mejores restaurantes
+SELECT *
+FROM nomnom
+ORDER BY review DESC
+LIMIT 10;
+
+-- Agrego una nueva columna llamada 'rating' que da su opinion sobre cada restaurante
+SELECT name,
+  CASE
+    WHEN review > 4.5 THEN 'Extraordinary'
+    WHEN review > 4 THEN  'Excellent'
+    WHEN review > 3 THEN 'Good'
+    WHEN review > 2 THEN 'Fair'
+    ELSE 'Poor'
+  END AS 'Review' -- Renombro la columna
+FROM nomnom;

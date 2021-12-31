@@ -15,8 +15,8 @@ CREATING USAGE FUNNELS: Visitors to ACME’s website follow a simple workflow:
 2 - Click an icon to begin the checkout process
 3 - Enter payment information to complete their purchase
 
-Not all users who browse on the website will find something that they like enough to checkout, and not all users who 
-begin the checkout process will finish entering their payment information to make a purchase.
+Not all users who browse on the website will find something that they like enough to checkout, and not all users 
+who begin the checkout process will finish entering their payment information to make a purchase.
 
 This type of multi-step process where some users leave at each step is called a funnel.
 
@@ -24,7 +24,8 @@ ANALIZING USER CHURN: A churn rate is the percent of subscribers to a monthly se
 
 DETERMINING WEB TRAFFIC ATTRIBUTION: UTM Parameters are special tags that site owners add to their pages to track 
 what website a user was on before they reach the website. For instance:
-- If a user found ACME’s website through Google search, the table page_visits might have utm_source set to ‘google’.
+- If a user found ACME’s website through Google search, the table page_visits might have utm_source set to 
+  ‘google’.
 - If a different user clicked a Facebook ad to get to ACME’s website, then their row in page_visits might have 
   utm_source as ‘facebook’.
   
@@ -228,6 +229,130 @@ Suppose we want to condense the ratings in movies to three levels:
 - Each WHEN tests a condition and the following THEN gives us the string if the condition is true.
 - The ELSE gives us the string if all the above conditions are false.
 - The CASE statement must end with END.
+  
+  
+
+-----LECCION 3-----
+SQL: CREATING, UPDATING & DELETING DATA
+You can  access a glossary of all the SQL commands taught in here: https://www.codecademy.com/article/sql-commands
+
+STATEMENTS & CREATING A TABLE: 
+	CREATE TABLE table_name (
+	   column_1 data_type, 
+	   column_2 data_type, 
+	   column_3 data_type
+	);
+
+Let’s break down the components of a statement:
+
+1. CREATE TABLE is a clause. Clauses perform specific tasks in SQL. By convention, clauses are written in capital 
+   letters. Clauses can also be referred to as commands.
+2. table_name refers to the name of the table that the command is applied to.
+3. (column_1 data_type, column_2 data_type, column_3 data_type) is a parameter. A parameter is a list of columns, 
+   data types, or values that are passed to a clause as an argument. Here, the parameter is a list of column 
+   names and the associated data type.
+
+The structure of SQL statements vary. The number of lines used does not matter. A statement can be written all on 
+one line, or split up across multiple lines if it makes it easier to read.
+
+CREATE: CREATE statements allow us to create a new table in the database. You can use the CREATE statement 
+anytime you want to create a new table from scratch. The statement below creates a new table named celebs.
+
+EJ	CREATE TABLE celebs (
+	   id INTEGER, 
+	   name TEXT, 
+	   age INTEGER
+	);
+
+INSERT: The INSERT statement inserts a new row into a table.
+
+We can use the INSERT statement when you want to add new records. The statement below enters a record for Justin 
+Bieber into the celebs table.
+
+EJ	INSERT INTO celebs (id, name, age) 
+	VALUES (1, 'Justin Bieber', 22);
+
+- INSERT INTO is a clause that adds the specified row or rows.
+- celebs is the table the row is added to.
+- (id, name, age) is a parameter identifying the columns that data will be inserted into.
+- VALUES is a clause that indicates the data being inserted.
+- (1, 'Justin Bieber', 22) is a parameter identifying the values being inserted.
+	- 1: 		    an integer that will be added to id column
+	- 'Justin Bieber': text that will be added to name column
+	- 22: 		    an integer that will be added to age column
+
+ALTER: The ALTER TABLE statement adds a new column to a table. You can use this command when you want to add 
+columns to a table. The statement below adds a new column twitter_handle to the celebs table.
+	
+EJ	ALTER TABLE celebs 
+	ADD COLUMN twitter_handle TEXT;
+
+1. ALTER TABLE is a clause that lets you make the specified changes.
+2. celebs is the name of the table that is being changed.
+3. ADD COLUMN is a clause that lets you add a new column to a table:
+4. The rows that existed before the column was added have NULL (∅) values for twitter_handle.
+
+UPDATE: The UPDATE statement edits a row in a table. You can use the UPDATE statement when you want to change 
+existing records. The statement below updates the record with an id value of 4 to have the twitter_handle 
+@taylorswift13.
+
+	UPDATE celebs 
+	SET twitter_handle = '@taylorswift13' 
+	WHERE id = 4; 
+
+DELETE: The DELETE FROM statement deletes one or more rows from a table. You can use the statement when you want 
+to delete existing records. The statement below deletes all records in the celeb table with no twitter_handle:
+	DELETE FROM celebs 
+	WHERE twitter_handle IS NULL;
+
+CONSTRAINTS: Constraints that add information about how a column can be used are invoked after specifying the 
+data type for a column. They can be used to tell the database to reject inserted data that does not adhere to a 
+certain restriction. The statement below sets constraints on the celebs table.
+
+	CREATE TABLE celebs (
+	   id INTEGER PRIMARY KEY,   <-- ACA!!!
+	   name TEXT UNIQUE,   <-- ACA!!!
+	   date_of_birth TEXT NOT NULL,   <-- ACA!!!
+	   date_of_death TEXT DEFAULT 'Not Applicable'   <-- ACA!!!
+	);
+
+1. PRIMARY KEY columns can be used to uniquely identify the row. Attempts to insert a row with an identical value 
+to a row already in the table will result in a constraint violation which will not allow you to insert the new 
+row.
+
+2. UNIQUE columns have a different value for every row. This is similar to PRIMARY KEY except a table can have 
+many different UNIQUE columns.
+
+3. NOT NULL columns must have a value. Attempts to insert a row without a value for a NOT NULL column will result 
+in a constraint violation and the new row will not be inserted.
+
+4. DEFAULT columns take an additional argument that will be the assumed value for an inserted row if the new row 
+does not specify a value for that column.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

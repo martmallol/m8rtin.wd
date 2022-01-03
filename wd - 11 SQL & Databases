@@ -121,7 +121,8 @@ We can also use % both before and after a pattern:
 Here, any movie that contains the word ‘man’ in its name will be returned in the result. LIKE is not case 
 sensitive. ‘Batman’ and ‘Man of Steel’ will both appear in the result of the query above.
 
-IS NULL: More often than not, the data you encounter will have missing values. It is not possible to test for NULL values with comparison operators, such as = and !=.
+IS NULL: More often than not, the data you encounter will have missing values. It is not possible to test for NULL 
+values with comparison operators, such as = and !=.
 
 Instead, we will have to use these operators:
 - IS NULL
@@ -328,33 +329,156 @@ in a constraint violation and the new row will not be inserted.
 
 4. DEFAULT columns take an additional argument that will be the assumed value for an inserted row if the new row 
 does not specify a value for that column.
+  
+  
 
+-----LECCION 4-----
+AGGREGATE FUNCTIONS
 
+COUNT: The fastest way to calculate how many rows are in a table is to use the COUNT() function.
+EJ 	SELECT COUNT(*)
+	FROM table_name;
 
+SUM: SUM() is a function that takes the name of a column as an argument and returns the sum of all the values in 
+that column.
 
+What is the total number of downloads for all of the apps combined?
+	SELECT SUM(downloads)
+	FROM fake_apps;
 
+MAX / MIN: The MAX() and MIN() functions return the highest and lowest values in a column, respectively.
 
+How many downloads does the most popular app have?
+	SELECT MAX(downloads)
+	FROM fake_apps;
+The most popular app has 31,090 downloads!
 
+AVERAGE: SQL uses the AVG() function to quickly calculate the average value of a particular column.
 
+The statement below returns the average number of downloads for an app in our database:
 
+	SELECT AVG(downloads)
+	FROM fake_apps;
 
+ROUND: It rounds the values in the column to the number of decimal places specified by the integer.
 
+	SELECT ROUND(price, 0)
+	FROM fake_apps;
 
+Here, we pass the column price and integer 0 as arguments. SQL rounds the values in the column to 0 decimal places 
+in the output.
 
+GROUP BY: Oftentimes, we will want to calculate an aggregate for data with certain characteristics.
 
+For instance, we might want to know the mean IMDb ratings for all movies each year. 
+	SELECT AVG(imdb_rating)
+	FROM movies
+	WHERE year = 1999;
+	 
+	SELECT AVG(imdb_rating)
+	FROM movies
+	WHERE year = 2000;
+	 
+	SELECT AVG(imdb_rating)
+	FROM movies
+	WHERE year = 2001;
 
+Luckily, there’s a better way! We can use GROUP BY to do this in a single step:
 
+	SELECT year,
+	   AVG(imdb_rating)
+	FROM movies
+	GROUP BY year
+	ORDER BY year;
 
+The GROUP BY statement comes after any WHERE statements, but before ORDER BY or LIMIT.
 
+GROUP BY SYNTAX SUGAR: Sometimes, we want to GROUP BY a calculation done on a column. SQL lets us use column 
+reference(s) in our GROUP BY that will make our lives easier.
+- 1 is the first column selected
+- 2 is the second column selected
+- 3 is the third column selected
+and so on.
 
+EJ	SELECT ROUND(imdb_rating),
+	   COUNT(name)
+	FROM movies
+	GROUP BY 1
+	ORDER BY 1;
+Here, the 1 refers to the first column in our SELECT statement, ROUND(imdb_rating).
 
+HAVING: SQL also allows you to filter which groups to include and which to exclude.
 
+For instance, imagine that we want to see how many movies of different genres were produced each year, but we only 
+care about years and genres with at least 10 movies.
 
+We can’t use WHERE here because we don’t want to filter the rows; we want to filter groups. This is where HAVING 
+comes in.
 
+EJ	SELECT year,
+	   genre,
+	   COUNT(name)
+	FROM movies
+	GROUP BY 1, 2
+	HAVING COUNT(name) > 10;
 
+- When we want to limit the results of a query based on values of the individual rows, use WHERE.
+- When we want to limit the results of a query based on an aggregate property, use HAVING.
 
+HAVING statement always comes after GROUP BY, but before ORDER BY and LIMIT.
+  
+  
 
+-----LECCION 5-----
+MULTIPLE TABLES 
+In order to efficiently store data, we often spread related information across multiple tables.
 
+COMBINING TABLES WITH SQL: Various tables can share the same information, such as a user's id for example.
+We can combine tables using the JOIN function 
+
+If we want to combine orders and customers, we would type:
+	SELECT *
+	FROM orders
+	JOIN customers
+	  ON orders.customer_id = customers.customer_id;
+
+1. The first line selects all columns from our combined table. If we only want to select certain columns, we can 
+   specify which ones we want.
+2. The second line specifies the first table that we want to look in, orders
+3. The third line uses JOIN to say that we want to combine information from orders with customers.
+4. The fourth line tells us how to combine the two tables. We want to match orders table’s customer_id column with 
+   customers table’s customer_id column.
+
+INNER JOINS: When we perform a simple JOIN (often called an inner join) our result only includes rows that match our 
+ON condition. If some rows don't match, they won't be included in the merge. 
+
+LEFT JOINS: What if we want to combine two tables and keep some of the un-matched rows?
+
+SQL lets us do this through a command called LEFT JOIN. A left join will keep all rows from the first table, 
+regardless of whether there is a matching row in the second table. The final result will keep all rows of the first 
+table but will omit the un-matched row from the second table.
+
+EJ	SELECT *
+	FROM table1
+	LEFT JOIN table2
+	  ON table1.c2 = table2.c2;
+
+1. The first line selects all columns from both tables.
+2. The second line selects table1 (the “left” table).
+3. The third line performs a LEFT JOIN on table2 (the “right” table).
+4. The fourth line tells SQL how to perform the join (by looking for matching values in column c2).
+
+PRIMARY KEY VS FOREIGN KEY: Primary keys have a few requirements:
+- None of the values can be NULL.
+- Each value must be unique (i.e., you can’t have two customers with the same customer_id in the customers table).
+- A table can not have more than one primary key column.
+
+When the primary key for one table appears in a different table, it is called a foreign key. So customer_id is a 
+primary key when it appears in customers, but a foreign key when it appears in orders.
+
+Why is this important? The most common types of joins will be joining a foreign key from one table with the primary 
+key from another table. For instance, when we join orders and customers, we join on customer_id, which is a foreign 
+key in orders and the primary key in customers.
 
 
 

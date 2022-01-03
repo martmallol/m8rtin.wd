@@ -1,0 +1,70 @@
+-- Veo la tabla completa. Hay 10 columnas: el nombre de la empresa, su locacion, su industria, su cantidad de empleados, cuanto dinero ganaron, en cuanto esta valuada, anio de fundacion, etapa, ceo, e info
+--SELECT * FROM startups;
+
+-- Calculo el numero total de companias que tiene la tabla (hay 70)
+SELECT COUNT(*) FROM startups;
+
+-- Quiero ver el valor total de todas las companias ($974,455,790,000)
+SELECT SUM(valuation) FROM startups;
+
+-- El mayor monto que gano una compania en la tabla ($11,500,000,000)
+SELECT MAX(raised) FROM startups;
+
+-- El mayor monto que gano una compania en la tabla en la etapa 'Seed' ($1,800,000)
+SELECT MAX(raised) FROM startups
+WHERE stage = 'Seed';
+
+-- La compania mas vieja (1994)
+SELECT MIN(founded) FROM startups;
+
+-- ** VALUACION ENTRE DIFERENTES SECTORES **
+
+-- Valuacion media de una compania ($15,974,685,081.9672)
+SELECT AVG(valuation) FROM startups;
+
+-- Valuacion media en cada industria
+SELECT category, AVG(valuation)
+FROM startups
+GROUP BY category;
+
+-- Valuacion media en cada industria con el valor redondeado a dos decimales
+SELECT category, ROUND(AVG(valuation), 2)
+FROM startups
+GROUP BY category;
+
+-- Por ultimo, la ordeno de mayor a menor valuacion
+SELECT category, ROUND(AVG(valuation), 2)
+FROM startups
+GROUP BY 1
+ORDER BY 2 DESC;
+
+-- ** MERCADOS MAS COMPETITIVOS **
+
+-- El nombre de cada industria con el total de companias que poseen
+SELECT category, COUNT(*)
+FROM startups
+GROUP BY 1;
+
+-- Filtro los resultados para incluir solo a las industrias con mas de 3 companias
+SELECT category, COUNT(*)
+FROM startups
+GROUP BY 1
+HAVING COUNT(*) > 3
+ORDER BY 2 DESC;
+-- Los mercados mas competitivos son: Social, Mobile & Education
+
+-- ** DIFERENCIA ENTRE TAMANO DE LA STARTUP Y LA LOCACION **
+
+-- Tamano promedio de una compania en cada locacion (Las de San Francisco son las que mas emplean)
+SELECT location, AVG(employees)
+FROM startups
+GROUP BY 1
+ORDER BY 2 DESC;
+
+-- Tamano promedio de una startup segun su locacion y teniendo mas de 500 empleados
+SELECT location, AVG(employees)
+FROM startups
+GROUP BY 1
+HAVING AVG(employees) > 500
+ORDER BY 2 DESC;
+-- San Francisco, Silicon Valley, New York, Brooklyn

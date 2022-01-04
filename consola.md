@@ -15,3 +15,7 @@
 - exit: salgo del equipo al que me cambie. si estoy en la consola de mi pc, la cierra
 - ./blablabla: corro el programa blablabla 
 
+## Programas:
+- VSCode: code
+- sqlite: sqlite3 blablabla.sqlite (.exit para salir)
+- DB Browser: sqlitebrowser

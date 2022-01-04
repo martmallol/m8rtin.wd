@@ -1,0 +1,83 @@
+/* 
+
+Suppose you are a Data Analyst at Lyft, a ride-sharing platform. 
+For a project, you were given three tables:
+    * trips: trips information
+    * riders: user data
+    * cars: autonomous cars
+
+*/
+
+-- Let's examine the three tables
+
+SELECT * FROM trips;
+-- Trips column names: id, date, pickup, dropoff, rider_id,	car_id,	type, cost
+
+SELECT * FROM riders;
+-- Riders column names: id,	first, last, username, rating, total_trips,	referred
+
+SELECT * FROM cars;
+-- Cars column names: id, model, OS, status, trips_completed
+
+-- The primary key of 'trips', 'riders' and 'cars' is 'id'
+
+
+-- Cross join between 'riders' and 'cars'
+SELECT *
+FROM riders
+CROSS JOIN cars;
+
+-- Is the result useful?
+-- It combines each user with every car model. Not so useful.
+
+
+-- We want to create a Trip Log with the trips and its users.
+-- Find the columns to join between trips and riders, let trips be the left table
+SELECT *
+FROM trips
+LEFT JOIN riders
+  ON trips.rider_id = riders.id;
+
+-- Suppose we want to create a link between the trips and the cars used during those trips.
+SELECT *
+FROM trips
+JOIN cars
+  ON trips.car_id = cars.id;
+
+-- The new riders data are in! (new table: 'riders2') There are three new users this month.
+-- Stack the 'riders' table on top of the new table named 'riders2'
+SELECT *
+FROM riders
+UNION
+SELECT *
+FROM riders2;
+
+-- Bonus: Queries and Aggregates
+
+-- What is the average cost for a trip?
+SELECT AVG(cost)
+FROM trips;
+-- $31.915!!
+
+-- Lyft is looking to do an email campaign for all the irregular users.
+-- Find all the riders who have used Lyft less than 500 times!
+SELECT *
+FROM riders
+WHERE total_trips < 500
+UNION
+SELECT *
+FROM riders2
+WHERE total_trips < 500;
+-- It gave me the info of 4 riders
+
+-- Calculate the number of cars that are active.
+SELECT COUNT(*)
+FROM cars
+WHERE status = 'active';
+-- There are 3 active cars right now
+
+-- Write a query that finds the two cars that have the highest trips_completed.
+SELECT *
+FROM cars
+ORDER BY trips_completed DESC
+LIMIT 2;

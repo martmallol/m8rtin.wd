@@ -480,6 +480,117 @@ Why is this important? The most common types of joins will be joining a foreign 
 key from another table. For instance, when we join orders and customers, we join on customer_id, which is a foreign 
 key in orders and the primary key in customers.
 
+CROSS JOINS: Sometimes, we just want to combine all rows of one table with all rows of another table.
+
+For instance, if we had a table of shirts and a table of pants, we might want to know all the possible combinations 
+to create different outfits.
+
+Our code might look like this:
+	SELECT shirts.shirt_color,
+	   pants.pants_color
+	FROM shirts
+	CROSS JOIN pants;
+
+- The third line pulls data from the table shirts.
+- The fourth line performs a CROSS JOIN with pants.
+
+UNION: Sometimes we just want to stack one dataset on top of the other. Well, the UNION operator allows us to do 
+that.
+
+If we combine two tables with UNION:
+	SELECT *
+	FROM table1
+	UNION
+	SELECT *
+	FROM table2;
+
+- Tables must have the same number of columns.
+- The columns must have the same data types in the same order as the first table.
+
+WITH: Often times, we want to combine two tables, but one of the tables is the result of another calculation.
+
+We can do this by using a WITH clause.
+
+	WITH previous_results AS (
+	   SELECT ...
+	   ...
+	   ...
+	   ...
+	)
+	SELECT *
+	FROM previous_results
+	JOIN customers
+	  ON _____ = _____;
+
+- The WITH statement allows us to perform a separate query (such as aggregating customer’s subscriptions)
+- previous_results is the alias that we will use to reference any columns from the query inside of the WITH clause
+- We can then go on to do whatever we want with this temporary table (such as join the temporary table with another 
+  table)
+
+Essentially, we are putting a whole first query inside the parentheses () and giving it a name. After that, we can 
+use this name as if it’s a table and write a new query using the first query.
+
+Another example: 
+	WITH previous_query AS (
+	   SELECT customer_id,
+	      COUNT(subscription_id) AS 'subscriptions'
+	   FROM orders
+	   GROUP BY customer_id
+	)
+	SELECT customers.customer_name, previous_query.subscriptions
+	FROM previous_query
+	JOIN customers
+	  ON previous_query.customer_id = customers.customer_id;
 
 
+LESSON'S REFERENCE GUIDE: https://www.codecademy.com/learn/analyze-data-sql-join-data/modules/analyze-data-sql-learn-joins/cheatsheet 
+  
+  
+
+-----LECCION 6-----
+WHAT IS SQLITE?
+SQLite is a database engine. It is software that allows users to interact with a relational database. In SQLite, a 
+database is stored in a single file — a trait that distinguishes it from other database engines. This fact allows 
+for a great deal of accessibility: copying a database is no more complicated than copying the file that stores the 
+data, sharing a database can mean sending an email attachment.
+
+DRAWBACKS (DESVENTAJAS) TO SQLITE: SQLite’s signature portability unfortunately makes it a poor choice when many 
+different users are updating the table at the same time (to maintain integrity of data, only one user can write to 
+the file at a time). It also may require some more work to ensure the security of private data due to the same 
+features that make SQLite accessible. Furthermore, SQLite does not offer the same exact functionality as many other 
+database systems, limiting some advanced features other relational database systems offer. Lastly, SQLite does not 
+validate data types. Where many other database software would reject data that does not conform to a table’s schema, 
+SQLite allows users to store data of any type into any column.
+
+The example below shows that the id column expects to store integers, the name column expects to store text, and the 
+age column expects to store integers:
+
+	CREATE TABLE celebs (
+	   id INTEGER, 
+	   name TEXT, 
+	   age INTEGER
+	);
+
+However, SQLite will not reject values of the wrong type. We could accidentally insert the wrong data types in the 
+columns. 
+
+USES FOR SQLITE: The benefits of being able to access and manipulate a database without involving a server 
+application are huge. SQLite is used worldwide for testing, development, and in any other scenario where it makes 
+sense for the database to be on the same disk as the application code.
+
+  
+
+-----LECCION 7-----
+SETTING UP DB BROWSER
+DB Browser is a visual tool used to organize commands sent to SQLite. With databases, it’s easy to lose track of 
+commands that have been run. DB Browser lets you see exactly the sequence of commands you are executing before you 
+run them. DB Browser will also allow you to see the column structure for the tables within the database you’re 
+working with, so inserting data or other manipulation of data is more manageable and doesn’t require performing 
+queries every time you need to remember the structure of your data.
+
+HOW TO USE IT: https://www.youtube.com/watch?v=1Vaqh24HLKU&t=369s
+
+You can now use DB Browser to visualize what SQL commands will accomplish without worrying about affecting the state 
+of your database. Verify these commands do what you want, and press “Write Changes” to commit to them. 
+Congratulations! You’re ready to manage a database.
 

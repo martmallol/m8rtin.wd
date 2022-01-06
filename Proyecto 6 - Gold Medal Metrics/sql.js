@@ -1,6 +1,9 @@
 var sqlite3 = require('sqlite3');
 var db = new sqlite3.Database('./gold_medals.sqlite');
 
+// En DB Browser voy a realizar testeos con Argentina como pais. 
+// (Ademas del suite de tests que corro con 'npm test')
+
 /*
 Returns a SQL query string that will create the Country table with four columns: name (required), code (required), gdp, and population.
 */
@@ -40,11 +43,12 @@ Returns a SQL query string that will find the number of gold medals for the give
 
 const goldMedalNumber = country => {
     return `
-      SELECT COUNT(*) AS count
-      FROM GoldMedal
-      WHERE country = '${country}';
+    SELECT COUNT(*) AS count
+    FROM GoldMedal
+    WHERE country = '${country}';
     `;
 };
+// 69 medallas 8-)
 
 /*
 Returns a SQL query string that will find the year where the given country 
@@ -61,6 +65,7 @@ const mostSummerWins = country => {
   LIMIT 1;
   `;
 };
+// 26 medallas en el 2004!! (Dudo de la veracidad de la tabla, a menos que cuenten a cada miembro del equipo de futbol por separado)
 
 /*
 Returns a SQL query string that will find the year where the given country 
@@ -100,7 +105,14 @@ won the most medals, along with the number of medals aliased to 'count'.
 */
 
 const bestDiscipline = country => {
-  return;
+  return `
+  SELECT discipline, COUNT(*) AS count
+  FROM GoldMedal
+  WHERE country = '${country}'
+  GROUP BY discipline
+  ORDER BY count DESC
+  LIMIT 1;
+  `;
 };
 
 /*
@@ -109,7 +121,14 @@ won the most medals, along with the number of medals aliased to 'count'.
 */
 
 const bestSport = country => {
-  return;
+  return `
+  SELECT sport, COUNT(*) AS count
+  FROM GoldMedal
+  WHERE country = '${country}'
+  GROUP BY sport
+  ORDER BY count DESC
+  LIMIT 1;
+  `;
 };
 
 /*
@@ -118,7 +137,14 @@ won the most medals, along with the number of medals aliased to 'count'.
 */
 
 const bestEvent = country => {
-  return;
+  return `
+  SELECT event, COUNT(*) AS count
+  FROM GoldMedal
+  WHERE country = '${country}'
+  GROUP BY event
+  ORDER BY count DESC
+  LIMIT 1;
+  `;
 };
 
 /*
@@ -126,24 +152,42 @@ Returns a SQL query string that will find the number of male medalists.
 */
 
 const numberMenMedalists = country => {
-  return;
+  return `
+  SELECT COUNT(DISTINCT name)
+  FROM GoldMedal
+  WHERE gender = 'Men' AND country = '${country}';
+  `;
 };
+// Hay 68
 
 /*
 Returns a SQL query string that will find the number of female medalists.
 */
 
 const numberWomenMedalists = country => {
-  return;
+  return `
+  SELECT COUNT(DISTINCT name)
+  FROM GoldMedal
+  WHERE gender = 'Women' AND country = '${country}';
+  `;
 };
+// No hay :'( 
 
 /*
 Returns a SQL query string that will find the athlete with the most medals.
 */
 
 const mostMedaledAthlete = country => {
-  return;
+  return `
+  SELECT name, COUNT(name) AS count
+  FROM GoldMedal
+  WHERE country = '${country}'
+  GROUP BY name
+  ORDER BY count DESC
+  LIMIT 1;
+  `;
 };
+// Mascherano! (2 medallas)
 
 /*
 Returns a SQL query string that will find the medals a country has won
@@ -151,7 +195,21 @@ optionally ordered by the given field in the specified direction.
 */
 
 const orderedMedals = (country, field, sortAscending) => {
-  return;
+  let order;
+  if (field) {
+    if (sortAscending) {
+      order = `ORDER BY ${field} ASC`;
+    } else {
+      order = `ORDER BY ${field} DESC`;
+    }
+  } 
+  
+  return `
+  SELECT *
+  FROM GoldMedal  
+  WHERE country = '${country}'
+  ${order};
+  `;
 };
 
 /*

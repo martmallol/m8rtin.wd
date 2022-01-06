@@ -82,6 +82,7 @@ const mostWinterWins = country => {
   LIMIT 1;
   `;
 };
+// 0 medallas de invierno :(
 
 /*
 Returns a SQL query string that will find the year where the given country 
@@ -98,6 +99,7 @@ const bestYear = country => {
   LIMIT 1;
   `;
 };
+// 26 medallas en el 2004 again
 
 /*
 Returns a SQL query string that will find the discipline this country has 
@@ -114,6 +116,7 @@ const bestDiscipline = country => {
   LIMIT 1;
   `;
 };
+// Futbol (que raro) (32)
 
 /*
 Returns a SQL query string that will find the sport this country has 
@@ -130,6 +133,7 @@ const bestSport = country => {
   LIMIT 1;
   `;
 };
+// Futbol de vuelta (32)
 
 /*
 Returns a SQL query string that will find the event this country has 
@@ -146,6 +150,7 @@ const bestEvent = country => {
   LIMIT 1;
   `;
 };
+// Otra vez futbol (32)
 
 /*
 Returns a SQL query string that will find the number of male medalists.
@@ -220,7 +225,28 @@ aliased as 'percent'. Optionally ordered by the given field in the specified dir
 */
 
 const orderedSports = (country, field, sortAscending) => {
-  return;
+  let order;
+  if (field) {
+    if (sortAscending) {
+      order = `ORDER BY ${field} ASC`;
+    } else {
+      order = `ORDER BY ${field} DESC`;
+    }
+  } 
+
+  return `
+  SELECT sport, COUNT(sport) AS count, 
+        (COUNT(sport) * 100 / 
+          (SELECT COUNT(*) 
+           FROM GoldMedal 
+           WHERE country = '${country}'
+          )
+        ) AS percent 
+  FROM GoldMedal 
+  WHERE country = '${country}'
+  GROUP BY sport
+  ${order};
+  `;
 };
 
 module.exports = {

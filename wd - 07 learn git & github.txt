@@ -1,6 +1,8 @@
 WEB DEVELOPMENT CODECADEMY:
 
 GIT CHEATSHEET: https://education.github.com/git-cheat-sheet-education.pdf
+MARKDOWN CHEATSHEET: https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
+ANOTHER MARKDOWN CHEATSHEET: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
 
 -----LECCION 1----- 
 BASIC GIT WORKFLOW
@@ -331,4 +333,347 @@ Instead of:
 GITHUB & MARKDOWN (.md)
 
 WHAT IS MARKDOWN?: https://www.youtube.com/watch?v=f49LJV1i-_w	
+
+Markdown provides a lightweight syntax to style any text document so that it can be converted to HTML for viewing 
+and publishing. (como Latex ponele)
+
+The authors of Markdown intended Markdown to be a language for writing styled text with syntax that is just as easy 
+to read as it is to write.
+
+Imagine that we are writing down some important text on a sheet of paper. If we wanted to emphasize the text we 
+might underline it, twice even! Similarly, in Markdown, we could write:
+
+Title of My Document
+====================
+
+Notice that we have plain text that has a row of equal signs (=) to produce a first-level header, also known as 
+<h1>. 
+
+WHEN TO USE MARKDOWN: After knowing the many benefits of Markdown, you might want to consider using Markdown if you 
+ever find yourself in any of these scenarios:
+
+The only editor available to you supports just plain text.
+Time is of the essence and you can’t afford to learn how to use an unfamiliar rich-text editor.
+You need to quickly outline your ideas in a structured but presentable manner.
+You want your document to be portable so that it can convert to HTML, PDF, EPUB, and/or MOBI.
+
+THE MARKDOWN PARSER: A Markdown parser is software written to parse the Markdown syntax in a text document and 
+convert it to HTML syntax. A basic Markdown parser should support the core Markdown syntax: paragraphs, headers, 
+blockquotes, phrase emphasis, lists, code, images, and links.
+
+MARKDOWN TUTORIAL:
+
+HEADINGS: You can simulate a <h1> HTML tag with a # Markdown symbol. Since there are six heading tags for HTML, 
+from <h1> through <h6>, you can simulate this with # through ###### in Markdown. For example this Markdown syntax:
+
+	# This is a H1 heading
+	## This is a H2 heading
+	### This is a H3 heading
+	#### This is a H4 heading
+	##### This is a H5 heading
+	###### This is a H6 heading
+
+BULLETED LISTS (LISTA DE PUNTOS): In addition to numbered lists, you can style a bulleted list too. There are three 
+different symbols you can use to mark a line item as a bullet: asterisk (*), plus sign (+), or hyphen (-).
+
+For example:
+	* Markdown
+	+ HTML
+	- XML
+
+For best practice, it is recommended to use the same marker throughout your list instead of mixing them like above.
+
+NESTED LISTS: The core Markdown syntax does not include nested lists (list within another list), but it allows 
+adding paragraphs between list items. To do so, you need to add a blank line after a list item and indent 4 spaces 
+or 1 tab before starting a paragraph. Some parsers are lenient and do not enforce 4 spaces but there should be some 
+spacing.
+
+EJ	* Markdown
+	 
+	   Markdown is a lightweight markup language for styling text.
+	 
+	* HTML
+	 
+	   HTML stands for HyperText Markup Language.
+
+THE MARKDOWN FLAVORS: Many independent developers have extended the Markdown syntax to incorporate more HTML 
+compatibilities and customize it for their own organizations. Here are a few popular flavors of Markdown:
+
+- CommonMark is a body of special-interest developers who work side-by-side on a proposal to standardize the 
+  Markdown syntax and offer extensive test suites to validate Markdown implementations against this specification. 
+  This standard has been used by other developers to base their code upon.
+
+- GitHub Flavored Markup, or GFM is GitHub’s expanded dialect of Markdown based on CommonMark and is used 
+  throughout the GitHub platform by its active community.
+
+- Trello, a popular collaborative tool that organizes and tracks information through virtual boards and cards, 
+  implements a custom version of Markdown as well.
+
+
+
+-----LECCION 7-----
+MASTERING MARKDOWN
+
+STYLING TEXT: 
+
+       Style               Syntax			Example	
+
+Bold:			  ** ** or __ __	**This is bold text**	
+Italic:		  * * or _ _   	*This text is italicized*	
+Strikethrough:		  ~~ ~~		~~This was mistaken text~~	
+Bold and nested italic:  ** ** and _ _	**This text is _extremely_ important**
+All bold and italic:	  *** ***		***All this text is important***	
+
+QUOTING TEXT: You can quote text with a >.
+
+	Text that is not a quote
+
+	> Text that is a quote
+
+QUOTING CODE!: You can call out code or a command within a sentence with single backticks. The text within the 
+backticks will not be formatted. You can also press the command or Ctrl + e keyboard shortcut to insert the 
+backticks for a code block within a line of Markdown.
+
+	Use `git status` to list all new or modified files that haven't yet been committed.
+
+Aca el bloque "git status" se vuelve formato codigo (lo rodea un recuadro)
+
+CODE BLOCK: (como en jupyter lab) To format code or text into its own distinct block, use triple backticks.
+
+	Some basic Git commands are:
+	```	<-- ACA!!
+	git status
+	git add
+	git commit
+	```	<-- ACA!!
+
+LINKS: You can create an inline link by wrapping link text in brackets [ ], and then wrapping the URL in 
+parentheses ( ). You can also use the keyboard shortcut command + k to create a link. 
+
+	This site was built using [GitHub Pages](https://pages.github.com/).
+
+RELATIVE LINKS: You can define relative links and image paths in your rendered files to help readers navigate to 
+other files in your repository.
+
+A relative link is a link that is relative to the current file. For example, if you have a README file in root of 
+your repository, and you have another file in docs/CONTRIBUTING.md, the relative link to CONTRIBUTING.md in your 
+README might look like this:
+
+	[Contribution guidelines for this project](docs/CONTRIBUTING.md)
+
+You can use all relative link operands, such as ./ and ../.
+
+IMAGES: You can display an image by adding ! and wrapping the alt text in[ ]. Then wrap the link for the image in 
+parentheses ().
+
+	![This is an image](https://myoctocat.com/assets/images/base-octocat.svg)
+
+Tip: When you want to display an image which is in your repository, you should use relative links instead of 
+absolute links.
+
+Here are some examples for using relative links to display an image.
+
+Context							Relative Link
+
+In a .md file on the same branch				/assets/images/electrocat.png
+
+In a .md file on another branch				/../main/assets/images/electrocat.png
+
+In issues, pull requests and comments of the repository	../blob/main/assets/images/electrocat.png
+
+In a .md file in another repository				/../../../../github/docs/blob/main/assets/images
+								/electrocat.png
+In issues, pull requests and comments of another repository	../../../github/docs/blob/main/assets/images/
+								electrocat.png?raw=true
+IMAGE THEME: You can specify the theme an image is displayed to by appending #gh-dark-mode-only or #gh-light-mode-
+only to the end of an image URL, in Markdown. This is particularly helpful for transparent PNG images.
+
+Context	URL
+Dark Theme	![GitHub Light](https://github.com/github-light.png#gh-dark-mode-only)
+Light Theme	![GitHub Dark](https://github.com/github-dark.png#gh-light-mode-only)
+
+TASKS LISTS: To create a task list, preface list items with a regular space character followed by [ ]. To mark a 
+task as complete, use [x].
+
+	- [x] #739
+	- [ ] https://github.com/octo-org/octo-repo/issues/740
+	- [ ] Add delight to the experience when all tasks are complete :tada:
+
+If a task list item description begins with a parenthesis, you'll need to escape it with \:
+	- [ ] \(Optional) Open a followup issue
+
+MENTIONING PEOPLE AND TEAMS: You can mention a person or team on GitHub by typing @ plus their username or team 
+name. This will trigger a notification and bring their attention to the conversation. People will also receive a 
+notification if you edit a comment to mention their username or team name.
 	
+	@github/support What do you think about these updates?
+
+When you mention a parent team, members of its child teams also receive notifications, simplifying communication 
+with multiple groups of people. For teams, enter the @organization/team-name and all members of that team will get 
+subscribed to the conversation.
+
+REFERENCING ISSUES OR PULL REQUESTS: You can bring up a list of suggested issues and pull requests within the 
+repository by typing #. Type the issue or pull request number or title to filter the list, and then press either 
+tab or enter to complete the highlighted result.
+
+REFERENCING EXTERNAL RESOURCES: If custom autolink references are configured for a repository, then references to 
+external resources, like a JIRA issue or Zendesk ticket, convert into shortened links. To know which autolinks are 
+available in your repository, contact someone with admin permissions to the repository. 
+
+UPLOADING ASSETS: You can upload assets like images by dragging and dropping, selecting from a file browser, or 
+pasting. You can upload assets to issues, pull requests, comments, and .md files in your repository.
+
+USING EMOJI: You can add emoji to your writing by typing :EMOJICODE:.
+
+	@octocat :+1: <-ACA! This PR looks great - it's ready to merge! :shipit: <-ACA!
+
+Typing : will bring up a list of suggested emoji. The list will filter as you type, so once you find the emoji 
+you're looking for, press Tab or Enter to complete the highlighted result.
+
+PARAGRAPHS: You can create a new paragraph by leaving a blank line between lines of text.
+
+FOOTNOTES: You can add footnotes to your content by using this bracket syntax:
+
+	Here is a simple footnote[^1].	<-- NUMERO DE LA REFE
+	
+	A footnote can also have multiple lines[^2].  <-- NUMERO DE LA REFE
+	
+	You can also use words, to fit your writing style more closely[^note]. <-- NUMERO DE LA REFE
+	
+	[^1]: My reference.	<-- PRIMERA REFE
+	[^2]: Every new line should be prefixed with 2 spaces.	<-- SEGUNDA REFE  
+	  This allows you to have a footnote with multiple lines.
+	[^note]:	<-- TERCERA REFE
+	    Named footnotes will still render with numbers instead of the text but allow easier identification and 	linking.  
+	    This footnote also has been made with a different syntax using 4 spaces for new lines.
+
+HIDING CONTENT WITH COMMENTS: You can tell GitHub to hide content from the rendered Markdown by placing the content 
+in an HTML comment.
+
+	<!-- This content will not appear in the rendered Markdown -->
+
+IGNORING MARKDOWN FORMATTING: You can tell GitHub to ignore (or escape) Markdown formatting by using \ before the 
+Markdown character.
+
+	Let's rename \*our-new-project\* to \*our-old-project\*.
+
+Se lee  Let's rename *our-new-project* to *our-old-project*
+
+TABLES: Tables aren't part of the core Markdown spec, but they are part of GFM and Markdown Here supports them. 
+They are an easy way of adding tables to your email -- a task that would otherwise require copy-pasting from 
+another application.
+
+Colons can be used to align columns.
+
+	| Tables        | Are           | Cool  |
+	| ------------- |:-------------:| -----:|
+	| col 3 is      | right-aligned | $1600 |
+	| col 2 is      | centered      |   $12 |
+	| zebra stripes | are neat      |    $1 |
+
+There must be at least 3 dashes separating each header cell.
+The outer pipes (|) are optional, and you don't need to make the 
+raw Markdown line up prettily. You can also use inline Markdown.
+
+	Markdown | Less | Pretty
+	--- | --- | ---
+	*Still* | `renders` | **nicely**
+	1 | 2 | 3
+
+This will still work, though it won't look pretty in the .md raw file
+
+HORIZONTAL RULE (separador horizontal): 
+	Three or more...
+	
+	---	<-- ACA!!
+	
+	Hyphens
+
+	***	<-- ACA!!
+
+	Asterisks
+
+	___	<-- ACA!!
+
+	Underscores
+	
+
+
+-----LECCION 8-----
+DEPLOYING TO GITHUB PAGES
+
+There are many different ways to deploy a website to the public Internet. We’ll be using GitHub’s free service 
+called GitHub Pages.
+
+Why GitHub Pages? GitHub Pages offers a lot of features and flexibility, all for free. Some of the benefits include:
+- Easy setup
+- Seamless collaboration using Git and GitHub
+- Free hosting with >95% uptime
+- Live updating with normal GitHub workflow
+
+WHAT IS DEPLOYING: Deploying is like publishing. When authors are ready for their work to be seen by the world, 
+they publish it. When web developers are ready to share their projects, they deploy to the World Wide Web. 
+Deployment is when a project is packaged and shared on the Internet. Unlike publishing, however, deployment may 
+occur many, many times over the course of a software project.
+
+DEPLOYMENT ON GITHUB PAGES: Deploying to GitHub Pages is automatic. Once it’s set up, deploying happens whenever 
+you push your local changes to your remote, GitHub-hosted repository. Head to GitHub Pages’ setup instructions 
+(https://pages.github.com/) and follow the steps exactly to get your main GitHub Pages page setup.
+
+VIEWING YOUR LIVE PAGE: That’s it! Your website is deployed to the Internet! You and anyone with whom you share 
+this link can view your project by navigating in your browser to the URL http://<your-github-username>.github.io.
+
+ADDING GITHUB PAGES PROJECTS: You can set up your GitHub Pages to deploy every one of your repositories in addition 
+to <username>.github.io. This will allow you to ensure all of your sites are deployed automatically whenever you 
+push to GitHub.
+
+In GitHub, navigate to your <username>.github.io repository and click Settings.
+
+Within Settings, navigate to the Source section within the Github Pages section. From the dropdown menu, select 
+master branch and then click Save.
+
+Now, all of your repositories can be found at http://<username>.github.io/<repository-name>. Try creating a new 
+repo with an HTML project inside it (perhaps push an old project to GitHub) and then navigate to the deployed page. 
+	
+
+
+-----LECCION 9-----
+BEST PRACTICES FOR TEAMS ON GITHUB
+
+WHAT IS A PULL REQUEST: Sonia, a new member of Codecademy’s engineering team, has just finished a snazzy navigation 
+menu on a branch titled, “sonia_feature_navigation_menu”. Her changes will not be merged to the main branch until 
+her pull request is approved. A pull request is a feature of GitHub and other source code management tools to 
+review code before merging it from one branch to another, usually the main branch.
+
+When Sonia creates a new pull request, her repository will automatically be set as the source repository and the 
+project’s repository will be set as the destination repository. She will get the option to specify the source 
+branch and the destination branch. She will be greeted with a preview of the changes between the two codebases and 
+whether the branches can be merged automatically depending on code conflicts. In the Pull Request description 
+field, Sonia must describe the code changes and what feature(s) this merge will add to the main branch. 
+
+Sonia’s proposed changes can then be accepted or rejected by her teammates. Any further commits Sonia makes to the 
+source branch will automatically be reflected in the pull request. Once her changes are accepted by the project’s 
+collaborators, her branch can be merged into the repository’s main branch. GitHub will keep this pull request in 
+history as a record of the code change, Sonia’s contribution, and the discussion that took place.
+
+HOW TO MAKE A GOOD PULL REQUEST: Concisely explain the purpose of the pull request in the title. If the pull 
+request adds a new feature, go for something like “Add frontend component for settings page”. If it’s to fix a 
+typo, be specific and say “Fix name typos on the Contact Us page”.
+
+The description is where all the juicy details are. You want the reviewers to know the thought process behind code 
+changes and the options you have considered. It also helps to embed screenshots, GIFs, or even videos of your 
+application so reviewers can anticipate what the code change in the pull request looks like.
+
+Some developers even have preconfigured templates or checklists on their repositories to ensure all pull requests 
+contain just the relevant information. Following these guidelines help speed up collaborative critiques so the code 
+can get merged faster!
+
+KEEP PULL REQUESTS SMALL AND FAST: Reduce the size of pull requests and respond to reviews quickly. Splitting big 
+features into smaller parts is the best way to speed up review time. Not only does it result in less wasted work if 
+the pull request gets rejected, but it will be easier to merge and review more thoroughly. Quickly respond to any 
+feedback or requested changes. You want to ship code fast and make sure reviewers aren’t stuck discussing an open 
+pull request for ages!
+
+WALKTHROUGH OF TWO PULL REQUESTS: https://www.youtube.com/watch?time_continue=187&v=9EqP3GsE9N4&feature=emb_title
+
+

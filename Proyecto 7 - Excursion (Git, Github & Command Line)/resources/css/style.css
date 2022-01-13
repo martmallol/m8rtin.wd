@@ -1,0 +1,26 @@
+* {
+    margin: 0; /*que nada tenga margen en el archivo si no se especifica*/
+    padding: 0; /*que nada tenga padding en el archivo si no se especifica*/
+}
+
+a:link, a:visited,  a:hover, a:active
+{
+    color: aquamarine;
+    font-size: 16px;
+}
+
+/*Specs del archivo de ruta*/
+html {
+    font-family: Verdana;
+    color: seashell;
+    background-color: black;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.grey-text {
+    color: gray;
+    font-size: 21px;
+}

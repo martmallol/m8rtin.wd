@@ -1,6 +1,7 @@
 * {
     margin: 0; /*que nada tenga margen en el archivo si no se especifica*/
     padding: 0; /*que nada tenga padding en el archivo si no se especifica*/
+    margin-bottom: 20px;
 }
 
 a:link, a:visited,  a:hover, a:active
@@ -18,9 +19,17 @@ html {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 
 .grey-text {
     color: gray;
     font-size: 21px;
+}
+
+/*Footer*/
+
+footer {
+    text-align: right;
+    margin: 40px 20px;
 }

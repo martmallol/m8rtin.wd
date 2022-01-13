@@ -813,3 +813,7 @@ longer listed under the open issues:
 -----LECCION 14-----
 GITHUB ACTIONS & TUTORIAL ON AUTOMATED TESTING
 
+Imagine we could configure your GitHub repository to automatically run tests to verify the functionality of the 
+codebase after each code change. Well… we can, using GitHub Actions!
+
+

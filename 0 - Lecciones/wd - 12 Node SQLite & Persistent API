@@ -1,3 +1,151 @@
 WEB DEVELOPMENT CODECADEMY
 
 -----LECCION 1----- 
+LEARN NODE SQLITE
+
+We will learn how to manage an SQLite database from within JavaScript. We will see how to perform all the 
+fundamental features of database management — CREATEing INSERTing and SELECTing, and then interacting with that data 
+using the full force of JavaScript — writing functions, wielding objects, and performing calculations.
+
+We’re going to access an SQLite database with temperature data for countries over the last 150 years. We’re going to 
+take this data, collect it per year in a JavaScript object, average it, and save it into a new SQL database!
+
+OPENING A DATABASE: To get these two worlds to communicate, we will be importing a package into our JavaScript code. 
+This package will allow us to open the channels of communication with our SQLite database. Once we do that, we can 
+start writing SQL directly in our JavaScript!
+
+The first order of business is to import the module that will facilitate this connection. Recall that to import a 
+module in JavaScript we can use require() like so:
+
+	const sqlite3 = require('sqlite3');
+
+The code above gives us a JavaScript object, called sqlite3 that we can interact with via methods. The first method 
+we’re going to use on sqlite3 is going to be the method that opens up a new database. The only argument required to 
+open this database is the path to the file that SQLite will use to save the database.
+
+	const db = new sqlite3.Database('./db.sqlite');
+	
+This code will create a new database file, in the current folder, named db.sqlite. Then we’ll have a database to 
+interact with!
+
+RETRIEVING ALL ROWS: Since we have access to our database as a JavaScript object, let’s try running a query on it.
+	
+	const { printQueryResults } = require('./utils');
+	...
+	
+	db.all("SELECT * FROM Dog WHERE breed='Corgi'", (error, rows) => {
+	  printQueryResults(rows);
+	});
+	
+In the previous example, we used the db.all() method to retrieve every dog of breed “Corgi” from a table named Dog 
+and print them.
+
+RETRIEVING A SINGLE ROW: db.all() is a useful tool to fetch all the data we have that meets certain criteria. But what if we only want to get a particular row?
+
+Luckily, we have a different method that will fetch a single row from a database: db.get(). See it in action:
+
+	db.get("SELECT * FROM Dog WHERE owner_name = 'Charlie'", (error, row) => {
+	  printQueryResults(row); 
+	});
+
+It’s important to note that even if multiple rows match the query, db.get() will only return a single result. 
+
+Sometimes all we need to know is whether a record matching our query exists (for instance: the code above would 
+answer the question “Does Charlie own a dog?” depending on whether or not row is undefined). Sometimes we know that 
+there’s only a single row because we are searching for a specific ID. And sometimes we only want an example of a row 
+that would match our description. In the code above we would only print information about one dog. To accomplish 
+this, we use db.get() instead of db.all().
+
+USING PLACEHOLDERS: Sometimes we’ll want to search our database based on a user’s submission. Or we might find 
+ourselves wanting to perform a series of queries looping over some external data. In those cases, we will have to 
+use a placeholder. A placeholder is a part of our SQL query that we want to be interpolated with a variable’s 
+contents. We want the value of the JavaScript variable to be placed within the SQL query. To do this properly, we’ll 
+need to pass a particular argument to our db.run() command that will tell it how to interpolate the query.
+
+	const furLength1 = "short";
+	const furColor1 = "brown";
+	 
+	const findDogByFur = (length, color) => {
+	  db.all(
+	    "SELECT * FROM Dog WHERE fur_length = $furLength AND fur_color = $furColor", 
+	    {
+	      $furLength: length,
+	      $furColor: color
+	    }, 
+	    (error, rows) => {
+	      printQueryResults(rows);
+	    }
+	  );
+	});
+ 
+	findDogByFur(furLength1, furColor1); // prints all dogs with short brown fur.
+
+As we can see in the example above, the power of placeholders is that we don’t need to know precisely the data we’re 
+searching for at the time of writing our query. We can use these placeholders and then later, when we have values we 
+want to find, we can plug them into the query. This is a highly effective tool that will allow us to harness our 
+programming skills within our database queries.
+
+USING DB.RUN(): If we INSERT a row or CREATE a TABLE we will not receive a row in response. To perform SQL commands 
+that do not return rows, we use db.run() to run the command. db.run() does not return a value, but, depending on 
+the SQL command, it may attach properties to the this keyword within the scope of the callback. In some cases, like 
+creating a table, db.run() will not modify this. In other cases, like when INSERTing a row, a callback to db.run() 
+will be able to access this.lastID, the ID of the last INSERTed row.
+
+	const newRow = {
+	  location: 'Istanbul, Turkey',
+	  year: 1976,
+	}
+	
+	db.run('INSERT INTO TemperatureData (location, year) VALUES ($location, $year)',
+	{ 
+	  location: newRow.location,
+	  year: newRow.year
+	}, 
+	function(error) {
+	  // handle errors here!
+	  if(error) {
+	    return console.log(error);
+	  }
+
+USING DB.EACH(): 
+
+	db.each("SELECT * FROM Dog WHERE breed = 'Labrador'", 
+	  (error, row) => {
+	    // This gets called for every row our query returns
+	    console.log(`${row.name} is a good dog`);
+	  },
+	  (error, numberOfRows) => {
+	    // This gets called after each of our rows have been processed
+	    console.log(`There were ${numberOfRows} good dogs`);
+	});
+
+In the code above we SELECT all the Labrador dogs from our Dog database. We offer affirmation to each of the 
+animals individually and then announce how many received this praise in sum.
+
+db.each() takes a query and a callback function that it performs on each row returned from the query. This is a 
+useful technique for transforming or updating rows. This is also useful for memory management — we only have to 
+look at one row at a time instead of trying to process every returned row at the same time. db.each() additionally 
+takes an optional second callback function, which will be called when all of the queries are completed and 
+processed.
+
+CREATING A NEW TABLE: Since creating a table is another operation that does not return a row, we can use the same 
+db.run() we used to INSERT rows. 
+
+SERIAL QUERIES: We can write all of our code in nested callbacks, let’s take a look at how that might look:
+
+	db.serialize(() =>
+	{
+	  db.run("DROP TABLE Dog")
+	  db.run("CREATE TABLE Dog")
+	  db.run("INSERT INTO Dog (breed, name, owner, fur_color, fur_length) 
+	          VALUES  ('Dachshund', 'Spike', 'Elizabeth', 'Brown', 'Short')")
+	});
+
+In the previous example, we explicitly tell the database to:
+- First, remove the table Dog if it exists.
+- Second, create an empty table named Dog.
+- Third, insert a new row into the table. In exactly that order without running any command until the previous one 
+  completes.
+
+
+

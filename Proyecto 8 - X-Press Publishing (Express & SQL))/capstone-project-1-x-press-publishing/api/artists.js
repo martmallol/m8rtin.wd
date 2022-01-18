@@ -12,7 +12,7 @@ const db = new sqlite3.Database(process.env.TEST_DATABASE || './database.sqlite'
 // Add a router param of artistId to the router.
 artistsRouter.param('artistId', (req, res, next, artistId) => {
     // SQL query que devuelve el artista con dicho id
-    db.get(`SELECT * FROM Artist WHERE id = ${artistId}`, (err, row) => {
+    db.get(`SELECT * FROM Artist WHERE Artist.id = ${artistId}`, (err, row) => {
         // Envio errores al middleware chain 
         if (err) {
             next(err);
@@ -79,7 +79,7 @@ artistsRouter.post('/', (req, res, next) => {
             next(error); // errorhandler middleware
         }
         // Si no hay, recupero al artista recien creado de la database y lo devuelvo como respuesta
-        db.get(`SELECT * FROM Artist WHERE id = ${this.lastID}`, (err, row) => {
+        db.get(`SELECT * FROM Artist WHERE Artist.id = ${this.lastID}`, (err, row) => {
             res.status(201).json({ artist: row });
         })
         

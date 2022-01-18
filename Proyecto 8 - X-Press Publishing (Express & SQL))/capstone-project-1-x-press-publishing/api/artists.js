@@ -75,8 +75,61 @@ artistsRouter.post('/', (req, res, next) => {
     // Ejecuto la query a la database
     db.run(sqlQuery, objectRequest, function(error) {
         // Si hay un error...
+        if (error) {
+            next(error); // errorhandler middleware
+        }
+        // Si no hay, recupero al artista recien creado de la database y lo devuelvo como respuesta
+        db.get(`SELECT * FROM Artist WHERE id = ${this.lastID}`, (err, row) => {
+            res.status(201).json({ artist: row });
+        })
+        
     })
 })
+
+// PUT handler de /:artistId (ACTUALIZO LA INFO DE UN ARTISTA CON UN DETERMINADO ID)
+artistsRouter.put('/:artistId', (req, res, next) => {
+    // Nuevamente (como en el POST) chequeo que el cuerpo de la instruccion respete las restricciones de la tabla Artist
+    // Si la request no lleva los campos obligatorios de la tabla, no se puede incluir
+    const name = req.body.artist.name;
+    const dateOfBirth = req.body.artist.dateOfBirth;
+    const biography = req.body.artist.biography;
+    // Si existe el campo empleado, y es 0, se devuelve 0. Si no, se devuelve 1 (valor default de la tabla)
+    const isCurrentlyEmployed = req.body.artist === 0 ? 0 : 1;
+    if (!name || !dateOfBirth || !biography) {
+        return res.sendStatus(400);
+    }
+
+    // Contenido del Query en SQLite (actualizo al artista con MI ID)
+    const sqlQuery = `UPDATE Artist SET name = $name, date_of_birth = $dateOfBirth, biography = $biography
+                    is_currently_employed = $isCurrentlyEmployed WHERE Artist.id = $artistId`
+    // Objeto con los datos del artista de la request
+    const objectRequest = {
+        $name: name,
+        $dateOfBirth: dateOfBirth,
+        $biography: biography,
+        $isCurrentlyEmployed: isCurrentlyEmployed,
+        $artistId: req.params.artistId // Id de la request
+    };
+
+    db.run(sqlQuery, objectRequest, function(error) {
+        // Si hay un error...
+        if (error) {
+            next(error); // errorhandler middleware
+        }
+        // Si no hay, recupero al artista recien creado de la database y lo devuelvo como respuesta
+        db.get(`SELECT * FROM Artist WHERE id = ${this.lastID}`, (err, row) => {
+            res.status(200).json({ artist: row });
+        })
+        
+    });
+});
+
+// DELETE handler de /:artistId (ACTUALIZO LA INFO DE UN ARTISTA CON UN DETERMINADO ID)
+artistsRouter.delete('/:artistId', (req, res, next) => {
+    
+})
+
+
 
 // Lo exporto
 module.exports = artistsRouter;

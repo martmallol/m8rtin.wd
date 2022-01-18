@@ -6,7 +6,8 @@ const express = require('express');
 const morgan = require('morgan');
 
 // Importo el router de Express
-const apiRouter = require('./api/api')
+const apiRouter = require('./api/api');
+const artistsRouter = require('./api/artists');
 
 // Creo una instancia de una Express app
 const app = express();
@@ -23,8 +24,11 @@ app.use(errorhandler());
 // Seteo el uso del morgan logging ('dev' setting )middleware
 app.use(morgan('dev'));
 
-// Mount del router
+// Mount del router (API)
 app.use('/api', apiRouter);
+
+// Mount del router (artists)
+app.use('/artists', artistsRouter);
 
 // Empiezo el servidor oyendo al PORT (para hacerlo, en la terminal uso 'node server')
 app.listen(PORT, () => {

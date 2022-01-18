@@ -117,7 +117,7 @@ artistsRouter.put('/:artistId', (req, res, next) => {
             next(error); // errorhandler middleware
         }
         // Si no hay, recupero al artista recien creado de la database y lo devuelvo como respuesta
-        db.get(`SELECT * FROM Artist WHERE id = ${this.lastID}`, (err, row) => {
+        db.get(`SELECT * FROM Artist WHERE Artist.id = ${this.lastID}`, (err, row) => {
             res.status(200).json({ artist: row });
         })
         
@@ -126,7 +126,20 @@ artistsRouter.put('/:artistId', (req, res, next) => {
 
 // DELETE handler de /:artistId (ACTUALIZO LA INFO DE UN ARTISTA CON UN DETERMINADO ID)
 artistsRouter.delete('/:artistId', (req, res, next) => {
-    
+    // En vez de borrar al artista, lo marco como desempleado
+    const sqlQuery = `UPDATE Artist SET is_currently_employed = 0 WHERE Artist.id = $artistId`
+    const objectQuery = { $artistId: req.params.artistId};
+
+    db.run(sqlQuery, objectQuery, function (error) {
+        // Si hay un error...
+        if (error) {
+            next(error); // errorhandler middleware
+        }
+        // Si no hay, recupero al artista recien creado de la database y lo devuelvo como respuesta
+        db.get(`SELECT * FROM Artist WHERE Artist.id = ${this.lastID}`, (err, row) => {
+            res.status(200).json({ artist: row });
+        })
+    })
 })
 
 

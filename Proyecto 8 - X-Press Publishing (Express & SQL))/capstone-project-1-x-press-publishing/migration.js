@@ -26,3 +26,18 @@ db.run(`CREATE TABLE IF NOT EXISTS 'Series' (
 
 // Corro 'node migration.js' y se crea el database con la tabla
 // Abro el database con DB Browser y chequeo que la tabla 'Series' este bien
+
+//Creo la tabla 'Issue'
+db.run(`CREATE TABLE IF NOT EXISTS 'Issue' (
+    id INTEGER NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    issue_number INTEGER NOT NULL,
+    publication_date TEXT NOT NULL,
+    artist_id NOT NULL,
+    series_id NOT NULL,
+    FOREIGN KEY(artist_id) REFERENCES Artist(id),
+    FOREIGN KEY(series_id) REFERENCES Series(id)
+)`)
+
+// Corro 'node migration.js' y se crea el database con la tabla
+// Abro el database con DB Browser y chequeo que la tabla 'Issue' este bien

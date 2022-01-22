@@ -112,5 +112,32 @@ seriesRouter.put('/:seriesId', (req, res, next) => {
     });
 });
 
+// DELETE handler de /:seriesId (ELIMINO LA INFO DE UNA SERIE CON UN DETERMINADO ID)
+seriesRouter.delete('/:seriesId', (req, res, next) => {
+    const sqlQuery = `SELECT * FROM Issue WHERE Issue.series_id = $seriesId`
+    const objectQuery = { $seriesId: req.params.seriesId};
+
+    db.get(sqlQuery, objectQuery, (error, issue) => {
+        // Si hay un error...
+        if (error) {
+            next(error); // errorhandler middleware
+        } else if (issue) {
+            res.sendStatus(400);
+        } else {
+            const deleteSql = `DELETE FROM Series WHERE Series.id = $seriesId`;
+            const objectDelete = { $seriesId: req.params.seriesId};
+
+            db.run(deleteSql, objectDelete, (error) => {
+                if (error) {
+                    next(error);
+                } else {
+                    res.sendStatus(204);
+                }
+            })
+        }       
+    })
+})
+
+
 // Lo exporto
 module.exports = seriesRouter;

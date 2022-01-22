@@ -1,0 +1,28 @@
+WEB DEVELOPMENT CODECADEMY
+
+-----LECCION 1----- 
+WHY TEST?
+
+AUTOMATED TESTING: Automated testing is the use of software to control the execution of tests and the comparison of actual behavior to expected behavior. All the testing you just did (and more) could be performed by a computer program.
+
+Compared to manual testing, automated testing is
+- Faster: it tests more of your product in less time.
+- More reliable: it’s less prone to error than a human is .
+- Maintainable: you can review, edit, and extend a collection of tests.
+
+Rather than hire a testing team at the end of development, professional developers can run their automated tests after 
+every change. The workflow might look like this:
+1. Write code and corresponding tests
+2. Enter a command into a terminal to run tests
+3. If the app behaves as intended, all tests should pass. Development is complete.
+4. If it does not behave as intended, at least one test should fail. Fix code and return to step 2.
+
+TEST SUITES: You run a test suite with 
+	npm test 
+
+Test code is included with and structured similarly to implementation code. Often times changes to test 
+code are associated with changes to implementation code and vice versa. Both are easier to maintain when they are 
+stored in the same place.
+
+For example, if implementation code is written in index.js then the corresponding test code may be written in index-
+test.js.

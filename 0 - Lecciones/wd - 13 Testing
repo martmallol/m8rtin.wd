@@ -259,3 +259,159 @@ ALL THE ASSERT METHODS AVAILABLE: https://nodejs.org/api/assert.html
 
 
 
+-----LECCION 4-----
+THE TESTING PYRAMID
+
+UNIT TESTS: Unit tests are isolated and fast tests that check one small behavior within your web application.
+For example, we want to test whether our database can save a comment. Saving does not involve the view or server. 
+We can create a test that writes directly to the database, and the test itself doesn’t need to know about the other 
+layers.
+
+A test like this is fast, but only gives you confidence that a small slice of your system is working as intended.
+
+SYSTEM TESTS: System tests are a group of fully integrated tests that exercise your entire web application.
+For example, we want to test whether our blog renders with the correct post and comments. We can write a test that 
+checks whether a browser renders a stored blog post. This test exercises every layer of the web application:
+
+- The database stores the blog post.
+- The server sends the HTML to the browser.
+- The browser renders the view.
+
+A test like this is slow and less descriptive but provides you with confidence that a large slice of your system is 
+working as intended. 
+
+INTEGRATION TESTS: Integration tests include everything between unit tests and system tests. They exercise multiple 
+parts of the web application, often in different layers.
+
+For example, an integration test may check whether your web application can save a server-generated comment to the 
+database. This test integrates two layers of your web application:
+
+- The server receives the comment and sends it to the database.
+- The database stores your comment.
+
+Developers often call tests like the one above end-to-end tests, because they start in the browser (one end) and 
+traverse the stack to the database (other end).
+
+Integration tests are faster than system tests, but slower than unit tests. They provide less confidence (that your 
+feature works as expected) than system tests and more confidence than unit tests.
+
+SHAPE OF A TESTING SUITE: The goal of a full-stack web application’s testing suite is to provide you with confidence 
+that your application works as expected while executing in a timely fashion.
+
+You could write few integration tests that provide you with confidence, and more unit tests that execute quickly and 
+provide you with specific feedback. The number and types of unit and integration tests that you write can be mapped 
+onto the testing pyramid.
+
+THE TESTING PYRAMID: The testing pyramid is an approach to structuring your test suite.
+
+- Browser-level integration tests sit on the top of the pyramid. This layer is the narrowest because it should have  
+  the fewest number of tests — the slow nature of browser-level tests make them more expensive than server-level 
+  tests.
+
+- While server tests don’t need to interact with the browser, they usually exercise parts of the model or database. 
+  They sit close to the middle of the spectrum between unit and system tests. They provide a moderate level of 
+  confidence as they may exercise multiple layers of the stack. Server tests are more expensive and provide less 
+  specific error messages than model tests.
+
+- Compared to browser and server tests, model and database tests exercise a smaller portion of the stack. They 
+  provide the most specific feedback, but not much confidence that the whole system is working as expected. Because 
+  they are the cheapest, you can write a lot of them without significantly slowing the amount of time it takes to run 
+  your test suite.
+
+
+
+-----LECCION 5-----
+OUTSIDE-IN TEST-DRIVEN DEVELOPMENT
+
+RED, GREEN, REFACTOR: Test-driven development (TDD) is the process of writing tests before implementation code. You 
+use the feedback from your tests to inform the implementation of a feature or outcome.
+
+A common approach to TDD is the red, green, refactor cycle. When you write a test before the implementation exists 
+you start “in the red” phase, because your test fails and outputs a red error message. Next, you write the minimum 
+implementation code to get your test to pass. This puts you “in the green” phase, because your test passes and 
+outputs a green message.
+
+Once you are in the green, you should consider whether your implementation is the best or most efficient approach. If 
+you think your code could be written more efficiently or cleaner, then you enter the refactor phase. You can refactor 
+your code with confidence, because you have tests that cover the expected behavior.
+
+OUTSIDE-INT TDD: Outside-in TDD is an approach that developers use to build full-stack web applications. It leverages 
+the same red, green, refactor steps that we covered above, but with one caveat — a failing test does not always 
+inform you to write new implementation code. Instead, it may require that you implement new functionality at a 
+different level.
+
+You start at the top of the stack, the view, and write tests as you work your way towards the database layer.
+
+If a test pushes you to a lower level, you restart your red, green, refactor cycle by writing a new test. This test 
+informs the implementation at your new layer. You continue the TDD cycle at this lower level until:
+- You need to drop another layer to implement the desired behavior
+- You have addressed the reason for dropping to the current layer
+
+Once you address the reason for dropping a layer, you can start working your way back up the testing pyramid. If 
+you’re in the model/database layer, you step up to the server, and run your server tests to see if you get a 
+different response. The response should be one of the following:
+- The test passes — you can start another red, green, refactor cycle at the server level or step up to the view layer.
+- The test fails — the server test that pushed you to the model layer fails, but for a different reason. This is 
+  common, and indicates that you’re making progress. This failure may indicate that you need to write additional 
+  implementation at the server level, or drop back to the model.
+
+
+
+-----LECCION 6-----
+OUTSIDE-IN EXAMPLE: 
+You have a movie blog and want to develop a feature that renders user comments under your blog posts. The application 
+should render no more than ten comments when a user lands on the web page. The application should present the 
+comments in reverse chronological order (i.e. the most recent comment should be first).
+
+Let’s assume the web application generates HTML at the server — any updates to the view require implementation at the 
+server level.
+
+FEATURE TESTING: The first step is to write a feature test that checks if your web application is rendering comments 
+to the browser. Let’s use the following outside-in TDD approach:
+
+1. Write a test that checks for the presence of a comment under a blog post.
+2. The test fails, because your web application does not render comments.
+3. Because your web application generates HTML at the server layer, you drop to the server to address the error.
+
+Although we could continue to write feature tests to check for the number of rendered comments, we know server tests 
+are cheaper, so we can test those details when we drop a layer.
+
+SERVER TESTING: At the server layer, we start by writing a test that informs the implementation of our server-
+generated HTML. Because our web application renders unique comments from the database, we want to check that the 
+server-generated HTML is dynamic.
+
+1. Write a test that checks for the presence of a dynamically generated comment element in the server HTML.
+2. The test fails, so we add implementation for a server-generated comment.
+3. Once we’re in the green and consider refactoring, we want to write a test that calls a method at the model layer, 
+   let’s call it Comment.latest(). At the server layer, we’ll check if the method returns comments from the database.
+3. Because this method doesn’t exist, we must drop to the model/database layer.
+
+MODEL AND DATABASE TESTING: At the model layer, we start by writing a test that informs the implementation of our 
+Comment.latest method. This method requires that you interface with the web application’s database.
+
+1. Write a test that checks if the Comment.latest method returns ten comments when the database has eleven comments.
+2. Implement the Comment.latest method to return ten comments, so the test is green.
+3. Once you’ve considered refactoring, write a test that checks whether the method returns the last ten comments in 
+   reverse chronological order.
+4. Implement and refactor
+5. Write a test that checks if Comment.latest() returns an empty array when your database is empty.
+6. Implement and refactor
+7. Write a test that checks if Comment.latest returns the correct number and order of comments when your database has 
+   between zero and ten comments in it.
+8. Implement and refactor
+
+TAKING STOCK: At this point, your entire test suite should be green. You have written seven new tests, and the 
+implementation code to make them pass — your web application should render the last ten comments from your database 
+in reverse chronological order.
+
+Let’s take stock of our seven new tests:
+1. Feature: Comments are rendered to a user’s browser.
+2. Server: The server generates an HTML field for comments.
+3. Server: The server has access to ten comments from the database.
+4. Model: The Comment.latest method returns ten comments from your database.
+5. Model: The Comment.latest method returns the last ten comments in your database in reverse chronological order.
+6. Model: The Comment.latest method returns an empty array when your database has zero comments.
+7. Model: The Comment.latest method returns all of the comments when your database has between zero and ten comments.
+
+Once your feature is working as expected, you should consider how your new tests fit into the broader test suite. The 
+rest of the test suite could have few tests, or over one hundred. It’s time to refactor.

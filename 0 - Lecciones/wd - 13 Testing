@@ -415,3 +415,33 @@ Let’s take stock of our seven new tests:
 
 Once your feature is working as expected, you should consider how your new tests fit into the broader test suite. The 
 rest of the test suite could have few tests, or over one hundred. It’s time to refactor.
+
+
+
+-----LECCION 7-----
+TDD FEATURE-LEVEL TESTS
+
+- When developing a new feature and practicing outside-in development, feature tests are where we’ll typically start.
+- Feature tests often incorporate every layer of the application and — using WebDriverI/O and Mocha — exercise 
+  features in the same way that a human user would. They’re a good tool for reproducing end-user behavior.
+- Feedback from feature tests is usually in terms of HTML (i.e. that text or button that you said would be on the page 
+  isn’t on the page).
+- Because feature tests typically hit every layer of a developer’s stack, they are slower than tests at lower layers, 
+  and errors thrown in feature tests can be difficult to interpret and provide little guidance on what the developer 
+  can do to resolve them.
+
+CHAI: Node.js has a default assertion library that provides enough functionality to write basic test code. The Chai 
+testing library extends the types of assertions we can make. Chai is an assertion library for Node.js and browsers 
+that can be paired with any JavaScript testing framework.
+
+PHANTOMJS: PhantomJS is a headless browser scriptable with a JavaScript API, which allows us to write tests that mimic 
+user interaction and then evaluate the results. It does not require us to render the application in a browser.
+
+A browser runs “headless” when it doesn’t render anything to the screen, but runs in the background.
+
+WEBDRIVER I/O: WebdriverIO provides methods that allow us to programmatically interact with the user-facing elements 
+of our app in the headless browser that PhantomJS runs.
+
+	
+
+

@@ -442,6 +442,55 @@ A browser runs “headless” when it doesn’t render anything to the screen, b
 WEBDRIVER I/O: WebdriverIO provides methods that allow us to programmatically interact with the user-facing elements 
 of our app in the headless browser that PhantomJS runs.
 
+
+
+-----LECCION 8-----
+SERVER TESTING STACK
+
+Server tests are used to test the server response only, not any front-end rendering of code or user interactions. We “disconnect” the browser and interact directly with the server using requests. Server tests are commonly used to test API responses.
+
+THE SUPERTEST LIBRARY: We are using the function request to make server calls to support our tests. This is actually a 
+reference to the SuperTest library:
+	const request = require('supertest');
+
+This library was specifically designed for testing Node server responses and integrates well with Mocha and Chai. To 
+use SuperTest, we pass the app object from our app into the request function. To make a GET request, we use .get() 
+with the desired route as the argument:
+	await request(app)
+	          .get('/')
+	          .send();
+
+It is also possible to perform a POST using SuperTest. We chain any desired properties or inputs to the HTTP call, and 
+use .send() to make the request:
+	await request(app)
+	          .post('/messages')
+	          .type('form')
+	          .send({author, message}); 
+
+
+
+-----LECCION 9-----
+SERVER TESTING PATTERNS
+
+One question to ask when deciding between a full feature test versus a server test is:
+	“Is it worth trading a slow feature test for a faster server test that doesn’t test the UI?”
+
+STATUS CODES: Server tests are slightly faster than browser-driven feature tests. Since the web browser is cut out of 
+the test, we are not testing how things are rendered for the user.
+
+One use of TDD at the server level is to ensure that the HTTP status codes are returned as expected.
+To verify status codes, we are asserting that the response status is equal to the status code integer that our 
+application requires:
+	assert.equal(response.status, 200);
+
+RESPONSE CONTENT: We need to make sure the server is responding with the correct content. 
+We can organize our tests into two categories:
+	- tests that exercise the “Happy Path” — expected use cases of our application
+	- tests that exercise the “Sad Path” — unexpected or invalid use of our application
 	
+For our tests, once we retrieve the response from the server, we use assert.include() from the Chai library to check 
+the response.
 
-
+EJ: 	response.text = '<div><div id="my-name">My Name</div></div>';
+	assert.include(parseTextFromHTML(response.text, '#my-name'), "My Name"); 	//True
+	

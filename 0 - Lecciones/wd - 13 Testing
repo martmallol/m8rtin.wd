@@ -494,3 +494,231 @@ the response.
 EJ: 	response.text = '<div><div id="my-name">My Name</div></div>';
 	assert.include(parseTextFromHTML(response.text, '#my-name'), "My Name"); 	//True
 	
+REFACTORING: HANDLEBARS: An improved approach to this is using a templating library like Handlebars to separate the 
+HTML view from the JavaScript controller.
+
+Our controller will now use render to create the view and pass in any variables:
+	const param = 'Foo';
+	res.render('templateName', {param});
+
+The templates are written like regular HTML, but variables can be accessed within the view using double curly braces:
+	<h1>{{ param }}</h1>
+
+When the view is rendered, it will replace {{ param }} with its actual value:
+	<h1>Foo</h1>
+	
+API ERRORS: One of the use cases for server testing is for checking API responses, especially the “sad path” where a 
+user interacts with the server in an unexpected or disallowed manner. We need to make sure our server properly handles 
+invalid passwords, form field errors, etc.	
+
+While there may only be one “happy path” for an interaction (user submits a valid password), there can be many 
+corresponding “sad paths” (password is too short, doesn’t contain special characters, etc). By testing the majority of 
+these on the server level, it saves us from testing them at a more resource intensive level including the user view.
+
+
+
+-----LECCION 10-----
+MONGOOSE FUNDAMENTALS
+
+MONGOOSE COLLECTIONS & DOCUMENTS: Mongo stores data in ‘binary’ JSON (BSON) documents. BSON documents have a similar 
+structure to JavaScript objects.
+
+MongoDB stores documents in a collection. A MongoDB database is made up of these collections of documents.
+
+A Mongo collection is like a table in a spreadsheet or relational database — each document is like a row in the 
+spreadsheet.
+
+Documents contain one or more key/value pairs. Each key has a corresponding value of a specified data type, like 
+array, number, or string. MongoDB organizes documents with similar structure into collections.
+
+SCHEMAS: Mongoose is a JavaScript library that provides methods to interact with a MongoDB database. Mongoose 
+translates JavaScript objects (JSON) to BSON data in a MongoDB database, and vice versa.
+
+Mongoose interactions are based on Schema and Model declarations.
+- A Schema defines the shape of the documents within that collection.
+- A Model maps to a MongoDB collection and its documents.
+
+MONGOOSE SCHEMA:  each record in a MongoDB database is a document with key/value pairs as entries. Using Mongoose’s 
+Schema, we can set the structure of those documents dynamically.
+
+Imagine you were creating a Schema for the database of a web-based poetry application where you could both write and 
+publish poems. Each key in our poemSchema will define a property in our documents which will be cast to its associated 
+SchemaType.
+
+	const poemSchema = new mongoose.Schema({
+	  title: String
+	})
+
+Each document that is derived from the poemSchema above will have a title property with a string saved to it.
+
+Mongoose will cast mismatched data types to the specified SchemaType. For example, if we entered the number 1 as a 
+title for a poem, Mongoose would cast the entry so that it entered that database as a string "1". Using casting, 
+Mongoose ensures that string properties are assigned strings values.
+
+PATHS: The key-value pair in a schema is called a path. Paths define the name and type of fields in a MongoDB document.
+
+	const poemSchema = new mongoose.Schema({
+	  title: String,
+	  body: [String],
+	  published: Boolean,
+	})
+
+The schema above has three paths: title, body, and published. Each path is set to a different schema type. The 
+[String] schema type, assigned to body, means a document that is derived from the poemSchema schema can store an array 
+of strings to the body field.
+
+VALIDATORS: Often, we want to specify more than just the type of a path — we can use validators to ensure other 
+aspects of a document’s input value.
+
+You can add required validators to our Schema in an object that you pass to the path:
+	const poemSchema = new mongoose.Schema({
+	  title: {
+	    type: String,
+	    required: true
+	  },
+	  body: {
+	    type: [String],
+	    required: true
+	  },
+	  published: {
+	    type: Boolean,
+	    required: true
+	  },
+	})
+
+In the example above, we set the schema type and required attributes for the title, body, and published paths. If the 
+required property is true, then it is a required field when you save to the database.
+
+If you save a document with an invalid path value, you will receive this error message Path `title` is required.. You 
+can define a custom error message like this:
+	const poemSchema = new mongoose.Schema({
+	  title: {
+	    type: String,
+	    required: 'Title is required!'
+	  }
+	})
+
+MODELS: Schemas provide the definition for a model. A model maps to a collection in your MongoDB database. Models are 
+defined by passing a Schema instance to mongoose.model like this:
+	mongoose.model(modelName, schema):
+
+In the case of our poetry web app, turning our schema into a model would look like this:
+	const Poem = mongoose.model('Poem', poemSchema); 
+ 
+Models are constructors that we define based on our Schema. They represent documents which can be saved and retrieved 
+from our database. All document creation and retrieval from the database is handled by these models.
+
+CREATE: We can construct documents as instances of our model. Creating documents and saving them to the database can 
+be done by calling .create() on our model. In the poetry app example it would look like this:
+
+EJ:	const Poem = mongoose.model('Poem', poemSchema);
+ 
+	const poemProperties = {
+	    title: "Rewrite Reality" ,
+	    body: ["Re-imagine the consumption of the stagnant status quo", 
+	           "No matter how nice you dress", 
+	           "The emperor is still wearing no clothes"],
+	    published: false
+	}
+ 
+	runWithDatabase(async () => {
+	  // Create and save a document
+	  await Poem.create(poemProperties);
+	});
+
+The runWithDatabase function is designed to accept a method as input, and run it after we connect to a database and 
+before we disconnect from it. This would create a new document in our database, with the paths and properties defined 
+in the code above. 
+
+QUERIES: All of the method calls and queries will be passed to runWithDatabase().
+
+If we wanted to search for the poem that we saved to the database, we could write a Mongoose query and call .findOne() 
+on our Poem model:
+
+EJ:	runWithDatabase(async () => {
+	   Poem.create(poemProperties) 
+	   const poemMatch = await Poem.findOne({ title: 'Rewrite Reality' });
+	   console.log(`Found poem: ${poemMatch.body}`);
+	});
+	
+.findOne() returns a document that has a title path with the value 'Rewrite Reality'. We confirm this by using 
+console.log() to see the value of the path body for the returned document.
+
+What if we wanted to find all the documents that matched a specified criteria? We can use .find(), which returns an 
+array of all the documents that match the argument passed to it.
+
+EJ: 	runWithDatabase(async () => {
+	  Poem.create(manyPoems);
+	  let publishedPoems = await Poem.find({ published: true })
+	  // Check that it works by logging the number of returned documents
+	  console.log(`Published Poems: ${publishedPoems.length}`)
+});
+
+METHODS: Mongoose supports the creation of methods on both instances of documents and collections of documents (the 
+model).
+- .statics() adds static “class” methods to the model.
+- .methods() adds an instance method to documents.
+
+
+
+-----LECCION 11-----
+MODEL TESTING PATTERNS
+
+HOOKS: Before each test, your beforeEach hook will connect to the database and drop any old data using these method calls:
+	await mongoose.connect(databaseUrl, options);
+	await mongoose.connection.db.dropDatabase();
+
+After each test, your afterEach hook will disconnect from the database with
+	await mongoose.disconnect();
+
+PATH VALIDATION: You can ensure the safety of the zoo by adding a validator function.
+
+In this exercise you’ll be using a custom validator function. It receives the value to validate as its first argument. 
+It returns a Boolean, which is false if the value fails validation. Avoid arrow notation () =>. Using function() 
+notation preserves the proper binding of this. Here’s the syntax:
+	// Define validator
+	validate = function (value) {
+	  ...
+	}
+ 
+	// Add validator to Schema
+	const DinosaurSchema = new Schema({
+	  count: {
+	    type: Number,
+	    validate: [validator, 'custom err msg']
+	  }
+	});
+
+Since validation is a model-level concern, you’ll need to test at the model layer. You can test validation like this:
+1. Create an instance of a model with validators and execute the validations with the validateSync method. Any 
+   validation errors will be stored in [instance].errors.[path], like dino.errors.count.
+2. Make assertions on [instance].errors.[path] and its properties.
+
+For more information on validators visit the Validation section of the Mongoose guide: http://mongoosejs.com/docs/
+validation.html.
+
+Remember that validation error messages are defined in the schema like this:
+
+	age: {
+	   type: Number,
+	   validate: [validator, 'Age must be above 9.']
+	}
+
+And you can assert the value of multiple properties of [instance].errors.[path] like message, path, kind, and name. 
+You can write out multiple assertions or use assert.include:
+	  const errorInfo = person.errors.age;
+	  assert.include(errorInfo, {
+	    message: 'Age must be above 9.',
+	    path: 'age',
+	    kind: 'user defined',
+	    name: 'ValidatorError'
+	  });
+
+The complete list of validators are available here: http://mongoosejs.com/docs/schematypes.html.
+
+
+
+
+
+
+

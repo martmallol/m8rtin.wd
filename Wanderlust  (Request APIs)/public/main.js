@@ -1,13 +1,13 @@
 // Foursquare API Info
 // Mi API Key de Foursquare
-const foursquareKey = 'fsq3g3a64c/3il1tza/n7LVTMuJjh+K+exw1SnxfxRfQhDg='; 
+const foursquareKey = 'blablablalbla'; 
 // URL de place search API endpoint
 const url = 'https://api.foursquare.com/v3/places/search?near=';
 // Le agrego una query al final de la URL con 'near' como parametro
 
 // OpenWeather Info
 //Mi API Key sacada de la pag de Open Weather
-const openWeatherKey = 'a68a7c848ec1049af6d87017cfd20130';
+const openWeatherKey = 'blalbalbla';
 const weatherUrl = 'https://api.openweathermap.org/data/2.5/weather';
 
 // Page Elements

@@ -19,3 +19,14 @@ Note: You will only be able to see the Foursquare API Key once. Make sure you co
 For OpenWeather, follow the instructions for the How to start. When prompted, create your account, you can fill in other for the OpenWeather questions for their data collection. OpenWeather will give you an API Key, which you’ll also need to save in main.js.
 
 Note: In this project, you will be using API Keys to authenticate the requests you make to the Foursquare and OpenWeather APIs. An API Key is your personal credential to access API resources and should never be shared. This means if you screenshot or send your code to someone for any reason, you should censor or remove your API Keys before doing so!
+
+## BONUS!: What's Next?
+If you want more practice, try any of the following challenges:
+
++ Fetch more than 4 places and randomize which ones are added to the page.
+
++ Include additional information about the weather.
+
++ Include additional information about each place from the response.
+
++ For a particularly difficult challenge, try fetching place photos! This will require an additional request for place photos for each place, as the photo information is not returned in the initial request.

@@ -1,5 +1,5 @@
 # Web Development Skill Path
-Here you will find all the projects that I worked on completing the Codecademy's WD course. It has a duration of 6 months approximately. Here You will find lots of directories. Here's what every directory means:
+Here you will find all the projects that I worked on completing the Codecademy's WD course. It has a duration of 6 months approximately. Here You will find lots of directories. **Here's what every directory means**:
 
 ## Lectures
 If you're searching for every lesson it was taken on this course, here you can find them. There are difinitions and examples of every aspect that was introduced to the course.

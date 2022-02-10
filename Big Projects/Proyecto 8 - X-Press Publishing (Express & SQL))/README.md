@@ -1,5 +1,7 @@
 # X-Press Publishing
 
+The project was done in the **capstone-project-1-x-press-publishing** directory
+
 ## Project Overview
 
 In this capstone project, you will build all of the routing and database logic for an internal tool for a comic book publishing company called X-Press Publishing.

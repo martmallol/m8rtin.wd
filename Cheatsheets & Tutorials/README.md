@@ -20,3 +20,6 @@ As its name indicates, it's a *refactoring guide*. It includes questions you sho
 
 ## how_to_write_a_good_readme.md
 The conventions of a good README file.
+
+## Cheatsheet Websites
+**Flex Cheatsheet**: [Made by yoksel](https://yoksel.github.io/flex-cheatsheet/)
